@@ -14,6 +14,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //Tells compiler where to store room schema.
+        javaCompileOptions{
+            annotationProcessorOptions{
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -26,9 +33,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    /**
+     * Not entirely sure what this does. I think it generates a binding class for each
+     * XML layout file in the module.
+     */
+    buildFeatures {
+        viewBinding true;
+    }
 }
 
 dependencies {
+
+    //Adding the room DB
+    def room_version = "2.6.1"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation libs.appcompat
     implementation libs.material
