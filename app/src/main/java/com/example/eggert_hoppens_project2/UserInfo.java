@@ -4,16 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+import com.example.eggert_hoppens_project2.DB.AppDataBase;
+
+@Entity (tableName = AppDataBase.USER_INFO_TABLE)
 public class UserInfo {
     //-------------------------------------------------------------------------------Fields
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey (autoGenerate = true)
+    private int mUserId;
+
     private String mUserName;
+
     private String mUserPassword;
 
-    //mUserId will be the primary key, first have to set up AppDataBase;
-    private int mUserId;
     private boolean mIsAdmin;
 
     //-------------------------------------------------------------------------------Constructor

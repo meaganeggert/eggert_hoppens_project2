@@ -13,8 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
+
+    public static final String TAG = "EGGHOP_MAIN";
     CheckBox showPass_checkBox;
     EditText pass_editText;
 
