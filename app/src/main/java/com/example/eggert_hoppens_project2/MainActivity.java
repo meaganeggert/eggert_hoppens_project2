@@ -1,6 +1,11 @@
 package com.example.eggert_hoppens_project2;
 
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,15 +15,30 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    CheckBox showPass_checkBox;
+    EditText pass_editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        showPass_checkBox = findViewById(R.id.showPassword_checkBox);
+        pass_editText = findViewById(R.id.password_editText);
+
+        showPass_checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // To show the password
+                    pass_editText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                else {
+                    // To keep the password hidden
+                    pass_editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
         });
+
     }
 }
