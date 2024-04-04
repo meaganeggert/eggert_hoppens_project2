@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">eggert_hoppens_project2</string>
+    <string name="otter_quest">Otter Quest</string>
+    <string name="created_by_meagan_eggert_brandon_hoppens"><![CDATA[Created by: Meagan Eggert & Brandon Hoppens]]></string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="please_sign_in_to_play">Please Sign In To Play</string>
+    <string name="username">Username:</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="password">Password:</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="show_password">Show Password</string>
 </resources>
