@@ -1,7 +1,14 @@
 package com.example.eggert_hoppens_project2;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class UserInfo {
     //-------------------------------------------------------------------------------Fields
+    @PrimaryKey
+    @NonNull
     private String mUserName;
     private String mUserPassword;
 
@@ -20,10 +27,10 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "mUserName='" + mUserName + '\'' +
-                ", mUserPassword='" + mUserPassword + '\'' +
-                ", mUserId=" + mUserId +
-                ", mIsAdmin=" + mIsAdmin +
+                "UserName='" + mUserName + '\'' +
+                ", UserPassword='" + mUserPassword + '\'' +
+                ", UserId=" + mUserId +
+                ", IsAdmin=" + mIsAdmin +
                 '}';
     }
 

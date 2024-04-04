@@ -7,13 +7,155 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Main Title Text -->
     <TextView
+        android:id="@+id/mainActivity_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/otter_quest"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Instruction to Sign in Text -->
+    <TextView
+        android:id="@+id/signIn_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/please_sign_in_to_play"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_Title" />
+
+    <!-- Username Label -->
+    <TextView
+        android:id="@+id/username_Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/username"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_textView" />
+
+    <!-- Username EditText -->
+    <EditText
+        android:id="@+id/username_editText"
+        android:layout_width="206dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:hint="@string/enter_username"
+        android:inputType="text"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/username_Label"
+        app:layout_constraintStart_toEndOf="@id/username_Label"
+        tools:text="Meagan Eggert" />
+
+    <!-- Password Label -->
+    <TextView
+        android:id="@+id/password_Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/password"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_Label" />
+
+    <!-- Password EditText -->
+    <EditText
+        android:id="@+id/password_editText"
+        android:layout_width="206dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/password_Label"
+        app:layout_constraintStart_toEndOf="@id/password_Label"
+        tools:text="ThisIsMyPass" />
+
+    <!-- Show Password Label -->
+    <TextView
+        android:id="@+id/showPassword_Label"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/show_password"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/showPassword_checkBox"
+        app:layout_constraintEnd_toStartOf="@id/showPassword_checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+
+    <!-- Show Password CheckBox -->
+    <CheckBox
+        android:id="@+id/showPassword_checkBox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/showPassword_Label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_editText" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/login_Button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif-monospace"
+        android:padding="10dp"
+        android:text="@string/login"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showPassword_checkBox"
+        tools:layout_editor_absoluteY="542dp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signUp_Button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif-monospace"
+        android:padding="10dp"
+        android:text="@string/sign_up"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_Button" />
+
+    <!-- Footer -->
+    <TextView
+        android:id="@+id/createdBy_Footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/created_by_meagan_eggert_brandon_hoppens"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
