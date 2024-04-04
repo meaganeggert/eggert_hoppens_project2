@@ -4,14 +4,15 @@ public class UserInfo {
     //-------------------------------------------------------------------------------Fields
     private String mUserName;
     private String mUserPassword;
+
+    //mUserId will be the primary key, first have to set up AppDataBase;
     private int mUserId;
     private boolean mIsAdmin;
 
     //-------------------------------------------------------------------------------Constructor
-    public UserInfo(String userName, String userPassword, int userId, boolean isAdmin) {
+    public UserInfo(String userName, String userPassword, boolean isAdmin) {
         mUserName = userName;
         mUserPassword = userPassword;
-        mUserId = userId;
         mIsAdmin = isAdmin;
     }
 
