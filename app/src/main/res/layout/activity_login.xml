@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <!-- Header Toolbar -->
     <include
         android:id="@+id/headerToolbar"
@@ -29,7 +28,7 @@
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/headerToolbar"/>
 
     <!-- Instruction to Sign in Text -->
     <TextView
@@ -39,118 +38,68 @@
         android:layout_marginTop="80dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="@string/please_sign_in_to_play"
+        android:text="@string/please_sign_up_to_play"
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_Title" />
 
-    <!-- Username Label -->
-    <TextView
-        android:id="@+id/username_Label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="serif-monospace"
-        android:text="@string/username"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIn_textView" />
-
-    <!-- Username EditText -->
-    <EditText
-        android:id="@+id/username_editText"
-        android:layout_width="206dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="5dp"
-        android:fontFamily="serif-monospace"
-        android:gravity="center"
-        android:hint="@string/enter_username"
-        android:inputType="text"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/username_Label"
-        app:layout_constraintStart_toEndOf="@id/username_Label"
-        tools:text="Meagan Eggert" />
-
-    <!-- Password Label -->
-    <TextView
-        android:id="@+id/password_Label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="serif-monospace"
-        android:text="@string/password"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_Label" />
-
-    <!-- Password EditText -->
-    <EditText
-        android:id="@+id/password_editText"
-        android:layout_width="206dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="5dp"
-        android:fontFamily="serif-monospace"
-        android:gravity="center"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/password_Label"
-        app:layout_constraintStart_toEndOf="@id/password_Label"
-        tools:text="ThisIsMyPass" />
-
-    <!-- Show Password Label -->
-    <TextView
-        android:id="@+id/showPassword_Label"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:fontFamily="serif-monospace"
-        android:gravity="center"
-        android:text="@string/show_password"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/showPassword_checkBox"
-        app:layout_constraintEnd_toStartOf="@id/showPassword_checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
-
-    <!-- Show Password CheckBox -->
-    <CheckBox
-        android:id="@+id/showPassword_checkBox"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/showPassword_Label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_editText" />
-
-    <!-- Login Button -->
+    <!-- Play Game Button -->
     <Button
-        android:id="@+id/login_Button"
+        android:id="@+id/play_Button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="serif-monospace"
         android:padding="10dp"
-        android:text="@string/login"
+        android:text="@string/play_game"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showPassword_checkBox"
-        tools:layout_editor_absoluteY="542dp" />
+        app:layout_constraintTop_toBottomOf="@id/mainActivity_Title" />
 
-    <!-- Sign Up Button -->
+    <!-- Scoreboard Button -->
     <Button
-        android:id="@+id/signUp_Button"
+        android:id="@+id/scoreboard_Button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="serif-monospace"
         android:padding="10dp"
-        android:text="@string/sign_up"
+        android:text="@string/view_scoreboard"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_Button" />
+        app:layout_constraintTop_toBottomOf="@id/play_Button" />
+
+    <!-- Settings Button -->
+    <Button
+        android:id="@+id/settings_Button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif-monospace"
+        android:padding="10dp"
+        android:text="@string/settings"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scoreboard_Button" />
+
+    <!-- Settings Button -->
+    <Button
+        android:id="@+id/adminSettings_Button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif-monospace"
+        android:padding="10dp"
+        android:text="@string/admin"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_Button" />
 
     <!-- Test/Debug Note Text -->
     <TextView
@@ -162,7 +111,7 @@
         android:gravity="center"
         android:text="@string/testButtonLabel"
         android:textSize="11sp"
-        app:layout_constraintTop_toBottomOf="@id/signUp_Button"
+        app:layout_constraintTop_toBottomOf="@id/adminSettings_Button"
         app:layout_wrapBehaviorInParent="horizontal_only" />
 
     <!-- Test/Debug Button -->

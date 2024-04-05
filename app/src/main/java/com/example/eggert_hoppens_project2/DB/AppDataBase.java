@@ -18,10 +18,10 @@ import java.util.concurrent.Executors;
 @Database(entities = {UserInfo.class}, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "MAIN_DATABASE";
-    public static final String USER_INFO_TABLE = "USER_TABLE";
-    public static final String SCORE_TABLE = "SCORE_TABLE";
-    public static final String QUESTION_TABLE = "QUEST_TABLE";
+    public static final String DATABASE_NAME = "MAINDATABASE";
+    public static final String USER_INFO_TABLE = "USERTABLE";
+    public static final String SCORE_TABLE = "SCORETABLE";
+    public static final String QUESTION_TABLE = "QUESTTABLE";
 
     private static volatile AppDataBase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -49,6 +49,15 @@ public abstract class AppDataBase extends RoomDatabase {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "Database Created!");
             //TODO : add databaseWriteExecutor.execute(() -> {}
+            databaseWriteExecutor.execute(() -> {
+                UserInfoDAO dao = INSTANCE.userInfoDAO();
+                dao.deleteAll();
+                UserInfo admin = new UserInfo("admin1", "admin1", true);
+                dao.insert(admin);
+
+                UserInfo testUser = new UserInfo("testUser1", "testUser1", false);
+                dao.insert(testUser);
+            });
         }
     };
 

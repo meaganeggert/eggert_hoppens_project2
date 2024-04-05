@@ -10,4 +10,11 @@
     <string name="password">Password:</string>
     <string name="enter_password">Enter Password</string>
     <string name="show_password">Show Password</string>
+    <string name="test">Test</string>
+    <string name="testButtonLabel">Note: This text and the following button will be invisible in the final product</string>
+    <string name="please_sign_up_to_play">Please Sign Up to Play</string>
+    <string name="view_scoreboard">View Scoreboard</string>
+    <string name="settings">Settings</string>
+    <string name="admin">Admin</string>
+    <string name="play_game">Play Game</string>
 </resources>

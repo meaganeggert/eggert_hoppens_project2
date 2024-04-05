@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <!-- Header Toolbar -->
     <include
         android:id="@+id/headerToolbar"
@@ -27,8 +26,8 @@
         android:gravity="center"
         android:text="@string/otter_quest"
         android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerToolbar" />
 
     <!-- Instruction to Sign in Text -->
@@ -39,7 +38,7 @@
         android:layout_marginTop="80dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="@string/please_sign_in_to_play"
+        android:text="@string/please_sign_up_to_play"
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_Title" />
 
     <!-- Username Label -->
@@ -98,6 +97,35 @@
         app:layout_constraintStart_toEndOf="@id/password_Label"
         tools:text="ThisIsMyPass" />
 
+    <!-- Repeat Password Label -->
+    <TextView
+        android:id="@+id/repeatPassword_Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="Re-type\nPassword:"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_Label" />
+
+    <!-- Password EditText -->
+    <EditText
+        android:id="@+id/repeatPassword_editText"
+        android:layout_width="206dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/repeatPassword_Label"
+        app:layout_constraintStart_toEndOf="@id/repeatPassword_Label"
+        tools:text="ThisIsMyPass" />
+
     <!-- Show Password Label -->
     <TextView
         android:id="@+id/showPassword_Label"
@@ -109,7 +137,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/showPassword_checkBox"
         app:layout_constraintEnd_toStartOf="@id/showPassword_checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/repeatPassword_editText" />
 
     <!-- Show Password CheckBox -->
     <CheckBox
@@ -120,22 +148,6 @@
         app:layout_constraintBaseline_toBaselineOf="@id/showPassword_Label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_editText" />
-
-    <!-- Login Button -->
-    <Button
-        android:id="@+id/login_Button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="serif-monospace"
-        android:padding="10dp"
-        android:text="@string/login"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showPassword_checkBox"
-        tools:layout_editor_absoluteY="542dp" />
 
     <!-- Sign Up Button -->
     <Button
@@ -150,7 +162,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_Button" />
+        app:layout_constraintTop_toBottomOf="@id/showPassword_checkBox" />
 
     <!-- Test/Debug Note Text -->
     <TextView
