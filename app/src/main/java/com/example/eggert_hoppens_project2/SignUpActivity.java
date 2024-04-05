@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,6 +27,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 import com.example.eggert_hoppens_project2.databinding.ActivitySignUpBinding;
+
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -47,6 +50,11 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Set up for Header Toolbar
+        Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
+        setSupportActionBar(thisToolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
         repository = AppRepository.getRepository(getApplication());
 
         //-- BEGIN Section for Sign Up Button Functionality --
@@ -54,12 +62,15 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
-                if (password_Validate()){
-                    Toast.makeText(getApplicationContext(), "Passwords MATCH", Toast.LENGTH_SHORT).show();
+                if (password_Validate() && !mUsername.isEmpty()){
                     insertUser();
                 }
+                else if (mUsername.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Must enter a username!", Toast.LENGTH_SHORT).show();
+
+                }
                 else {
-                    Toast.makeText(getApplicationContext(), "Passwords must match!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Passwords must match and not be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -110,7 +121,10 @@ public class SignUpActivity extends AppCompatActivity {
      * @return true if the passwords match, false otherwise
      */
     private boolean password_Validate() {
-        return mPassword.equals(mRepeatPassword);
+        if (!mPassword.isEmpty()) {
+            return mPassword.equals(mRepeatPassword);
+        }
+        return false;
     }
 
     /**
