@@ -32,4 +32,7 @@ public interface UserInfoDAO {
 
     @Query("DELETE from " + AppDataBase.USER_INFO_TABLE)
     void deleteAll();
+
+    @Query("DELETE FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName NOT IN ('admin1', 'testUser1')")
+    void resetUserDB();
 }

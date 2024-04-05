@@ -68,6 +68,12 @@ public class AppRepository {
         });
     }
 
+    public void clearUsers() {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            userinfoDAO.resetUserDB();
+        });
+    }
+
     public boolean containsUserName(String newUser) {
         Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(
                 new Callable<Boolean>() {

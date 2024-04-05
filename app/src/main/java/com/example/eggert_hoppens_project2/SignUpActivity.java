@@ -101,6 +101,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
         //-- END Section For ShowPassword Checkbox Functionality --
+
+        //-- BEGIN Section for Test Button Functionality --
+        //-- For this activity, the test button will clear all the users in the DB, except the initial admin1 and testUser1
+        binding.testButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                clearUserTable();
+                return false;
+            }
+        });
+
+        //-- END Section for Test Button Functionality --
     }
 
     /**
@@ -109,6 +121,10 @@ public class SignUpActivity extends AppCompatActivity {
     private void insertUser() {
         UserInfo user = new UserInfo(mUsername, mPassword, false);
         repository.insertUserInfo(user);
+    }
+
+    private void clearUserTable() {
+        repository.clearUsers();
     }
 
     private boolean userIDAvailable() {
