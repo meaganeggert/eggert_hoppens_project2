@@ -25,5 +25,6 @@ public interface ScoreDAO {
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mScore DESC")
     List<Score> getScoresByHighest();
 
-    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = ")
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
+    List<Score> getScoreByUserId(int userId);
 }
