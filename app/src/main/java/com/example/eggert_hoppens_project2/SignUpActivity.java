@@ -24,6 +24,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.eggert_hoppens_project2.DB.AppDataBase;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 import com.example.eggert_hoppens_project2.databinding.ActivitySignUpBinding;
@@ -62,6 +63,9 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
+                if (!userIDAvailable()) {
+                    Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_LONG).show();
+                }
                 if (password_Validate() && !mUsername.isEmpty()){
                     insertUser();
                 }
@@ -105,6 +109,10 @@ public class SignUpActivity extends AppCompatActivity {
     private void insertUser() {
         UserInfo user = new UserInfo(mUsername, mPassword, false);
         repository.insertUserInfo(user);
+    }
+
+    private boolean userIDAvailable() {
+        return !(repository.containsUserName(mUsername));
     }
 
     /**

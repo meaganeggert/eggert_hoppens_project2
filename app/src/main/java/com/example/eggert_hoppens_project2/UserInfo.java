@@ -16,7 +16,7 @@ public class UserInfo {
 
     private String mUserPassword;
 
-    private boolean mIsAdmin;
+    private boolean mIsAdmin = false;
 
     //-------------------------------------------------------------------------------Constructor
     public UserInfo(String userName, String userPassword, boolean isAdmin) {

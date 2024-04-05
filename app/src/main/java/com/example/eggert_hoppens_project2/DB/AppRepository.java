@@ -18,6 +18,7 @@ public class AppRepository {
     private ArrayList<UserInfo> allInfo;
 
     private static AppRepository repository;
+
     private AppRepository(Application application) {
         AppDataBase db = AppDataBase.getDatabase(application);
         this.userinfoDAO = db.userInfoDAO();
@@ -38,8 +39,7 @@ public class AppRepository {
         );
         try {
             return future.get();
-        }
-        catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             Log.d(SignUpActivity.TAG, "Problem getting AppRepository, thread error");
         }
         return null;
@@ -62,10 +62,27 @@ public class AppRepository {
     }
 
     public void insertUserInfo(UserInfo user) {
-        AppDataBase.databaseWriteExecutor.execute(()->
+        AppDataBase.databaseWriteExecutor.execute(() ->
         {
             userinfoDAO.insert(user);
         });
     }
 
+    public boolean containsUserName(String newUser) {
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(
+                new Callable<Boolean>() {
+                    public Boolean call() throws Exception {
+                        int temp = userinfoDAO.doesContain(newUser);
+                        if (temp >= 1) return true;
+                        else return false;
+                    }
+                });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(MainActivity.TAG, "Problem when comparing new user to existing users");
+        }
+        return true;
     }
+
+}
