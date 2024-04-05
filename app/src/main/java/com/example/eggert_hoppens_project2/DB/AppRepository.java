@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.eggert_hoppens_project2.MainActivity;
+import com.example.eggert_hoppens_project2.SignUpActivity;
 import com.example.eggert_hoppens_project2.UserInfo;
 
 import java.util.ArrayList;
@@ -16,10 +17,32 @@ public class AppRepository {
     private UserInfoDAO userinfoDAO;
     private ArrayList<UserInfo> allInfo;
 
-    public AppRepository(Application application) {
+    private static AppRepository repository;
+    private AppRepository(Application application) {
         AppDataBase db = AppDataBase.getDatabase(application);
         this.userinfoDAO = db.userInfoDAO();
-        this.allInfo = this.userinfoDAO.getAllRecords();
+        this.allInfo = (ArrayList<UserInfo>) this.userinfoDAO.getAllRecords();
+    }
+
+    public static AppRepository getRepository(Application application) {
+        if (repository != null) {
+            return repository;
+        }
+        Future<AppRepository> future = AppDataBase.databaseWriteExecutor.submit(
+                new Callable<AppRepository>() {
+                    @Override
+                    public AppRepository call() throws Exception {
+                        return new AppRepository(application);
+                    }
+                }
+        );
+        try {
+            return future.get();
+        }
+        catch (InterruptedException | ExecutionException e) {
+            Log.d(SignUpActivity.TAG, "Problem getting AppRepository, thread error");
+        }
+        return null;
     }
 
     public ArrayList<UserInfo> getAllInfo() {
@@ -27,7 +50,7 @@ public class AppRepository {
                 new Callable<ArrayList<UserInfo>>() {
                     @Override
                     public ArrayList<UserInfo> call() throws Exception {
-                        return userinfoDAO.getAllRecords();
+                        return (ArrayList<UserInfo>) userinfoDAO.getAllRecords();
                     }
                 });
         try {
