@@ -1,3 +1,9 @@
+/**
+ * Names: Meagan Eggert & Brandon Hoppens
+ * Detail: Main activity for the trivia game. Functions as a pre-main menu, where the user has the
+ * option to log in or sign up for an account.
+ */
+
 package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
@@ -87,16 +93,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Intent Factory for the MainActivity
+     * @param context The context that the intent factory was called from
+     * @return The intent involving this class
+     */
     static Intent intentFactory(Context context){
         return new Intent(context, MainActivity.class);
     }
 
+    /**
+     * Updates the testResultTextView with the new information that was entered.
+     * This function is only used in our application for testing purposes.
+     */
     private void updateDisplay() {
         String currentInfo = binding.testResultTextView.getText().toString();
         String newDisplay = String.format(Locale.ROOT, "Username: %s%nPassword: %s%n-=-=-=-=-=-=-%n%s%n", mUsername, mPassword, currentInfo);
         binding.testResultTextView.setText(newDisplay);
 
     }
+
+    /**
+     * Pulls the entered information from the usernameEditText and the passwordEditText
+     */
     private void getInformationFromDisplay() {
         mUsername = binding.usernameEditText.getText().toString();
         mPassword = binding.passwordEditText.getText().toString();
