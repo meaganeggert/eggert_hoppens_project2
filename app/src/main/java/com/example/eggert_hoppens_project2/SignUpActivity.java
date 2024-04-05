@@ -64,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getInformationFromDisplay();
                 if (!userIDAvailable()) {
-                    Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_SHORT).show();
                 }
                 if (password_Validate() && !mUsername.isEmpty()){
                     insertUser();
