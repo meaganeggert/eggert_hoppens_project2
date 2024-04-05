@@ -58,6 +58,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         repository = AppRepository.getRepository(getApplication());
 
+        //-- BEGIN Section for toolbar "login" Functionality --
+        binding.headerToolbar.toolbarUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.intentFactory(SignUpActivity.this);
+                startActivity(intent);
+            }
+        });
+        //-- END Section for toolbar "login" Functionality --
+
         //-- BEGIN Section for Sign Up Button Functionality --
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +76,12 @@ public class SignUpActivity extends AppCompatActivity {
                 if (!userIDAvailable()) {
                     Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_SHORT).show();
                 }
-                if (password_Validate() && !mUsername.isEmpty()){
+                if (password_Validate() && !mUsername.isEmpty()) {
                     insertUser();
-                }
-                else if (mUsername.isEmpty()){
+                } else if (mUsername.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Must enter a username!", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Passwords must match and not be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -111,7 +119,6 @@ public class SignUpActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         //-- END Section for Test Button Functionality --
     }
 
@@ -142,6 +149,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /**
      * Method to make sure that the user has entered matching passwords
+     *
      * @return true if the passwords match, false otherwise
      */
     private boolean password_Validate() {
@@ -153,10 +161,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     /**
      * Intent Factory for the SignUpActivity
+     *
      * @param context The context that the intent factory was called from
      * @return The intent involving this class
      */
-    static Intent intentFactory(Context context){
+    static Intent intentFactory(Context context) {
         return new Intent(context, SignUpActivity.class);
     }
 }
