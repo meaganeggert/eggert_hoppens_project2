@@ -1,3 +1,9 @@
+/**
+ * Names: Meagan Eggert & Brandon Hoppens
+ * Detail: This activity will handle a user signing up for an account within the app.
+ * If the user enters a valid username and password, it will enter them into the user database.
+ */
+
 package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
@@ -13,13 +19,17 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.eggert_hoppens_project2.DB.AppDataBase;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 import com.example.eggert_hoppens_project2.databinding.ActivitySignUpBinding;
+
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -41,19 +51,38 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Set up for Header Toolbar
+        Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
+        setSupportActionBar(thisToolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
         repository = AppRepository.getRepository(getApplication());
+
+        //-- BEGIN Section for toolbar "login" Functionality --
+        binding.headerToolbar.toolbarUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.intentFactory(SignUpActivity.this);
+                startActivity(intent);
+            }
+        });
+        //-- END Section for toolbar "login" Functionality --
 
         //-- BEGIN Section for Sign Up Button Functionality --
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
-                if (password_Validate()){
-                    Toast.makeText(getApplicationContext(), "Passwords MATCH", Toast.LENGTH_SHORT).show();
-                    insertUser();
+                if (!userIDAvailable()) {
+                    Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "Passwords must match!", Toast.LENGTH_SHORT).show();
+                if (password_Validate() && !mUsername.isEmpty()) {
+                    insertUser();
+                } else if (mUsername.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Must enter a username!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Passwords must match and not be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -80,24 +109,63 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
         //-- END Section For ShowPassword Checkbox Functionality --
+
+        //-- BEGIN Section for Test Button Functionality --
+        //-- For this activity, the test button will clear all the users in the DB, except the initial admin1 and testUser1
+        binding.testButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                clearUserTable();
+                return false;
+            }
+        });
+        //-- END Section for Test Button Functionality --
     }
 
+    /**
+     * This method will insert a new user into the USER_TABLE
+     */
     private void insertUser() {
         UserInfo user = new UserInfo(mUsername, mPassword, false);
         repository.insertUserInfo(user);
     }
 
+    private void clearUserTable() {
+        repository.clearUsers();
+    }
+
+    private boolean userIDAvailable() {
+        return !(repository.containsUserName(mUsername));
+    }
+
+    /**
+     * This method will pull the information from the EditText boxes and save them to their respective local variables
+     */
     private void getInformationFromDisplay() {
         mUsername = binding.usernameEditText.getText().toString();
         mPassword = binding.passwordEditText.getText().toString();
         mRepeatPassword = binding.repeatPasswordEditText.getText().toString();
     }
 
+    /**
+     * Method to make sure that the user has entered matching passwords
+     *
+     * @return true if the passwords match, false otherwise
+     */
     private boolean password_Validate() {
-        return mPassword.equals(mRepeatPassword);
+        if (!mPassword.isEmpty()) {
+            return mPassword.equals(mRepeatPassword);
+        }
+        return false;
     }
 
-    static Intent intentFactory(Context context){
+    /**
+     * Intent Factory for the SignUpActivity
+     *
+     * @param context The context that the intent factory was called from
+     * @return The intent involving this class
+     */
+    static Intent intentFactory(Context context) {
         return new Intent(context, SignUpActivity.class);
     }
 }

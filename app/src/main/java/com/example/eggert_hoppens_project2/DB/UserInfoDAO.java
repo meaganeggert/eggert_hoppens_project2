@@ -18,12 +18,21 @@ public interface UserInfoDAO {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insert(UserInfo user);
 
-    @Query ("Select * from " + AppDataBase.USER_INFO_TABLE)
+    @Query ("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " ORDER BY mUserName")
     List<UserInfo> getAllRecords();
+
+    @Query("SELECT EXISTS (SELECT 1 FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName = :newUserName)")
+    int doesContain(String newUserName);
 
     @Update
     void update(UserInfo... userInfos);
 
     @Delete
     void delete(UserInfo userInfo);
+
+    @Query("DELETE from " + AppDataBase.USER_INFO_TABLE)
+    void deleteAll();
+
+    @Query("DELETE FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName NOT IN ('admin1', 'testUser1')")
+    void resetUserDB();
 }

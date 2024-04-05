@@ -1,3 +1,9 @@
+/**
+ * Names: Meagan Eggert & Brandon Hoppens
+ * Detail: Main activity for the trivia game. Functions as a pre-main menu, where the user has the
+ * option to log in or sign up for an account.
+ */
+
 package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
@@ -15,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +50,25 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Set up for Header Toolbar
+        Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
+        setSupportActionBar(thisToolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+
         // This will only be used while debugging
         binding.testResultTextView.setMovementMethod(new ScrollingMovementMethod());
 
+        //-- BEGIN Login Button Functionality --
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = LoginActivity.intentFactory(MainActivity.this);
+
+                startActivity(intent);
+            }
+        });
+        //-- END Login Button Functionality --
 
         //-- BEGIN Sign-Up Button Functionality --
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = SignUpActivity.intentFactory(MainActivity.this);
                 startActivity(intent);
-
             }
         });
         //-- END Sign-Up Button Functionality --
@@ -87,16 +110,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Intent Factory for the MainActivity
+     * @param context The context that the intent factory was called from
+     * @return The intent involving this class
+     */
     static Intent intentFactory(Context context){
         return new Intent(context, MainActivity.class);
     }
 
+    /**
+     * Updates the testResultTextView with the new information that was entered.
+     * This function is only used in our application for testing purposes.
+     */
     private void updateDisplay() {
         String currentInfo = binding.testResultTextView.getText().toString();
         String newDisplay = String.format(Locale.ROOT, "Username: %s%nPassword: %s%n-=-=-=-=-=-=-%n%s%n", mUsername, mPassword, currentInfo);
         binding.testResultTextView.setText(newDisplay);
 
     }
+
+    /**
+     * Pulls the entered information from the usernameEditText and the passwordEditText
+     */
     private void getInformationFromDisplay() {
         mUsername = binding.usernameEditText.getText().toString();
         mPassword = binding.passwordEditText.getText().toString();
