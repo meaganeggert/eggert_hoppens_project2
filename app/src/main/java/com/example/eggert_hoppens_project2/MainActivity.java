@@ -1,13 +1,17 @@
 package com.example.eggert_hoppens_project2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     String mUsername = "testUser";
     String mPassword = "testPass";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
         binding.testResultTextView.setMovementMethod(new ScrollingMovementMethod());
 
 
+        //-- BEGIN Sign-Up Button Functionality --
+        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SignUpActivity.intentFactory(MainActivity.this);
+                startActivity(intent);
+
+            }
+        });
+        //-- END Sign-Up Button Functionality --
+
         //-- BEGIN Section for Test Button Functionality --
         binding.testButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 updateDisplay();
             }
         });
-
         //-- END Section for Test Button Functionality --
 
         //-- BEGIN Section For ShowPassword Checkbox Functionality --
@@ -66,9 +82,13 @@ public class MainActivity extends AppCompatActivity {
                     pass_editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
-        //-- END Section For ShowPassword Checkbox Functionality --
         });
+        //-- END Section For ShowPassword Checkbox Functionality --
 
+    }
+
+    static Intent intentFactory(Context context){
+        return new Intent(context, MainActivity.class);
     }
 
     private void updateDisplay() {
