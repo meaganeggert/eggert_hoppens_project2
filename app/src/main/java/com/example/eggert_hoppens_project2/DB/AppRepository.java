@@ -19,7 +19,7 @@ public class AppRepository {
     public AppRepository(Application application) {
         AppDataBase db = AppDataBase.getDatabase(application);
         this.userinfoDAO = db.userInfoDAO();
-        this.allInfo = this.userinfoDAO.getAllRecords();
+        this.allInfo = (ArrayList<UserInfo>) this.userinfoDAO.getAllRecords();
     }
 
     public ArrayList<UserInfo> getAllInfo() {
@@ -27,7 +27,7 @@ public class AppRepository {
                 new Callable<ArrayList<UserInfo>>() {
                     @Override
                     public ArrayList<UserInfo> call() throws Exception {
-                        return userinfoDAO.getAllRecords();
+                        return (ArrayList<UserInfo>) userinfoDAO.getAllRecords();
                     }
                 });
         try {

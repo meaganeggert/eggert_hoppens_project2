@@ -142,6 +142,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_Button" />
 
+    <!-- Test/Debug Note Text -->
+    <TextView
+        android:id="@+id/test_textView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="12dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/testButtonLabel"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@id/signUp_Button"
+        app:layout_wrapBehaviorInParent="horizontal_only" />
+
+    <!-- Test/Debug Button -->
+    <Button
+        android:id="@+id/test_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:fontFamily="serif-monospace"
+        android:text="@string/test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/test_textView" />
+
+    <!-- Test Result Text -->
+    <TextView
+        android:id="@+id/testResult_textView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="12dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@id/test_Button"
+        app:layout_wrapBehaviorInParent="horizontal_only"
+        tools:text="We're going to override this message" />
+
     <!-- Footer -->
     <TextView
         android:id="@+id/createdBy_Footer"

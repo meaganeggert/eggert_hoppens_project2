@@ -19,7 +19,7 @@ public interface UserInfoDAO {
     void insert(UserInfo user);
 
     @Query ("Select * from " + AppDataBase.USER_INFO_TABLE)
-    ArrayList<UserInfo> getAllRecords();
+    List<UserInfo> getAllRecords();
 
     @Update
     void update(UserInfo... userInfos);

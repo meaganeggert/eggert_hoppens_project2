@@ -10,4 +10,6 @@
     <string name="password">Password:</string>
     <string name="enter_password">Enter Password</string>
     <string name="show_password">Show Password</string>
+    <string name="test">Test</string>
+    <string name="testButtonLabel">Note: This text and the following button will be invisible in the final product</string>
 </resources>
