@@ -13,13 +13,13 @@ import java.util.List;
 @Dao
 public interface QuestionDAO {
     @Insert
-    void insert(Question... questions);
+    void insertQuestions(Question... questions);
 
     @Update
-void update(Question...questions);
+    void updateQuestions(Question...questions);
 
     @Delete
-    void delete(Question question);
+    void deleteQuestion(Question question);
 
     @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category")
     List<Question> getQuestionByCategory(String category);
