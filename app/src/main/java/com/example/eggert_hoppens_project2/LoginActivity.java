@@ -3,6 +3,7 @@ package com.example.eggert_hoppens_project2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String CATEGORY_NAME = "Category_Name_Value_String";
     ActivityLoginBinding binding;
 
     @Override
@@ -29,6 +31,14 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
         setSupportActionBar(thisToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        binding.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CategoryActivity.intentFactory(LoginActivity.this);
+                startActivity(intent);
+            }
+        });
 
     }
 

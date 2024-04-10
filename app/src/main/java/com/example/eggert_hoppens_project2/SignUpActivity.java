@@ -17,16 +17,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.eggert_hoppens_project2.DB.AppDataBase;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
-import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
+import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivitySignUpBinding;
 
 import java.util.Objects;
