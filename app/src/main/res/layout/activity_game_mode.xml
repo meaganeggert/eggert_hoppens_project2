@@ -21,7 +21,7 @@
         android:layout_marginStart="15dp"
         android:gravity="center"
         android:text="@string/game_mode_category_label"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
@@ -33,7 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/no_category_passed"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/gameModeCategoryTextView"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 

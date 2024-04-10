@@ -21,7 +21,9 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categoryFirstOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = GameModeActivity.intentFactory(CategoryActivity.this, binding.categoryFirstOptionButton.getText().toString());
+                Intent intent = GameModeActivity.intentFactory(
+                        CategoryActivity.this,
+                        binding.categoryFirstOptionButton.getText().toString());
                 startActivity(intent);
             }
         });
@@ -29,7 +31,9 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categorySecondOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = GameModeActivity.intentFactory(CategoryActivity.this, binding.categorySecondOptionButton.getText().toString());
+                Intent intent = GameModeActivity.intentFactory(
+                        CategoryActivity.this,
+                        binding.categorySecondOptionButton.getText().toString());
                 startActivity(intent);
             }
         });

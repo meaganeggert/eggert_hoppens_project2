@@ -3,6 +3,7 @@ package com.example.eggert_hoppens_project2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,36 @@ public class GameModeActivity extends AppCompatActivity {
             String category = getIntent().getStringExtra(CATEGORY_NAME);
             binding.gameModePassedCategoryTextView.setText(String.format(Locale.US, "%s", category));
         }
+
+        binding.gameModeFirstOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = PlayActivity.intentFactory(
+                        GameModeActivity.this,
+                        binding.gameModeFirstOptionButton.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        binding.gameModeSecondOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = PlayActivity.intentFactory(
+                        GameModeActivity.this,
+                        binding.gameModeSecondOptionButton.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        binding.gameModeThirdOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = PlayActivity.intentFactory(
+                        GameModeActivity.this,
+                        binding.gameModeThirdOptionButton.getText().toString());
+                startActivity(intent);
+            }
+        });
 
     }
 
