@@ -16,6 +16,29 @@
         />
 
     <TextView
+        android:id="@+id/playPassedCategoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/no_category_passed"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
+
+    <TextView
+        android:id="@+id/playPassedGameModeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Game Mode Name"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
+
+    <TextView
         android:id="@+id/questionNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,18 +101,6 @@
         android:text="Fourth Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerSecondButton" />
-
-    <TextView
-        android:id="@+id/playPassedGameModeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="Game Mode Name"
-        android:textSize="12sp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

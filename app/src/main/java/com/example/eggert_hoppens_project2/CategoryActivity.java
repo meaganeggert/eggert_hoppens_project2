@@ -18,6 +18,8 @@ public class CategoryActivity extends AppCompatActivity {
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Upon selecting the first category option, use the intent factory from the GameModeActivity
+        //and pass an extra for the selected category's name.
         binding.categoryFirstOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +30,8 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
+        //Upon selecting the second category option, use the intent factory from the GameModeActivity
+        //and pass an extra for the selected category's name.
         binding.categorySecondOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +43,12 @@ public class CategoryActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * CategoryActivity intent factory intended to be used within the LoginActivity (which is
+     * actually the main activity). Utilizes the context of the previous activity (LoginActivity).
+     * @param context Context of the previous activity (LoginActivity)
+     * @return Returns intent to be used to start CategoryActivity
+     */
     public static Intent intentFactory(Context context){
          return new Intent(context, CategoryActivity.class);
     }
