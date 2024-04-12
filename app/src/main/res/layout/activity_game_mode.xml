@@ -10,9 +10,9 @@
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/gameModePassedCategoryTextView"
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif-monospace"
         android:text="@string/no_category_passed"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +30,11 @@
         android:id="@+id/gameModeTitleTextView"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/game_mode"
-        android:gravity="center"
-        android:textSize="35sp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="@string/game_mode"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
@@ -41,45 +43,49 @@
         android:id="@+id/gameModeInstructionTextView"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameModeTitleTextView"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="@string/select_a_game_mode"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameModeTitleTextView" />
 
     <Button
         android:id="@+id/gameModeFirstOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/zen"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameModeInstructionTextView"
-        android:text="@string/zen"
-        android:textSize="25sp" />
+        app:layout_constraintTop_toBottomOf="@+id/gameModeInstructionTextView" />
 
     <Button
         android:id="@+id/gameModeSecondOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/speed"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameModeFirstOptionButton"
-        android:text="@string/speed"
-        android:textSize="25sp" />
+        app:layout_constraintTop_toBottomOf="@+id/gameModeFirstOptionButton" />
 
     <Button
         android:id="@+id/gameModeThirdOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/compete"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameModeSecondOptionButton"
-        android:text="@string/compete"
-        android:textSize="25sp" />
+        app:layout_constraintTop_toBottomOf="@+id/gameModeSecondOptionButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         repository = AppRepository.getRepository(getApplication());
 
+        //-- BEGIN Section for toolbar "home" Functionality --
+        binding.headerToolbar.toolbarTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.intentFactory(SignUpActivity.this);
+                startActivity(intent);
+            }
+        });
+        //-- END Section for toolbar "home" Functionality --
+
         //-- BEGIN Section for toolbar "login" Functionality --
         binding.headerToolbar.toolbarUsername.setOnClickListener(new View.OnClickListener() {
             @Override
