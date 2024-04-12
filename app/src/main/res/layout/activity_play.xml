@@ -10,10 +10,9 @@
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/playPassedCategoryTextView"
@@ -21,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif-monospace"
         android:text="@string/no_category_passed"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="Game Mode Name"
         android:textSize="12sp"
@@ -43,8 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Question Number"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
+        android:text="Question Number"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +57,9 @@
         android:layout_width="308dp"
         android:layout_height="89dp"
         android:layout_marginTop="50dp"
-        android:text="Question"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
+        android:text="Question"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +71,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="100dp"
+        android:fontFamily="serif-monospace"
         android:text="First Answer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
@@ -78,6 +82,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
+        android:fontFamily="serif-monospace"
         android:text="Second Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
@@ -88,6 +93,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="serif-monospace"
         android:text="Third Answer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerFirstButton" />
@@ -98,6 +104,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
+        android:fontFamily="serif-monospace"
         android:text="Fourth Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerSecondButton" />

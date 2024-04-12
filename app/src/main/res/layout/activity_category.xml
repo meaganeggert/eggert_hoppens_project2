@@ -11,15 +11,16 @@
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/categoryTitleTextView"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="@string/category"
         android:textSize="35sp"
@@ -31,34 +32,37 @@
         android:id="@+id/categoryInstructionTextView"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryTitleTextView"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="@string/select_a_category"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryTitleTextView" />
 
     <Button
         android:id="@+id/categoryFirstOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="75dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/video_games"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryInstructionTextView"
-        android:text="@string/video_games"
-        android:textSize="25sp" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryInstructionTextView" />
 
     <Button
         android:id="@+id/categorySecondOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/sports"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryFirstOptionButton"
-        android:text="@string/sports"
-        android:textSize="25sp" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryFirstOptionButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
