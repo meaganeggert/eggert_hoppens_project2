@@ -1,4 +1,4 @@
-package com.example.eggert_hoppens_project2.DB;
+package com.example.eggert_hoppens_project2.DB.entities;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,9 +7,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.eggert_hoppens_project2.UserInfo;
+import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao

@@ -3,12 +3,12 @@ package com.example.eggert_hoppens_project2.DB;
 import android.app.Application;
 import android.util.Log;
 
+import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.SignUpActivity;
-import com.example.eggert_hoppens_project2.UserInfo;
+import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
