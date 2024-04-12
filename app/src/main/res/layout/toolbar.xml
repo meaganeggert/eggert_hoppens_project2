@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:fontFamily="serif-monospace"
+        android:clickable="true"
         android:text="@string/otter_quest"
         android:textSize="25sp" />
 
