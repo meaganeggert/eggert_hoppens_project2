@@ -3,6 +3,8 @@ package com.example.eggert_hoppens_project2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +19,9 @@ public class PlayActivity extends AppCompatActivity {
 
     private static String gameModeName = "";
     private static String categoryName = "";
+
+    Button ans1, ans2, ans3, ans4;
+    TextView questionTextView;
     ActivityPlayBinding binding;
 
     @Override
@@ -25,6 +30,13 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPlayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        questionTextView = findViewById(R.id.questionTextView);
+        ans1 = findViewById(R.id.answerFirstButton);
+        ans2 = findViewById(R.id.answerSecondButton);
+        ans3 = findViewById(R.id.answerThirdButton);
+        ans4 = findViewById(R.id.answerFourthButton);
+
 
         //If the previous activity passed an extra for the selected game mode, show the selected
         //game mode on screen using the playPassedGameModeTextView text view.
