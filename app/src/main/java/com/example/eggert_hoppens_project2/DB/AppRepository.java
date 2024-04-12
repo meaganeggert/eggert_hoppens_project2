@@ -3,26 +3,30 @@ package com.example.eggert_hoppens_project2.DB;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.SignUpActivity;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class AppRepository {
     private UserInfoDAO userinfoDAO;
-    private ArrayList<UserInfo> allInfo;
+    private LiveData<List<UserInfo>> allInfo;
+
 
     private static AppRepository repository;
 
     private AppRepository(Application application) {
         AppDataBase db = AppDataBase.getDatabase(application);
         this.userinfoDAO = db.userInfoDAO();
-        this.allInfo = (ArrayList<UserInfo>) this.userinfoDAO.getAllRecords();
+        this.allInfo = this.userinfoDAO.getAllRecords();
     }
 
     public static AppRepository getRepository(Application application) {
@@ -45,20 +49,16 @@ public class AppRepository {
         return null;
     }
 
-    public ArrayList<UserInfo> getAllInfo() {
-        Future<ArrayList<UserInfo>> future = AppDataBase.databaseWriteExecutor.submit(
-                new Callable<ArrayList<UserInfo>>() {
-                    @Override
-                    public ArrayList<UserInfo> call() throws Exception {
-                        return (ArrayList<UserInfo>) userinfoDAO.getAllRecords();
-                    }
-                });
-        try {
-            return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.i(MainActivity.TAG, "Problem when getting all user info in the repository");
-        }
-        return null;
+    public LiveData<UserInfo> getUserByUserName(String username) {
+        return userinfoDAO.getUserByUserName(username);
+    }
+
+    public LiveData<UserInfo> getUserByUserId(int userId) {
+        return userinfoDAO.getUserByUserId(userId);
+    }
+
+    public LiveData<List<UserInfo>> getAllInfo() {
+        return userinfoDAO.getAllRecords();
     }
 
     public void insertUserInfo(UserInfo user) {

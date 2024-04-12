@@ -1,5 +1,6 @@
 package com.example.eggert_hoppens_project2.DB.entities;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,16 +10,24 @@ import androidx.room.Update;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface UserInfoDAO {
-    //Room library should implement these for us.
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserInfo user);
 
-    @Query ("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " ORDER BY mUserName")
-    List<UserInfo> getAllRecords();
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName == :username")
+    LiveData<UserInfo> getUserByUserName(String username);
+
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserId == :userId")
+    LiveData<UserInfo> getUserByUserId(int userId);
+
+    //Room library should implement these for us.
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(UserInfo... user);
+
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " ORDER BY mUserName")
+    LiveData<List<UserInfo>> getAllRecords();
 
     @Query("SELECT EXISTS (SELECT 1 FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName = :newUserName)")
     int doesContain(String newUserName);

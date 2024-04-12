@@ -8,6 +8,7 @@ package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -25,7 +26,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
 
+import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 
 import java.util.Locale;
@@ -36,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
     public static final String TAG = "EGGHOP_MAIN";
+    private static final String USER_NAME = "logged_In_User";
     CheckBox showPass_checkBox;
     EditText pass_editText;
+
+    private AppRepository repository;
+
 
     String mUsername = "testUser";
     String mPassword = "testPass";
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = AppRepository.getRepository(getApplication());
 
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
@@ -63,9 +72,7 @@ public class MainActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = LoginActivity.intentFactory(MainActivity.this);
-
-                startActivity(intent);
+                userVerified();
             }
         });
         //-- END Login Button Functionality --
@@ -136,5 +143,44 @@ public class MainActivity extends AppCompatActivity {
     private void getInformationFromDisplay() {
         mUsername = binding.usernameEditText.getText().toString();
         mPassword = binding.passwordEditText.getText().toString();
+    }
+
+    /**
+     * Checks that the user is trying to login with correct credentials
+     * @return true if valid username with valid password
+     * false if invalid or mismatched
+     */
+    private void userVerified() {
+        getInformationFromDisplay();
+        if (mUsername.isEmpty()) {
+            toastMaker("Username should not be blank");
+            return;
+        }
+        LiveData<UserInfo> userObserver = repository.getUserByUserName(mUsername);
+        userObserver.observe(this, userInfo -> {
+            if (userInfo != null) {
+                if (mPassword.equals(userInfo.getUserPassword())) {
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor sharedPrefEditor= sharedPreferences.edit();
+                    sharedPrefEditor.putInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, userInfo.getUserId());
+                    sharedPrefEditor.apply();
+                    toastMaker("You made it here");
+                    Intent intent = LoginActivity.intentFactory(MainActivity.this, userInfo.getUserId());
+                    startActivity(intent);
+                }
+                else {
+                    toastMaker("Invalid Password");
+                    binding.passwordEditText.setSelection(0);
+                }
+            }
+            else {
+                toastMaker(String.format("%s is not a valid username.", mUsername));
+                binding.usernameEditText.setSelection(0);
+            }
+        });
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
