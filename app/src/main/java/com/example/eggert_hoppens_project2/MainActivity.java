@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor sharedPrefEditor= sharedPreferences.edit();
                     sharedPrefEditor.putInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, userInfo.getUserId());
                     sharedPrefEditor.apply();
-                    toastMaker("You made it here");
+//                    toastMaker("You made it here");
                     Intent intent = LoginActivity.intentFactory(MainActivity.this, userInfo.getUserId());
                     startActivity(intent);
                 }

@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -25,6 +26,7 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     static final String SHARED_PREFERENCE_USERID_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERID_KEY";
+    static final String SHARED_PREFERENCE_USERNAME_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERNAME_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERID_VALUE";
     private static final String CATEGORY_NAME = "Category_Name_Value_String";
     private static final String USER_NAME = "logged_In_User";
@@ -46,19 +48,20 @@ public class LoginActivity extends AppCompatActivity {
         loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
         loginUser();
         Toast.makeText(this, String.valueOf(loggedInUserId), Toast.LENGTH_SHORT).show();
+
+
         if (loggedInUserId == LOGGED_OUT) {
             Intent intent = MainActivity.intentFactory(getApplicationContext());
             startActivity(intent);
         }
 
-        // Show persistent username
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        if (b != null) {
-            loggedInUser = b.getString(USER_NAME);
-        }
+        String loggedInUserName = "Username";
+
+//        loggedInUserName = sharedPreferences.getString(SHARED_PREFERENCE_USERNAME_KEY, "bob");
+
+        // Show persistent UserName
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
-        toolbar_UserName.setText(loggedInUser);
+        toolbar_UserName.setText(loggedInUserName);
 
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
@@ -95,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
+
+        LiveData<UserInfo> userObserver;
+
         // check shared preference for logged in user
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
@@ -107,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         if (loggedInUserId != LOGGED_OUT) {
             return;
         }
-        LiveData<UserInfo> userObserver = repository.getUserByUserId(loggedInUserId);
+        userObserver = repository.getUserByUserId(loggedInUserId);
         userObserver.observe(this, userInfo -> {
             if (userInfo != null) {
                 return;
@@ -117,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void logout() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor= sharedPreferences.edit();
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
         sharedPrefEditor.apply();
         getIntent().putExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
@@ -127,10 +133,11 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Intent Factory for the LoginActivity
+     *
      * @param context The context that the intent factory was called from
      * @return The intent involving this class
      */
-    static Intent intentFactory(Context context, int userId){
+    static Intent intentFactory(Context context, int userId) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.putExtra(LOGIN_ACT_USER_ID, userId);
         return intent;
