@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        loginUser();
         loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
+        loginUser();
         Toast.makeText(this, String.valueOf(loggedInUserId), Toast.LENGTH_SHORT).show();
         if (loggedInUserId == LOGGED_OUT) {
             Intent intent = MainActivity.intentFactory(getApplicationContext());
@@ -94,26 +94,26 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-//    private void loginUser() {
-//        // check shared preference for logged in user
-//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-//        loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-//        if (loggedInUserId != LOGGED_OUT) {
-//            return;
-//        }
-//
-//        // check intent for logged in user
-//        loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
-//        if (loggedInUserId == LOGGED_OUT) {
-//            return;
-//        }
-//        LiveData<UserInfo> userObserver = repository.getUserByUserId(loggedInUserId);
-//        userObserver.observe(this, userInfo -> {
-//            if (userInfo != null) {
-//                return;
-//            }
-//        });
-//    }
+    private void loginUser() {
+        // check shared preference for logged in user
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        if (loggedInUserId != LOGGED_OUT) {
+            return;
+        }
+
+        // check intent for logged in user
+        loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
+        if (loggedInUserId != LOGGED_OUT) {
+            return;
+        }
+        LiveData<UserInfo> userObserver = repository.getUserByUserId(loggedInUserId);
+        userObserver.observe(this, userInfo -> {
+            if (userInfo != null) {
+                return;
+            }
+        });
+    }
 
     private void logout() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);

@@ -2,7 +2,9 @@ package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +22,17 @@ public class SettingsActivity extends AppCompatActivity {
 
         //Can likely be done some other way, this is just to go back to the main menu
 
-        /*binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {
+        binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = LoginActivity.intentFactory(SettingsActivity.this);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+                int loggedInUserId = sharedPreferences.getInt(LoginActivity.SHARED_PREFERENCE_USERID_VALUE, -1);
+                Intent intent = LoginActivity.intentFactory(SettingsActivity.this, loggedInUserId);
                 startActivity(intent);
             }
 
-        });*/
+        });
 
     }
 
