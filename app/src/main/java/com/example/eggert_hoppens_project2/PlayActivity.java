@@ -20,6 +20,7 @@ public class PlayActivity extends AppCompatActivity {
     private static String gameModeName = "";
     private static String categoryName = "";
 
+
     private int score = 0;
     private int currentQuestionNumber = 0;
 
@@ -29,6 +30,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView questionTextView;
     TextView questionNumberTextView;
     Button ans1, ans2, ans3, ans4;
+  
     ActivityPlayBinding binding;
 
     @Override
@@ -39,7 +41,9 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         questionTextView = findViewById(R.id.questionTextView);
+
         questionNumberTextView = findViewById(R.id.questionNumberTextView);
+
         ans1 = findViewById(R.id.answerFirstButton);
         ans2 = findViewById(R.id.answerSecondButton);
         ans3 = findViewById(R.id.answerThirdButton);

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.example.eggert_hoppens_project2.databinding.ActivitySettingsBinding;
 
@@ -17,13 +19,17 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //Can likely be done some other way, this is just to go back to the main menu
+
         /*binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = LoginActivity.intentFactory(SettingsActivity.this);
                 startActivity(intent);
             }
+
         });*/
+
     }
 
     public static Intent intentFactory(Context context){

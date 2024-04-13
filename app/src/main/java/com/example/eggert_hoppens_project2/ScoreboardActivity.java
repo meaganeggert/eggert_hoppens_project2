@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding;
 
@@ -22,13 +24,17 @@ public class ScoreboardActivity extends AppCompatActivity {
         binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         //Can likely be done some other way, this is just to go back to the main menu
+
         /*binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = LoginActivity.intentFactory(ScoreboardActivity.this);
                 startActivity(intent);
             }
+
         });*/
+
     }
 
     public static Intent intentFactory(Context context){
