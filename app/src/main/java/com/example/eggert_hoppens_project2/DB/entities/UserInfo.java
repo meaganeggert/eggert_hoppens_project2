@@ -1,6 +1,5 @@
 package com.example.eggert_hoppens_project2.DB.entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

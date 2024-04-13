@@ -10,7 +10,6 @@ import androidx.room.Update;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
