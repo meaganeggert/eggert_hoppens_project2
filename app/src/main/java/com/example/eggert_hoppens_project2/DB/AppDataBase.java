@@ -75,6 +75,18 @@ public abstract class AppDataBase extends RoomDatabase {
                         "Doo"
                 );
                 questionDAO.insertQuestion(testQuestion1);
+
+                Question testQuestion2 = new Question(
+                        "multiple",
+                        "medium",
+                        "Video Games",
+                        "What is the name of the main character in the first three games of Gears of War",
+                        "Marcus Fenix",
+                        "Dominic Santiago",
+                        "Damon Baird",
+                        "Augustus Cole"
+                );
+                questionDAO.insertQuestion(testQuestion2);
             });
         }
     };
