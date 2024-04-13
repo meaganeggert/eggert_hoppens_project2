@@ -1,5 +1,6 @@
 package com.example.eggert_hoppens_project2.DB.entities;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,7 +14,7 @@ import java.util.List;
 @Dao
 public interface QuestionDAO {
     @Insert
-    void insertQuestions(Question... questions);
+    void insertQuestion(Question... question);
 
     @Update
     void updateQuestions(Question...questions);
@@ -21,6 +22,18 @@ public interface QuestionDAO {
     @Delete
     void deleteQuestion(Question question);
 
+    @Query("DELETE FROM " + AppDataBase.QUESTION_TABLE)
+    void deleteAllQuestions();
+
     @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category")
-    List<Question> getQuestionByCategory(String category);
+    LiveData<List<Question>> getAllQuestionsByCategory(String category);
+
+    @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE)
+    LiveData<List<Question>> getAllQuestions();
+
+    @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
+    LiveData<Question> getQuestionById(int questionId);
+
+    /*@Query("SELECT 1 FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category")
+    LiveData<Question> getQuestionByCategory(String category);*/
 }
