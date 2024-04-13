@@ -34,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private AppRepository repository;
 
-    private String loggedInUser = "testUser";
+    private static final String LOGGED_OUT_USERNAME = "EGGHOP";
+    private String loggedInUser = "egghop";
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
 
@@ -55,13 +56,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        String loggedInUserName = "Username";
-
-//        loggedInUserName = sharedPreferences.getString(SHARED_PREFERENCE_USERNAME_KEY, "bob");
-
         // Show persistent UserName
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
-        toolbar_UserName.setText(loggedInUserName);
+        toolbar_UserName.setText(loggedInUser);
 
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
@@ -104,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         // check shared preference for logged in user
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        loggedInUser = sharedPreferences.getString(SHARED_PREFERENCE_USERNAME_KEY, "BOB");
         if (loggedInUserId != LOGGED_OUT) {
             return;
         }
@@ -125,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        sharedPrefEditor.putString(SHARED_PREFERENCE_USERNAME_KEY, LOGGED_OUT_USERNAME);
         sharedPrefEditor.apply();
         getIntent().putExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
 
