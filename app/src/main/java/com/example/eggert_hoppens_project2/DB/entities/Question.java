@@ -18,17 +18,18 @@ public class Question {
     private String mCategory;
     private String mQuestion;
     private String mCorrectAnswer;
+
     private String mIncorrectAnswer1;
     private String mIncorrectAnswer2;
     private String mIncorrectAnswer3;
 
-    //----------------------------------------------------------------Constructors
 
     public Question(String type, String difficulty, String category, String question, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3) {
         mType = type;
         mDifficulty = difficulty;
         mCategory = category;
         mQuestion = question;
+
         mCorrectAnswer = correctAnswer;
         mIncorrectAnswer1 = incorrectAnswer1;
         mIncorrectAnswer2 = incorrectAnswer2;

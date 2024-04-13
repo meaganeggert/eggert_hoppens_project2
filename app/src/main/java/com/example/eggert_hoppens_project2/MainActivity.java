@@ -47,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
     private AppRepository repository;
 
 
-    String mUsername = "testUser";
-    String mPassword = "testPass";
+    private String mUsername = "testUser";
+    private String mPassword = "testPass";
+
+    private int loggedInUserId = -1;
+    private static final int LOGGED_OUT = -1;
 
 
 
@@ -58,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         repository = AppRepository.getRepository(getApplication());
+
+        if (userLoggedIn()) {
+            Intent intent = LoginActivity.intentFactory(this, loggedInUserId);
+            startActivity(intent);
+        }
 
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
@@ -163,8 +171,9 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor sharedPrefEditor= sharedPreferences.edit();
                     sharedPrefEditor.putInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, userInfo.getUserId());
+                    sharedPrefEditor.putString(LoginActivity.SHARED_PREFERENCE_USERNAME_KEY, userInfo.getUserName());
                     sharedPrefEditor.apply();
-                    toastMaker("You made it here");
+//                    toastMaker("You made it here");
                     Intent intent = LoginActivity.intentFactory(MainActivity.this, userInfo.getUserId());
                     startActivity(intent);
                 }
@@ -180,6 +189,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * TODO: FILL THIS IN LATER
+     * @return
+     */
+    private boolean userLoggedIn() {
+
+        LiveData<UserInfo> userObserver;
+
+        // check shared preference for logged in user
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        loggedInUserId = sharedPreferences.getInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        if (loggedInUserId != LOGGED_OUT) {
+            return true;
+        }
+
+
+        userObserver = repository.getUserByUserId(loggedInUserId);
+        userObserver.observe(this, userInfo -> {
+            if (userInfo != null) {
+                return;
+            }
+        });
+        return false;
+    }
+
+    /**
+     * This method just makes it easier to type Toast messages
+     * @param message The message you want to display in the toast
+     */
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
