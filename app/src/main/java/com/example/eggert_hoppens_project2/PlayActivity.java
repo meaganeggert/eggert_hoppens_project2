@@ -20,8 +20,15 @@ public class PlayActivity extends AppCompatActivity {
     private static String gameModeName = "";
     private static String categoryName = "";
 
-    Button ans1, ans2, ans3, ans4;
+    private int score = 0;
+    private int currentQuestionNumber = 0;
+
+    String userAnswer = "";
+
+
     TextView questionTextView;
+    TextView questionNumberTextView;
+    Button ans1, ans2, ans3, ans4;
     ActivityPlayBinding binding;
 
     @Override
@@ -32,6 +39,7 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         questionTextView = findViewById(R.id.questionTextView);
+        questionNumberTextView = findViewById(R.id.questionNumberTextView);
         ans1 = findViewById(R.id.answerFirstButton);
         ans2 = findViewById(R.id.answerSecondButton);
         ans3 = findViewById(R.id.answerThirdButton);
@@ -52,6 +60,8 @@ public class PlayActivity extends AppCompatActivity {
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
     }
+
+
 
     /**
      * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context

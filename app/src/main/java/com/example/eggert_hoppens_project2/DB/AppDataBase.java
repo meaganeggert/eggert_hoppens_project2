@@ -9,6 +9,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.eggert_hoppens_project2.DB.entities.Question;
+import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
@@ -16,7 +18,7 @@ import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserInfo.class}, version = 1, exportSchema = false)
+@Database(entities = {UserInfo.class, Question.class}, version = 2, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "MAINDATABASE";
@@ -52,15 +54,32 @@ public abstract class AppDataBase extends RoomDatabase {
             //TODO : add databaseWriteExecutor.execute(() -> {}
             databaseWriteExecutor.execute(() -> {
                 UserInfoDAO dao = INSTANCE.userInfoDAO();
+                QuestionDAO questionDAO = INSTANCE.questionDAO();
                 dao.deleteAll();
+                questionDAO.deleteAllQuestions();
+
                 UserInfo admin = new UserInfo("admin1", "admin1", true);
                 dao.insert(admin);
 
                 UserInfo testUser = new UserInfo("testUser1", "testUser1", false);
                 dao.insert(testUser);
+
+                Question testQuestion1 = new Question(
+                        "multiple",
+                        "medium",
+                        "Video Games",
+                        "Which of these is the name of a city in the Grand Theft Auto series?",
+                        "San Andreas",
+                        "Yabba",
+                        "Dabba",
+                        "Doo"
+                );
+                questionDAO.insertQuestion(testQuestion1);
             });
         }
     };
 
     public abstract UserInfoDAO userInfoDAO();
+
+    public abstract QuestionDAO questionDAO();
 }

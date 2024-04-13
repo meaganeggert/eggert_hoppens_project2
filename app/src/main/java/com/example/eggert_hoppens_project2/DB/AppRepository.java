@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.eggert_hoppens_project2.DB.entities.Question;
+import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.SignUpActivity;
@@ -18,7 +20,10 @@ import java.util.concurrent.Future;
 
 public class AppRepository {
     private UserInfoDAO userinfoDAO;
+
+    private QuestionDAO questionDAO;
     private LiveData<List<UserInfo>> allInfo;
+    private LiveData<List<Question>> allQuestionInfo;
 
 
     private static AppRepository repository;
@@ -27,6 +32,9 @@ public class AppRepository {
         AppDataBase db = AppDataBase.getDatabase(application);
         this.userinfoDAO = db.userInfoDAO();
         this.allInfo = this.userinfoDAO.getAllRecords();
+
+        this.questionDAO = db.questionDAO();
+        this.allQuestionInfo = this.questionDAO.getAllQuestions();
     }
 
     public static AppRepository getRepository(Application application) {
@@ -89,6 +97,30 @@ public class AppRepository {
             Log.i(MainActivity.TAG, "Problem when comparing new user to existing users");
         }
         return true;
+    }
+
+    //_____________________________________________________________________Question Methods_________
+    /*public LiveData<Question> getQuestionByCategory(String category){
+        return questionDAO.getQuestionByCategory(category);
+    }*/
+
+    public LiveData<Question> getQuestionById(int questionId){
+        return questionDAO.getQuestionById(questionId);
+    }
+
+    public LiveData<List<Question>> getAllQuestions(){
+        return questionDAO.getAllQuestions();
+    }
+
+    public LiveData<List<Question>> getAllQuestionsByCategory(String category){
+        return questionDAO.getAllQuestionsByCategory(category);
+    }
+
+    public void insertQuestion(Question question){
+        AppDataBase.databaseWriteExecutor.execute(() ->
+        {
+            questionDAO.insertQuestion(question);
+        });
     }
 
 }

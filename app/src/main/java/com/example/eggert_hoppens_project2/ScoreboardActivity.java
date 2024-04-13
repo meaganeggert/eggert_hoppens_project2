@@ -27,13 +27,13 @@ public class ScoreboardActivity extends AppCompatActivity {
         binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         //Can likely be done some other way, this is just to go back to the main menu
-        binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
+        /*binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = LoginActivity.intentFactory(ScoreboardActivity.this);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     public static Intent intentFactory(Context context){
