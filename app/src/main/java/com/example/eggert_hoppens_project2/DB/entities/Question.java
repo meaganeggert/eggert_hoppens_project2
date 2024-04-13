@@ -17,8 +17,8 @@ public class Question {
     private String mDifficulty;
     private String mCategory;
     private String mQuestion;
-    private String mRightAnswer;
-    private String[] mWrongAnswer;
+    private String mCorrectAnswer;
+    private String[] mWrongAnswers;
 
     //----------------------------------------------------------------Constructor
     public Question(String type, String difficulty, String category, String question,
@@ -27,8 +27,8 @@ public class Question {
         mDifficulty = difficulty;
         mCategory = category;
         mQuestion = question;
-        mRightAnswer = rightAnswer;
-        mWrongAnswer = wrongAnswer;
+        mCorrectAnswer = rightAnswer;
+        mWrongAnswers = wrongAnswer;
     }
 
     //----------------------------------------------------------------ToString
@@ -40,8 +40,8 @@ public class Question {
                 ", mDifficulty='" + mDifficulty + '\'' +
                 ", mCategory='" + mCategory + '\'' +
                 ", mQuestion='" + mQuestion + '\'' +
-                ", mRightAnswer='" + mRightAnswer + '\'' +
-                ", mWrongAnswer=" + Arrays.toString(mWrongAnswer) +
+                ", mRightAnswer='" + mCorrectAnswer + '\'' +
+                ", mWrongAnswer=" + Arrays.toString(mWrongAnswers) +
                 '}';
     }
 
@@ -86,19 +86,19 @@ public class Question {
         mQuestion = question;
     }
 
-    public String getRightAnswer() {
-        return mRightAnswer;
+    public String getCorrectAnswer() {
+        return mCorrectAnswer;
     }
 
-    public void setRightAnswer(String rightAnswer) {
-        mRightAnswer = rightAnswer;
+    public void setCorrectAnswer(String correctAnswer) {
+        mCorrectAnswer = correctAnswer;
     }
 
-    public String[] getWrongAnswer() {
-        return mWrongAnswer;
+    public String[] getWrongAnswers() {
+        return mWrongAnswers;
     }
 
-    public void setWrongAnswer(String[] wrongAnswer) {
-        mWrongAnswer = wrongAnswer;
+    public void setWrongAnswers(String[] wrongAnswers) {
+        mWrongAnswers = wrongAnswers;
     }
 }

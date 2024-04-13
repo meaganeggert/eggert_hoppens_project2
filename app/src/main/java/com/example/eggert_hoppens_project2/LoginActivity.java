@@ -65,10 +65,29 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(thisToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
+        //Pressing the play button takes you to the category selection activity
         binding.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = CategoryActivity.intentFactory(LoginActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        //Pressing the scoreboard button takes you to the scoreboard activity
+        binding.scoreboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ScoreboardActivity.intentFactory(LoginActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        //Pressing the settings button takes you to the settings activity
+        binding.settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SettingsActivity.intentFactory(LoginActivity.this);
                 startActivity(intent);
             }
         });
