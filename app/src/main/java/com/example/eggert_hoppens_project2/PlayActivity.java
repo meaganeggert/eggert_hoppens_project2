@@ -80,7 +80,10 @@ public class PlayActivity extends AppCompatActivity {
         categoryObserver.observe(this, questionList -> {
             if(!questionList.isEmpty()){
                 questionTextView.setText(questionList.get(currentQuestionIndex).getQuestion());
-                ans1.setText(questionList.get(currentQuestionIndex).getQuestion());
+                ans1.setText(questionList.get(currentQuestionIndex).getCorrectAnswer());
+                ans2.setText(questionList.get(currentQuestionIndex).getIncorrectAnswer1());
+                ans3.setText(questionList.get(currentQuestionIndex).getIncorrectAnswer2());
+                ans4.setText(questionList.get(currentQuestionIndex).getIncorrectAnswer3());
             }
         });
     }
