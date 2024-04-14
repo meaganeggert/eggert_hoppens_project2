@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Dao
 public interface QuestionDAO {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertQuestion(Question... question);
 
     @Update
@@ -34,6 +35,8 @@ public interface QuestionDAO {
     @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
     LiveData<Question> getQuestionById(int questionId);
 
-    /*@Query("SELECT 1 FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category")
+    /*@Query("SELECT 1 FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory == :category")
     LiveData<Question> getQuestionByCategory(String category);*/
+
+    //TODO: count how many different questions there are and return it.
 }

@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
+import java.util.Objects;
+
 @Entity (tableName = AppDataBase.QUESTION_TABLE)
 public class Question {
     //----------------------------------------------------------------Fields
@@ -50,8 +52,22 @@ public class Question {
                 '}';
     }
 
-    //-----------------------------------------------------------------Get/Set
+    //__________________________________________________________________Hash/Equals
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return mQuestionId == question.mQuestionId && Objects.equals(mType, question.mType) && Objects.equals(mDifficulty, question.mDifficulty) && Objects.equals(mCategory, question.mCategory) && Objects.equals(mQuestion, question.mQuestion) && Objects.equals(mCorrectAnswer, question.mCorrectAnswer) && Objects.equals(mIncorrectAnswer1, question.mIncorrectAnswer1) && Objects.equals(mIncorrectAnswer2, question.mIncorrectAnswer2) && Objects.equals(mIncorrectAnswer3, question.mIncorrectAnswer3);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(mQuestionId, mType, mDifficulty, mCategory, mQuestion, mCorrectAnswer, mIncorrectAnswer1, mIncorrectAnswer2, mIncorrectAnswer3);
+    }
+
+
+    //-----------------------------------------------------------------Get/Set
 
     public int getQuestionId() {
         return mQuestionId;

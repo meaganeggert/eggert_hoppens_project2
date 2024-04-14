@@ -113,6 +113,18 @@
         app:layout_constraintTop_toBottomOf="@+id/answerSecondButton" />
 
     <Button
+
+        android:id="@+id/submitButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="Submit"
+        app:layout_constraintTop_toBottomOf="@+id/answerFourthButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+  
+    <Button
         android:id="@+id/quitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,6 +135,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
