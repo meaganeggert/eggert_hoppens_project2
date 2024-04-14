@@ -19,6 +19,7 @@ import com.example.eggert_hoppens_project2.gamemodes.GameModeSettings;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class PlayActivity extends AppCompatActivity {
     private AppRepository repository;
@@ -68,16 +69,18 @@ public class PlayActivity extends AppCompatActivity {
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
 
-        //TODO: Fix so
-        setTotalQuestions();
+        //_______________________________________________________________________________________________________________
+        //Most of the play functionality will take place from here on out.
 
-        loadNewQuestion();
+        setTotalQuestions();    //Set question list size so we know when to stop getting questions.
+        loadNewQuestion();      //Load the question to be used for the activity.
 
+        //For each answerButton, set the user's answer to the button they selected.
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){
-                    userAnswer = null;
+                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                    userAnswer = "";
                 }
                 userAnswer = ans1.getText().toString();
             }
@@ -85,8 +88,8 @@ public class PlayActivity extends AppCompatActivity {
         ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){
-                    userAnswer = null;
+                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                    userAnswer = "";
                 }
                 userAnswer = ans2.getText().toString();
             }
@@ -94,8 +97,8 @@ public class PlayActivity extends AppCompatActivity {
         ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){
-                    userAnswer = null;
+                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                    userAnswer = "";
                 }
                 userAnswer = ans3.getText().toString();
             }
@@ -103,13 +106,17 @@ public class PlayActivity extends AppCompatActivity {
         ans4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){
-                    userAnswer = null;
+                if(!userAnswer.isEmpty()){  //This shouldn't happen, but just to be safe.
+                    userAnswer = "";
                 }
                 userAnswer = ans4.getText().toString();
             }
         });
 
+        //Clicking the submit button will check if an answer has been selected and will check if it is
+        //correct. It will also check if we have the user has made it to the end of the list to
+        //to prevent a crash. Doing so will send the user somewhere.
+        //TODO: create a finish screen and send the user there instead.
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +130,7 @@ public class PlayActivity extends AppCompatActivity {
                         Intent intent = CategoryActivity.intentFactory(PlayActivity.this);
                         startActivity(intent);
                     } else{
+                        userAnswer = "";
                         currentQuestionIndex++;
                         loadNewQuestion();
                     }
@@ -134,7 +142,7 @@ public class PlayActivity extends AppCompatActivity {
 
     /**
      * loadNewQuestion will read from the database's question table by category, then assign the
-     * temporary fields of question info by the current question number. Once the temporary fields
+     * question related field values by the current question number. Once the temporary fields
      * are established, call the assignQuestionToView() method to display the info on screen.
      */
     public void loadNewQuestion(){
@@ -145,9 +153,7 @@ public class PlayActivity extends AppCompatActivity {
                     dbQuestion = questions.get(currentQuestionIndex).getQuestion();
                     dbCorrectAnswer = questions.get(currentQuestionIndex).getCorrectAnswer();
 
-                    //Correct answer is included so we can randomize its placement for the quiz later.
-                    //Can likely be done another way, but I struggled to get this to work with a normal
-                    //string array. Maybe I messed up, but for now this will do.
+                    //Using array list so later we can arrange the answers without repeats.
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getCorrectAnswer());
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getIncorrectAnswer1());
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getIncorrectAnswer2());
@@ -155,13 +161,14 @@ public class PlayActivity extends AppCompatActivity {
                 }
             }
             assignQuestionToView();
-            dbAnswerChoices.clear();
+            //do not clear dbAnswerChoices here because we still need it to randomize its associated button in assignQuestionToView();
         });
     }
 
     /**
      * setTotalQuestions() method reads from the database's question table and assigns the
-     * dbTotalQuestions field to the tables size;
+     * dbTotalQuestions field to the tables size. Mostly done separately so we don't keep
+     * reassigning the dbTotalQuestions to the same thing over and over again.
      */
     public void setTotalQuestions(){
         LiveData<List<Question>> categoryObserver = repository.getAllQuestionsByCategory(categoryName);
@@ -172,7 +179,44 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * assignQuestionToView() method allows the answer choices for the current question to be
+     * displayed in a random order of buttons, displays the question itself, and the question
+     * number.
+     */
+    public void assignQuestionToView(){
+        Random rand = new Random();
+        int tempIndex = 0;
 
+        //This portion can likely be done in a while loop or something
+        //TODO: use a loop here if we have extra time.
+        tempIndex = rand.nextInt(dbAnswerChoices.size());
+        ans1.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(tempIndex)));
+        dbAnswerChoices.remove(tempIndex);
+
+        tempIndex = rand.nextInt(dbAnswerChoices.size());
+        ans2.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(tempIndex)));
+        dbAnswerChoices.remove(tempIndex);
+
+        tempIndex = rand.nextInt(dbAnswerChoices.size());
+        ans3.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(tempIndex)));
+        dbAnswerChoices.remove(tempIndex);
+
+        tempIndex = rand.nextInt(dbAnswerChoices.size());
+        ans4.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(tempIndex)));
+        dbAnswerChoices.remove(tempIndex);
+
+        //make sure arrayList is clear to use for next question.
+        dbAnswerChoices.clear();
+
+        questionNumberTextView.setText(String.format(Locale.US, "Question %d", currentQuestionIndex+1));
+        questionTextView.setText(String.format(Locale.US, "%s", dbQuestion));
+    }
+
+    /**
+     * setViewBindings() sets the buttons and text views that will be edited... which is probably
+     * all of them. TODO: continue adding on to this, then change the description of this.
+     */
     public void setViewBindings(){
         questionTextView = findViewById(R.id.questionTextView);
         questionNumberTextView = findViewById(R.id.questionNumberTextView);
@@ -183,16 +227,7 @@ public class PlayActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.submitButton);
     }
 
-    //TODO: assign the choices randomly
-    public void assignQuestionToView(){
-        questionNumberTextView.setText(String.format(Locale.US, "Question %d", currentQuestionIndex+1));
-        questionTextView.setText(String.format(Locale.US, "%s", dbQuestion));
 
-        ans1.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(0)));
-        ans2.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(1)));
-        ans3.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(2)));
-        ans4.setText(String.format(Locale.US, "%s", dbAnswerChoices.get(3)));
-    }
 
     /**
      * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
