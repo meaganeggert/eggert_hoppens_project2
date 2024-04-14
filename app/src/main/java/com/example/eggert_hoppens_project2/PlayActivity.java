@@ -3,6 +3,7 @@ package com.example.eggert_hoppens_project2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -63,12 +64,22 @@ public class PlayActivity extends AppCompatActivity {
             categoryName = getIntent().getStringExtra(CATEGORY_NAME);
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
+
+        //-- BEGIN Quit Button Functionality --
+        binding.quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = LandingActivity.intentFactory(getApplicationContext(), 99);
+                startActivity(intent);
+            }
+        });
+        //-- END Quit Button Functionality --
     }
 
 
 
     /**
-     * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
+     * PlayActivity intent factory intended to be used within GameModeActivity. Utilizes the context
      * of the previous activity (GameModeActivity), and passes the extras for the names of the
      * selected game mode and category.
      * @param context Context of the previous activity (GameModeActivity)

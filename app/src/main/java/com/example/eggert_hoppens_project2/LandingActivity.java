@@ -108,7 +108,7 @@ public class LandingActivity extends AppCompatActivity {
                 logout();
             }
         });
-        //-- END Sign-Up Button Functionality --
+        //-- END Log Out Button Functionality --
 
     }
 
