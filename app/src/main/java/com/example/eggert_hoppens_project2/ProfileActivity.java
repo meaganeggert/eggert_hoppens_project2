@@ -5,51 +5,59 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
-
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
-
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
+import com.example.eggert_hoppens_project2.databinding.ActivityProfileBinding;
 import com.example.eggert_hoppens_project2.databinding.ActivitySettingsBinding;
 
-public class SettingsActivity extends AppCompatActivity {
-    ActivitySettingsBinding binding;
+import org.w3c.dom.Text;
+
+
+public class ProfileActivity extends AppCompatActivity {
+
+    ActivityProfileBinding binding;
     private AppRepository repository;
 
     private String loggedInUser = "bob";
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         checkLoggedInUser();
 
-        binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {
+        // Show persistent UserName
+        TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
+        toolbar_UserName.setText(loggedInUser);
+
+        // Display current username
+        TextView userName_Display = (TextView) findViewById(R.id.currentUser_TextView);
+        userName_Display.setText(loggedInUser);
+
+        //Handles back button to return to the settings menu from the profile menu
+        binding.profileBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-                int loggedInUserId = sharedPreferences.getInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, -1);
-                Intent intent = LandingActivity.intentFactory(SettingsActivity.this, loggedInUserId);
-                startActivity(intent);
-            }
-
-        });
-
-        // Handling switching to ProfileActivity
-        binding.profileOptionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = ProfileActivity.intentFactory(SettingsActivity.this);
+                Intent intent = SettingsActivity.intentFactory(ProfileActivity.this);
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -76,7 +84,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+
     public static Intent intentFactory(Context context){
-        return new Intent(context, SettingsActivity.class);
+        return new Intent(context, ProfileActivity.class);
     }
 }
+
