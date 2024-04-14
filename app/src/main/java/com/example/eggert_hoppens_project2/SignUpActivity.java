@@ -53,6 +53,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         repository = AppRepository.getRepository(getApplication());
 
+        // Only show "Test" button if needed for debugging
+        if (MainActivity.DEBUG) {
+            binding.testButton.setVisibility(View.VISIBLE);
+        }
+
         //-- BEGIN Section for toolbar "home" Functionality --
         binding.headerToolbar.toolbarTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,12 +88,17 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if (password_Validate() && !mUsername.isEmpty()) {
                     insertUser();
-                } else if (mUsername.isEmpty()) {
+                    Toast.makeText(SignUpActivity.this, "Success!.", Toast.LENGTH_LONG).show();
+                }
+                else if (mUsername.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Must enter a username!", Toast.LENGTH_SHORT).show();
 
-                } else {
+                }
+                else {
                     Toast.makeText(getApplicationContext(), "Passwords must match and not be empty!", Toast.LENGTH_SHORT).show();
                 }
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
         //-- END Section for Sign Up Button Functionality --

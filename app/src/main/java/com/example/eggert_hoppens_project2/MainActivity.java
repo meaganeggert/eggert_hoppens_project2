@@ -13,19 +13,14 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -43,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String USER_NAME = "logged_In_User";
     CheckBox showPass_checkBox;
     EditText pass_editText;
+
+    static final boolean DEBUG = false;
 
     private AppRepository repository;
 
@@ -62,8 +59,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         repository = AppRepository.getRepository(getApplication());
 
+        // Only show "Test" button if needed for debugging
+        if (DEBUG) {
+            binding.testButton.setVisibility(View.VISIBLE);
+        }
+
         if (userLoggedIn()) {
-            Intent intent = LoginActivity.intentFactory(this, loggedInUserId);
+            Intent intent = LandingActivity.intentFactory(this, loggedInUserId);
             startActivity(intent);
         }
 
@@ -168,13 +170,14 @@ public class MainActivity extends AppCompatActivity {
         userObserver.observe(this, userInfo -> {
             if (userInfo != null) {
                 if (mPassword.equals(userInfo.getUserPassword())) {
-                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor sharedPrefEditor= sharedPreferences.edit();
-                    sharedPrefEditor.putInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, userInfo.getUserId());
-                    sharedPrefEditor.putString(LoginActivity.SHARED_PREFERENCE_USERNAME_KEY, userInfo.getUserName());
+                    sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_USERID_KEY, userInfo.getUserId());
+                    sharedPrefEditor.putString(LandingActivity.SHARED_PREFERENCE_USERNAME_KEY, userInfo.getUserName());
+                    sharedPrefEditor.putBoolean(LandingActivity.SHARED_PREFERENCE_ISADMIN_KEY, userInfo.isAdmin());
                     sharedPrefEditor.apply();
 //                    toastMaker("You made it here");
-                    Intent intent = LoginActivity.intentFactory(MainActivity.this, userInfo.getUserId());
+                    Intent intent = LandingActivity.intentFactory(MainActivity.this, userInfo.getUserId());
                     startActivity(intent);
                 }
                 else {
@@ -198,8 +201,8 @@ public class MainActivity extends AppCompatActivity {
         LiveData<UserInfo> userObserver;
 
         // check shared preference for logged in user
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        loggedInUserId = sharedPreferences.getInt(LoginActivity.SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        loggedInUserId = sharedPreferences.getInt(LandingActivity.SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
         if (loggedInUserId != LOGGED_OUT) {
             return true;
         }
