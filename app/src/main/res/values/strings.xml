@@ -34,4 +34,6 @@
     <string name="tutorial">Tutorial</string>
     <string name="quit">Quit</string>
     <string name="example_raven_question">Why is a raven like a writing desk?</string>
+    <string name="change_username">Change Username</string>
+    <string name="change_password">Change Password</string>
 </resources>

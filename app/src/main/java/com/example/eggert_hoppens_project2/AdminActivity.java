@@ -8,17 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class AdminActivity extends AppCompatActivity {
+import com.example.eggert_hoppens_project2.databinding.ActivityAdminBinding;
+import com.example.eggert_hoppens_project2.databinding.ActivityCategoryBinding;
 
+public class AdminActivity extends AppCompatActivity {
+    ActivityAdminBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        binding = ActivityAdminBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
