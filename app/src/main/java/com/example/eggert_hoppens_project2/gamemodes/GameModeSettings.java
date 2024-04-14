@@ -1,8 +1,7 @@
 package com.example.eggert_hoppens_project2.gamemodes;
 
-import java.util.Objects;
 
-public abstract class GameModeSettings {
+public class GameModeSettings {
     //________________________________________________________________________________________Fields
     private String gameModeName = "";
     private String gameModeDescription = "";
@@ -63,19 +62,6 @@ public abstract class GameModeSettings {
     }
 
     //______________________________________________________________________________GeneratedMethods
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GameModeSettings that = (GameModeSettings) o;
-        return isTimed == that.isTimed && Objects.equals(gameModeName, that.gameModeName) && Objects.equals(gameModeDescription, that.gameModeDescription);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameModeName, gameModeDescription, isTimed);
-    }
-
     @Override
     public String toString() {
         return "GameModeSettings{" +
