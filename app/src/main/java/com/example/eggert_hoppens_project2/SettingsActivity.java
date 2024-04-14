@@ -26,9 +26,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LoginActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-                int loggedInUserId = sharedPreferences.getInt(LoginActivity.SHARED_PREFERENCE_USERID_VALUE, -1);
-                Intent intent = LoginActivity.intentFactory(SettingsActivity.this, loggedInUserId);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+                int loggedInUserId = sharedPreferences.getInt(LandingActivity.SHARED_PREFERENCE_USERID_VALUE, -1);
+                Intent intent = LandingActivity.intentFactory(SettingsActivity.this, loggedInUserId);
                 startActivity(intent);
             }
 

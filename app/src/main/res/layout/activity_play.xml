@@ -22,7 +22,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="serif-monospace"
         android:text="@string/no_category_passed"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
@@ -34,8 +34,8 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="Game Mode Name"
-        android:textSize="12sp"
+        android:text="Game Mode"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
@@ -58,8 +58,8 @@
         android:layout_marginTop="50dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="Question"
-        android:textSize="14sp"
+        android:text="@string/example_raven_question"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionNumberTextView" />
@@ -72,6 +72,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="serif-monospace"
         android:text="First Answer"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
 
@@ -83,6 +84,7 @@
         android:layout_marginEnd="25dp"
         android:fontFamily="serif-monospace"
         android:text="Second Answer"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
 
@@ -94,6 +96,7 @@
         android:layout_marginTop="25dp"
         android:fontFamily="serif-monospace"
         android:text="Third Answer"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerFirstButton" />
 
@@ -104,20 +107,35 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:fontFamily="serif-monospace"
+        android:textSize="18sp"
         android:text="Fourth Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerSecondButton" />
 
     <Button
+
         android:id="@+id/submitButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="serif-monospace"
         android:text="Submit"
+        app:layout_constraintTop_toBottomOf="@+id/answerFourthButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+  
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/quit"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

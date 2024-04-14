@@ -68,6 +68,7 @@ public class PlayActivity extends AppCompatActivity {
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
 
+
         //TODO: Fix so
         setTotalQuestions();
 
@@ -157,6 +158,17 @@ public class PlayActivity extends AppCompatActivity {
             assignQuestionToView();
             dbAnswerChoices.clear();
         });
+
+        //-- BEGIN Quit Button Functionality --
+        binding.quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = LandingActivity.intentFactory(getApplicationContext(), 99);
+                startActivity(intent);
+            }
+        });
+        //-- END Quit Button Functionality --
+
     }
 
     /**
@@ -195,7 +207,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     /**
-     * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
+     * PlayActivity intent factory intended to be used within GameModeActivity. Utilizes the context
      * of the previous activity (GameModeActivity), and passes the extras for the names of the
      * selected game mode and category.
      * @param context Context of the previous activity (GameModeActivity)

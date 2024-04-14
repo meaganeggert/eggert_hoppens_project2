@@ -6,15 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -23,14 +17,17 @@ import com.example.eggert_hoppens_project2.databinding.ActivityLoginBinding;
 
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
+public class LandingActivity extends AppCompatActivity {
 
     static final String SHARED_PREFERENCE_USERID_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERID_KEY";
     static final String SHARED_PREFERENCE_USERNAME_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERNAME_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERID_VALUE";
+    static final String SHARED_PREFERENCE_ISADMIN_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_ISADMIN_KEY";
+
     private static final String CATEGORY_NAME = "Category_Name_Value_String";
     private static final String USER_NAME = "logged_In_User";
     private static final String LOGIN_ACT_USER_ID = "login_activity_user_id";
+
 
     private AppRepository repository;
 
@@ -38,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private String loggedInUser = "egghop";
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
+
+    private boolean loggedIn_isAdmin = false;
 
     ActivityLoginBinding binding;
 
@@ -48,12 +47,22 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
         loginUser();
-        Toast.makeText(this, String.valueOf(loggedInUserId), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, String.valueOf(loggedInUserId), Toast.LENGTH_SHORT).show();
 
 
         if (loggedInUserId == LOGGED_OUT) {
             Intent intent = MainActivity.intentFactory(getApplicationContext());
             startActivity(intent);
+        }
+
+        // Only show "Test" button if needed for debugging
+        if (MainActivity.DEBUG) {
+            binding.testButton.setVisibility(View.VISIBLE);
+        }
+
+        //Only show "Admin" options if the logged in user is an administrator
+        if (loggedIn_isAdmin) {
+            binding.adminSettingsButton.setVisibility(View.VISIBLE);
         }
 
         // Show persistent UserName
@@ -69,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = CategoryActivity.intentFactory(LoginActivity.this);
+                Intent intent = CategoryActivity.intentFactory(LandingActivity.this);
                 startActivity(intent);
             }
         });
@@ -78,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.scoreboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ScoreboardActivity.intentFactory(LoginActivity.this);
+                Intent intent = ScoreboardActivity.intentFactory(LandingActivity.this);
                 startActivity(intent);
             }
         });
@@ -87,13 +96,26 @@ public class LoginActivity extends AppCompatActivity {
         binding.settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = SettingsActivity.intentFactory(LoginActivity.this);
+                Intent intent = SettingsActivity.intentFactory(LandingActivity.this);
                 startActivity(intent);
             }
         });
 
+        //-- BEGIN Log Out Button Functionality --
+        binding.logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+        //-- END Log Out Button Functionality --
+
     }
 
+    /**
+     * This method will effectively get all of the necessary information for being 'logged in'
+     * It will store the current user's ID, username, and whether or not they are an admin
+     */
     private void loginUser() {
 
         LiveData<UserInfo> userObserver;
@@ -101,7 +123,8 @@ public class LoginActivity extends AppCompatActivity {
         // check shared preference for logged in user
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
-        loggedInUser = sharedPreferences.getString(SHARED_PREFERENCE_USERNAME_KEY, "BOB");
+        loggedInUser = sharedPreferences.getString(SHARED_PREFERENCE_USERNAME_KEY, LOGGED_OUT_USERNAME);
+        loggedIn_isAdmin = sharedPreferences.getBoolean(SHARED_PREFERENCE_ISADMIN_KEY, false);
         if (loggedInUserId != LOGGED_OUT) {
             return;
         }
@@ -119,11 +142,16 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method will logout the user and reset all shared preferences
+     * It will also send the user back to the main activity so they can log in again, if desired
+     */
     private void logout() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
         sharedPrefEditor.putString(SHARED_PREFERENCE_USERNAME_KEY, LOGGED_OUT_USERNAME);
+        sharedPrefEditor.putBoolean(SHARED_PREFERENCE_ISADMIN_KEY, false);
         sharedPrefEditor.apply();
         getIntent().putExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
 
@@ -137,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
      * @return The intent involving this class
      */
     static Intent intentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, LandingActivity.class);
         intent.putExtra(LOGIN_ACT_USER_ID, userId);
         return intent;
     }
