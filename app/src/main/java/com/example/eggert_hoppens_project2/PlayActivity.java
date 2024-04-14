@@ -30,9 +30,10 @@ public class PlayActivity extends AppCompatActivity {
 
     private String dbQuestion = "";
     private String dbCorrectAnswer = "Correct";
-    private ArrayList<String> dbAnswerChoices = new ArrayList<>();
+    private final ArrayList<String> dbAnswerChoices = new ArrayList<>();
     private int dbTotalQuestions = 0;
     private int score = 0;
+    private int strikes = 0;
     private int currentQuestionIndex = 0;
     private String userAnswer = "";
 
@@ -124,9 +125,11 @@ public class PlayActivity extends AppCompatActivity {
                     Toast.makeText(PlayActivity.this, "Must select an answer.", Toast.LENGTH_SHORT).show();
                 } else{
                     if(userAnswer.equals(dbCorrectAnswer)){
-                        score++;
+                        gameModeSettings.incrementScore();
+                    }else{
+                        gameModeSettings.incrementStrikes();
                     }
-                    if(currentQuestionIndex >= dbTotalQuestions - 1){
+                    if(gameModeSettings.checkGameEnds(currentQuestionIndex, dbTotalQuestions)){
                         Intent intent = CategoryActivity.intentFactory(PlayActivity.this);
                         startActivity(intent);
                     } else{

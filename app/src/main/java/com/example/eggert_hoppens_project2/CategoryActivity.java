@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,9 +24,10 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categoryFirstOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String categoryName = binding.categoryFirstOptionButton.getText().toString();
                 Intent intent = GameModeActivity.intentFactory(
                         CategoryActivity.this,
-                        binding.categoryFirstOptionButton.getText().toString());
+                        categoryName);
                 startActivity(intent);
             }
         });
@@ -35,10 +37,12 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categorySecondOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = GameModeActivity.intentFactory(
-                        CategoryActivity.this,
-                        binding.categorySecondOptionButton.getText().toString());
-                startActivity(intent);
+//                String categoryName = binding.categorySecondOptionButton.getText().toString();
+//                Intent intent = GameModeActivity.intentFactory(
+//                        CategoryActivity.this,
+//                        categoryName);
+//                startActivity(intent);
+                Toast.makeText(CategoryActivity.this, "Sports category not implemented yet", Toast.LENGTH_SHORT).show();
             }
         });
     }
