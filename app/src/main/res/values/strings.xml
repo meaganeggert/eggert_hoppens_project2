@@ -28,4 +28,10 @@
     <string name="zen">Zen</string>
     <string name="speed">Speed</string>
     <string name="compete">Compete</string>
+    <string name="log_out">Log Out</string>
+    <string name="back">Back</string>
+    <string name="profile">Profile</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="quit">Quit</string>
+    <string name="example_raven_question">Why is a raven like a writing desk?</string>
 </resources>

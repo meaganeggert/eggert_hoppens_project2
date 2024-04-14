@@ -158,11 +158,26 @@
         android:fontFamily="serif-monospace"
         android:padding="10dp"
         android:text="@string/sign_up"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showPassword_checkBox" />
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/back_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="serif-monospace"
+        android:padding="10dp"
+        android:text="@string/back"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/createdBy_Footer"/>
 
     <!-- Test/Debug Note Text -->
     <TextView
@@ -172,6 +187,8 @@
         android:layout_margin="12dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:text="@string/testButtonLabel"
         android:textSize="11sp"
         app:layout_constraintTop_toBottomOf="@id/signUp_Button"
@@ -185,6 +202,8 @@
         android:backgroundTint="@color/black"
         android:fontFamily="serif-monospace"
         android:text="@string/test"
+        android:visibility="invisible"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/test_textView" />
@@ -196,6 +215,8 @@
         android:layout_height="80dp"
         android:layout_margin="12dp"
         android:fontFamily="serif-monospace"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:gravity="center"
         android:textSize="11sp"
         app:layout_constraintTop_toBottomOf="@id/test_Button"
