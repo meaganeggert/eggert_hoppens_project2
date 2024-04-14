@@ -2,14 +2,18 @@ package com.example.eggert_hoppens_project2.gamemodes;
 
 import java.util.Objects;
 
-public abstract class GameModeAbstract {
+public abstract class GameModeSettings {
     //________________________________________________________________________________________Fields
     private String gameModeName = "";
     private String gameModeDescription = "";
     private boolean isTimed = false;
 
+    private double timeStart = 0.0;
+    private double timeEnd = 0.0;
+    private boolean timerIsRunning = false;
+
     //___________________________________________________________________________________Constructor
-    public GameModeAbstract(String gameModeExtra) {
+    public GameModeSettings(String gameModeExtra) {
         this.gameModeName = gameModeName;
         setGameMode();
     }
@@ -33,12 +37,37 @@ public abstract class GameModeAbstract {
         }
     }
 
+    public void setTimeStart(){
+        if(this.isTimed){
+            this.timeStart = System.currentTimeMillis();
+            this.timerIsRunning = true;
+        }
+    }
+    public void setTimeEnd(){
+        if(this.isTimed){
+            this.timeEnd = System.currentTimeMillis();
+            this.timerIsRunning = false;
+        }
+    }
+
+    public double getTotalTime(){
+        double totalTime = 0.0;
+        if(this.isTimed){
+            if(timerIsRunning){
+                totalTime = System.currentTimeMillis() - this.timeStart;
+            } else{
+                totalTime = this.timeEnd - this.timeStart;
+            }
+        }
+        return totalTime;
+    }
+
     //______________________________________________________________________________GeneratedMethods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameModeAbstract that = (GameModeAbstract) o;
+        GameModeSettings that = (GameModeSettings) o;
         return isTimed == that.isTimed && Objects.equals(gameModeName, that.gameModeName) && Objects.equals(gameModeDescription, that.gameModeDescription);
     }
 
@@ -49,7 +78,7 @@ public abstract class GameModeAbstract {
 
     @Override
     public String toString() {
-        return "GameModeAbstract{" +
+        return "GameModeSettings{" +
                 "gameModeName='" + gameModeName + '\'' +
                 ", gameModeDescription='" + gameModeDescription + '\'' +
                 ", isTimed=" + isTimed +
@@ -77,6 +106,6 @@ public abstract class GameModeAbstract {
     }
 
     public void setTimed(boolean timed) {
-        isTimed = timed;
+        this.isTimed = timed;
     }
 }

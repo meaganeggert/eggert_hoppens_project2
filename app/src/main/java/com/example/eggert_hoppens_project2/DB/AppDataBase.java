@@ -54,9 +54,9 @@ public abstract class AppDataBase extends RoomDatabase {
             //TODO : add databaseWriteExecutor.execute(() -> {}
             databaseWriteExecutor.execute(() -> {
                 UserInfoDAO dao = INSTANCE.userInfoDAO();
-//                QuestionDAO questionDAO = INSTANCE.questionDAO();
+                QuestionDAO questionDAO = INSTANCE.questionDAO();
                 dao.resetUserDB();
-//                questionDAO.deleteAllQuestions();
+                questionDAO.deleteAllQuestions();
 
                 UserInfo admin = new UserInfo("admin1", "admin1", true);
                 dao.insert(admin);
@@ -64,17 +64,29 @@ public abstract class AppDataBase extends RoomDatabase {
                 UserInfo testUser = new UserInfo("testUser1", "testUser1", false);
                 dao.insert(testUser);
 
-//                Question testQuestion1 = new Question(
-//                        "multiple",
-//                        "medium",
-//                        "Video Games",
-//                        "Which of these is the name of a city in the Grand Theft Auto series?",
-//                        "San Andreas",
-//                        "Yabba",
-//                        "Dabba",
-//                        "Doo"
-//                );
-//                questionDAO.insertQuestion(testQuestion1);
+                Question testQuestion1 = new Question(
+                        "multiple",
+                        "medium",
+                        "Video Games",
+                        "Which of these is the name of a city in the Grand Theft Auto series?",
+                        "San Andreas",
+                        "Yabba",
+                        "Dabba",
+                        "Doo"
+                );
+                questionDAO.insertQuestion(testQuestion1);
+
+                Question testQuestion2 = new Question(
+                        "multiple",
+                        "medium",
+                        "Video Games",
+                        "How many fingers do humans have?",
+                        "Ten",
+                        "Five",
+                        "Nine",
+                        "Seven"
+                );
+                questionDAO.insertQuestion(testQuestion2);
             });
         }
     };

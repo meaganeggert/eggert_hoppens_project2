@@ -2,6 +2,7 @@ package com.example.eggert_hoppens_project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,29 +15,32 @@ import androidx.lifecycle.LiveData;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.databinding.ActivityPlayBinding;
+import com.example.eggert_hoppens_project2.gamemodes.GameModeSettings;
+import com.example.eggert_hoppens_project2.gamemodes.Speed;
+import com.example.eggert_hoppens_project2.gamemodes.Zen;
 
 import java.util.List;
 import java.util.Locale;
 
 public class PlayActivity extends AppCompatActivity {
     private AppRepository repository;
-    private static final String GAME_MODE_NAME = "Game Mode Name";
-    private static final String CATEGORY_NAME = "Category_Name_Value_String";
-    private static String gameModeName = "";
-    private static String categoryName = "";
+    private static final String GAME_MODE_NAME = "Game Mode Name";  //extra game mode name for intent factory
+    private static final String CATEGORY_NAME = "Category_Name_Value_String";   //extra category name for intent factory
+    private static String gameModeName = "";    //game mode name
+    private static String categoryName = "";    //category name;
 
+    GameModeSettings gameModeSettings;
 
     private int score = 0;
+    private int totalQuestions;
     private int currentQuestionIndex = 0;
-
-    String userAnswer = "";
-
-
+    private String userAnswer = "";
+  
+    ActivityPlayBinding binding;
     TextView questionTextView;
     TextView questionNumberTextView;
     Button ans1, ans2, ans3, ans4;
-  
-    ActivityPlayBinding binding;
+    Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +52,23 @@ public class PlayActivity extends AppCompatActivity {
 
         //Identifiers for text and buttons for editing
         questionTextView = findViewById(R.id.questionTextView);
-
         questionNumberTextView = findViewById(R.id.questionNumberTextView);
-
         ans1 = findViewById(R.id.answerFirstButton);
         ans2 = findViewById(R.id.answerSecondButton);
         ans3 = findViewById(R.id.answerThirdButton);
         ans4 = findViewById(R.id.answerFourthButton);
+        submitButton = findViewById(R.id.submitButton);
 
         //If the previous activity passed an extra for the selected game mode, show the selected
         //game mode on screen using the playPassedGameModeTextView text view.
         if(getIntent().hasExtra(GAME_MODE_NAME)){
             gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
             binding.playPassedGameModeTextView.setText(String.format(Locale.US, "%s", gameModeName));
+            if(gameModeName.equals("Zen")){
+                gameModeSettings = new Zen(gameModeName);
+            } else if (gameModeName.equals("Speed")) {
+                gameModeSettings = new Speed(gameModeName);
+            }
             //TODO: use game mode rules based on string name.
         }
         //If the previous activity passed an extra for the selected category, show the selected
@@ -69,10 +77,6 @@ public class PlayActivity extends AppCompatActivity {
             categoryName = getIntent().getStringExtra(CATEGORY_NAME);
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
-
-        //Set questions to textview and buttons. Needs to come after reading the extra as we use it
-        //to select questions based on category.
-        loadNewQuestion();
 
     }
 
@@ -83,6 +87,7 @@ public class PlayActivity extends AppCompatActivity {
         LiveData<List<Question>> categoryObserver = repository.getAllQuestionsByCategory(categoryName);
         categoryObserver.observe(this, questionList -> {
             if(!questionList.isEmpty()){
+                questionNumberTextView.setText(String.format(Locale.US, "Question %d", currentQuestionIndex+1));
                 questionTextView.setText(questionList.get(currentQuestionIndex).getQuestion());
                 ans1.setText(questionList.get(currentQuestionIndex).getCorrectAnswer());
                 ans2.setText(questionList.get(currentQuestionIndex).getIncorrectAnswer1());
@@ -91,6 +96,17 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public void setQuestionCount(){
+//        LiveData<List<Question>> categoryObserver = repository.getAllQuestionsByCategory(categoryName);
+//        categoryObserver.observe(this, questionList -> {
+//            if(!questionList.isEmpty()){
+//                totalQuestions = questionList.size();
+//            }else{
+//                totalQuestions = 0;
+//            }
+//        });
+//    }
 
     /**
      * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
