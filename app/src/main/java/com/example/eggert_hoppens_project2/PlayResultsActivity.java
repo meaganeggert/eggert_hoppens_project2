@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +69,17 @@ public class PlayResultsActivity extends AppCompatActivity {
         if(getIntent().hasExtra(GAME_MODE_NAME)){
             gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
         }
+
+        //Not entirely sure if this works the way I want it to. Supposed to clear all the activities leading up to this
+        //and go back to the landing page.
+        binding.mainMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 
     private void checkLoggedInUser() {
