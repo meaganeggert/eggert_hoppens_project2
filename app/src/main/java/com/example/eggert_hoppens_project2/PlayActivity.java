@@ -32,8 +32,6 @@ public class PlayActivity extends AppCompatActivity {
     private String dbCorrectAnswer = "Correct";
     private final ArrayList<String> dbAnswerChoices = new ArrayList<>();
     private int dbTotalQuestions = 0;
-    private int score = 0;
-    private int strikes = 0;
     private int currentQuestionIndex = 0;
     private String userAnswer = "";
 
@@ -43,7 +41,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView questionTextView;
     TextView questionNumberTextView;
     Button ans1, ans2, ans3, ans4;
-    Button submitButton;
+    Button submitButton, quitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +115,6 @@ public class PlayActivity extends AppCompatActivity {
         //Clicking the submit button will check if an answer has been selected and will check if it is
         //correct. It will also check if we have the user has made it to the end of the list to
         //to prevent a crash. Doing so will send the user somewhere.
-        //TODO: create a finish screen and send the user there instead.
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,23 +126,40 @@ public class PlayActivity extends AppCompatActivity {
                     }else{
                         gameModeSettings.incrementStrikes();
                     }
-                    if(gameModeSettings.checkGameEnds(currentQuestionIndex, dbTotalQuestions)){
+                    if(gameModeSettings.checkGameEnds()){
+                        gameModeSettings.endGame();
                         Intent intent = PlayResultsActivity.intentFactory(
                                 PlayActivity.this,
                                 gameModeSettings.getUserScore(),
                                 gameModeSettings.getUserStrikes(),
+                                gameModeSettings.getCurrentQuestionIndex() + 1,
                                 gameModeSettings.getTotalTime()
                         );
                         startActivity(intent);
                     } else{
                         userAnswer = "";
                         currentQuestionIndex++;
+                        gameModeSettings.setCurrentQuestionIndex(currentQuestionIndex);
                         loadNewQuestion();
                     }
                 }
             }
         });
 
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gameModeSettings.endGame();
+                Intent intent = PlayResultsActivity.intentFactory(
+                        PlayActivity.this,
+                        gameModeSettings.getUserScore(),
+                        gameModeSettings.getUserStrikes(),
+                        gameModeSettings.getCurrentQuestionIndex() + 1,
+                        gameModeSettings.getTotalTime()
+                );
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -161,7 +175,6 @@ public class PlayActivity extends AppCompatActivity {
                     dbQuestion = questions.get(currentQuestionIndex).getQuestion();
                     dbCorrectAnswer = questions.get(currentQuestionIndex).getCorrectAnswer();
 
-                    //Using array list so later we can arrange the answers without repeats.
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getCorrectAnswer());
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getIncorrectAnswer1());
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getIncorrectAnswer2());
@@ -183,6 +196,7 @@ public class PlayActivity extends AppCompatActivity {
         categoryObserver.observe(this, questionList -> {
             if(!questionList.isEmpty()){
                 dbTotalQuestions = questionList.size();
+                gameModeSettings.setDbTotalQuestions(dbTotalQuestions);
             }
         });
     }
@@ -194,7 +208,7 @@ public class PlayActivity extends AppCompatActivity {
      */
     public void assignQuestionToView(){
         Random rand = new Random();
-        int tempIndex = 0;
+        int tempIndex;
 
         //This portion can likely be done in a while loop or something
         //TODO: use a loop here if we have extra time.
@@ -233,6 +247,7 @@ public class PlayActivity extends AppCompatActivity {
         ans3 = findViewById(R.id.answerThirdButton);
         ans4 = findViewById(R.id.answerFourthButton);
         submitButton = findViewById(R.id.submitButton);
+        quitButton = findViewById(R.id.quitButton);
     }
 
 

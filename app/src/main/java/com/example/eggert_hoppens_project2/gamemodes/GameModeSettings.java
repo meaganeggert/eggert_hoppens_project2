@@ -1,12 +1,13 @@
 package com.example.eggert_hoppens_project2.gamemodes;
 
 
-import android.content.Intent;
+import androidx.annotation.NonNull;
 
 public class GameModeSettings {
     //________________________________________________________________________________________Fields
-    private String gameModeName = "";
+    private String gameModeName;
     private String gameModeDescription = "";
+    private String categoryName = "";
 
     private boolean hasStrikes = false;
     private boolean isTimed = false;
@@ -14,6 +15,10 @@ public class GameModeSettings {
     private double timeEnd = 0.0;
     private boolean timerIsRunning = false;
 
+    private int dbTotalQuestions = 0;
+    private int currentQuestionIndex = 0;
+
+    //User gameplay info
     private int userScore = 0;
     private int userStrikes = 0;
 
@@ -21,7 +26,6 @@ public class GameModeSettings {
     public GameModeSettings(String gameModeExtra) {
         this.gameModeName = gameModeExtra;
         this.userScore = 0;
-        //this.playIsRunning = true;
         setGameMode();
     }
     //_______________________________________________________________________________GameModeMethods
@@ -83,8 +87,8 @@ public class GameModeSettings {
         return totalTime;
     }
 
-    public boolean checkGameEnds(int currentQuestion, int totalQuestions){
-        if(currentQuestion >= totalQuestions - 1){
+    public boolean checkGameEnds(){
+        if(currentQuestionIndex >= dbTotalQuestions - 1){
             return true;
         }
         if(this.gameModeName.equals("Compete")){
@@ -99,9 +103,9 @@ public class GameModeSettings {
         if(this.isTimed){
             setTimeEnd();
         }
-        //TODO: do intent stuff here. Might also need to migrate some questions and answers.
     }
     //______________________________________________________________________________GeneratedMethods
+    @NonNull
     @Override
     public String toString() {
         return "GameModeSettings{" +
@@ -181,5 +185,29 @@ public class GameModeSettings {
 
     public void setUserStrikes(int userStrikes) {
         this.userStrikes = userStrikes;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getDbTotalQuestions() {
+        return dbTotalQuestions;
+    }
+
+    public void setDbTotalQuestions(int dbTotalQuestions) {
+        this.dbTotalQuestions = dbTotalQuestions;
+    }
+
+    public int getCurrentQuestionIndex() {
+        return currentQuestionIndex;
+    }
+
+    public void setCurrentQuestionIndex(int currentQuestionIndex) {
+        this.currentQuestionIndex = currentQuestionIndex;
     }
 }

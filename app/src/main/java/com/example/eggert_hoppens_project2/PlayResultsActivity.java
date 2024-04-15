@@ -13,10 +13,12 @@ import java.util.Locale;
 public class PlayResultsActivity extends AppCompatActivity {
     private static final String USER_SCORE_NAME = "User Score";
     private static final String USER_STRIKE_NAME = "User Strikes";
+    private static final String TOTAL_QUESTIONS_ANSWERED_NAME = "Total Answered Questions";
     private static final String USER_TIME_NAME = "User Time";
 
     private static int userScore = 0;
     private static int userStrikes = 0;
+    private static int totalAnsweredQuestions = 0;
     private static double userTime = 0.0;
 
     ActivityPlayResultsScreenBinding binding;
@@ -27,9 +29,12 @@ public class PlayResultsActivity extends AppCompatActivity {
         binding = ActivityPlayResultsScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if(getIntent().hasExtra(TOTAL_QUESTIONS_ANSWERED_NAME)){
+            totalAnsweredQuestions = getIntent().getIntExtra(TOTAL_QUESTIONS_ANSWERED_NAME, 0);
+        }
         if(getIntent().hasExtra(USER_SCORE_NAME)){
             userScore = getIntent().getIntExtra(USER_SCORE_NAME, 0);
-            binding.resultScoreTextView.setText(String.format(Locale.US, "Score: %d", userScore));
+            binding.resultScoreTextView.setText(String.format(Locale.US, "Score: %d" + "/" + "%d", userScore, totalAnsweredQuestions));
         }
         if(getIntent().hasExtra(USER_STRIKE_NAME)){
             userStrikes = getIntent().getIntExtra(USER_STRIKE_NAME, 0);
@@ -37,14 +42,15 @@ public class PlayResultsActivity extends AppCompatActivity {
         }
         if(getIntent().hasExtra(USER_TIME_NAME)){
             userTime = getIntent().getDoubleExtra(USER_TIME_NAME, 0);
-            binding.resultTimeTextView.setText(String.format(Locale.US, "Time: %.2f", userTime));
+            binding.resultTimeTextView.setText(String.format(Locale.US, "Time: %.2f seconds", userTime));
         }
     }
 
-    public static Intent intentFactory(Context context, int userScore, int userStrikes, double totalTime){
+    public static Intent intentFactory(Context context, int userScore, int userStrikes, int totalAnsweredQuestions, double totalTime){
         Intent intent = new Intent(context, PlayResultsActivity.class);
         intent.putExtra(USER_SCORE_NAME, userScore);
         intent.putExtra(USER_STRIKE_NAME, userStrikes);
+        intent.putExtra(TOTAL_QUESTIONS_ANSWERED_NAME, totalAnsweredQuestions);
         intent.putExtra(USER_TIME_NAME, totalTime);
         return intent;
     }

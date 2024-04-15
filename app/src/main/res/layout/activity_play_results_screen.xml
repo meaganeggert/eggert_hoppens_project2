@@ -30,11 +30,11 @@
         android:id="@+id/resultScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="serif-monospace"
-        android:text="Score: 0"
-        android:textSize="15sp"
+        android:text="Score: 0/0"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizResultTextView" />
 
@@ -42,42 +42,31 @@
         android:id="@+id/resultTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="serif-monospace"
         android:text="Time: untimed"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/resultScoreTextView"
-        app:layout_constraintEnd_toStartOf="@+id/resultStrikesTextView"
-        app:layout_constraintTop_toBottomOf="@+id/quizResultTextView" />
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultScoreTextView" />
 
     <TextView
         android:id="@+id/resultStrikesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="serif-monospace"
         android:text="Strikes: 0"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quizResultTextView" />
-
-    <TextView
-        android:layout_width="370dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="75dp"
-        android:fontFamily="serif-monospace"
-        android:text="User Results Info"
-        android:padding="8dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quizResultTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/resultTimeTextView" />
 
     <Button
         android:id="@+id/mainMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="serif-monospace"
         android:text="Main Menu"
         app:layout_constraintBottom_toBottomOf="parent"
