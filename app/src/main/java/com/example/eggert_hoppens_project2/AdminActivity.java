@@ -5,19 +5,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityAdminBinding;
-import com.example.eggert_hoppens_project2.databinding.ActivityCategoryBinding;
 
 public class AdminActivity extends AppCompatActivity {
     ActivityAdminBinding binding;
@@ -27,6 +26,13 @@ public class AdminActivity extends AppCompatActivity {
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
+
+    private boolean MEAGAN = false;
+    public static boolean clearScore_Clicked = false;
+
+    // Attempting Fragments
+    Button fragmentButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,37 @@ public class AdminActivity extends AppCompatActivity {
         // Show persistent UserName
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
+
+        Button clearScoreButton = (Button) findViewById(R.id.clearScore_Button);
+        clearScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!clearScore_Clicked) {
+                    loadFragment(new ClearScoreConfirmationFragment());
+
+                }
+            }
+        });
+
+        // Test Fragment Set Up
+        fragmentButton = (Button) findViewById(R.id.fragment_Button);
+        fragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!MEAGAN) {
+                    loadFragment(new MeaganFragment());
+                    MEAGAN = true;
+                }
+                else {
+                    loadFragment(new BrandonFragment());
+                    MEAGAN = false;
+                }
+
+
+            }
+        });
+
+
 
         //Back Button Functionality
         binding.adminBackButton.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +109,17 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * ToDo: Fill this in later
+     */
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragMan = getSupportFragmentManager();
+        FragmentTransaction fragTran = fragMan.beginTransaction();
+        fragTran.replace(R.id.frag_ContainerView, fragment);
+        fragTran.commit();
+    }
+
 
     public static Intent intentFactory(Context context){
         return new Intent(context, AdminActivity.class);
