@@ -55,12 +55,12 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categorySecondOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String categoryName = binding.categorySecondOptionButton.getText().toString();
-//                Intent intent = GameModeActivity.intentFactory(
-//                        CategoryActivity.this,
-//                        categoryName);
-//                startActivity(intent);
-                Toast.makeText(CategoryActivity.this, "Sports category not implemented yet", Toast.LENGTH_SHORT).show();
+                String categoryName = binding.categorySecondOptionButton.getText().toString();
+                Intent intent = GameModeActivity.intentFactory(
+                        CategoryActivity.this,
+                        categoryName);
+                startActivity(intent);
+                //Toast.makeText(CategoryActivity.this, "Sports category not implemented yet", Toast.LENGTH_SHORT).show();
             }
         });
     }
