@@ -133,7 +133,8 @@ public class PlayActivity extends AppCompatActivity {
                                 gameModeSettings.getUserScore(),
                                 gameModeSettings.getUserStrikes(),
                                 gameModeSettings.getCurrentQuestionIndex() + 1,
-                                gameModeSettings.getTotalTime()
+                                gameModeSettings.getTotalTime(),
+                                gameModeSettings.getGameModeName()
                         );
                         startActivity(intent);
                     } else{
@@ -154,8 +155,9 @@ public class PlayActivity extends AppCompatActivity {
                         PlayActivity.this,
                         gameModeSettings.getUserScore(),
                         gameModeSettings.getUserStrikes(),
-                        gameModeSettings.getCurrentQuestionIndex() + 1,
-                        gameModeSettings.getTotalTime()
+                        gameModeSettings.getCurrentQuestionIndex(),
+                        gameModeSettings.getTotalTime(),
+                        gameModeSettings.getGameModeName()
                 );
                 startActivity(intent);
             }

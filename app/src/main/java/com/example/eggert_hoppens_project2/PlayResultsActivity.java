@@ -15,11 +15,13 @@ public class PlayResultsActivity extends AppCompatActivity {
     private static final String USER_STRIKE_NAME = "User Strikes";
     private static final String TOTAL_QUESTIONS_ANSWERED_NAME = "Total Answered Questions";
     private static final String USER_TIME_NAME = "User Time";
+    private static final String GAME_MODE_NAME = "Game Mode Name";  //To be used for scoreboard database.
 
     private static int userScore = 0;
     private static int userStrikes = 0;
     private static int totalAnsweredQuestions = 0;
     private static double userTime = 0.0;
+    private static String gameModeName = "";
 
     ActivityPlayResultsScreenBinding binding;
 
@@ -44,14 +46,19 @@ public class PlayResultsActivity extends AppCompatActivity {
             userTime = getIntent().getDoubleExtra(USER_TIME_NAME, 0);
             binding.resultTimeTextView.setText(String.format(Locale.US, "Time: %.2f seconds", userTime));
         }
+        //In case we need it for the scoreboard database.
+        if(getIntent().hasExtra(GAME_MODE_NAME)){
+            gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
+        }
     }
 
-    public static Intent intentFactory(Context context, int userScore, int userStrikes, int totalAnsweredQuestions, double totalTime){
+    public static Intent intentFactory(Context context, int userScore, int userStrikes, int totalAnsweredQuestions, double totalTime, String gameModeName){
         Intent intent = new Intent(context, PlayResultsActivity.class);
         intent.putExtra(USER_SCORE_NAME, userScore);
         intent.putExtra(USER_STRIKE_NAME, userStrikes);
         intent.putExtra(TOTAL_QUESTIONS_ANSWERED_NAME, totalAnsweredQuestions);
         intent.putExtra(USER_TIME_NAME, totalTime);
+        intent.putExtra(GAME_MODE_NAME, gameModeName);
         return intent;
     }
 }
