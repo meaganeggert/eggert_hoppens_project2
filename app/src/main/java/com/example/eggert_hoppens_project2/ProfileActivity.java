@@ -23,7 +23,6 @@ import org.w3c.dom.Text;
 
 
 public class ProfileActivity extends AppCompatActivity {
-
     ActivityProfileBinding binding;
     private AppRepository repository;
 
@@ -31,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

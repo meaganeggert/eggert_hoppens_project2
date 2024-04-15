@@ -110,6 +110,16 @@ public class LandingActivity extends AppCompatActivity {
         });
         //-- END Log Out Button Functionality --
 
+        //-- BEGIN Admin Button Functionality --
+        binding.adminSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminActivity.intentFactory(LandingActivity.this);
+                startActivity(intent);
+            }
+        });
+        //-- END Admin Button Functionality --
+
     }
 
     /**
