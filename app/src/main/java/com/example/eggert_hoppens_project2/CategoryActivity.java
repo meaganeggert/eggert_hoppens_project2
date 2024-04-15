@@ -12,13 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityCategoryBinding;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CategoryActivity extends AppCompatActivity {
     ActivityCategoryBinding binding;
 
     private AppRepository repository;
+
+    public static final String TAG = "EGGHOP_CATEGORY";
 
     private String loggedInUser = "bob";
     private int loggedInUserId = -1;
@@ -30,6 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = AppRepository.getRepository(getApplication());
 
         checkLoggedInUser();
 
@@ -43,10 +50,16 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String categoryName = binding.categoryFirstOptionButton.getText().toString();
-                Intent intent = GameModeActivity.intentFactory(
-                        CategoryActivity.this,
-                        categoryName);
-                startActivity(intent);
+                if(checkCategoryExists(categoryName)){
+                    Intent intent = GameModeActivity.intentFactory(
+                            CategoryActivity.this,
+                            categoryName);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(CategoryActivity.this,
+                            "No questions related to " + categoryName + " at the moment.",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -56,13 +69,25 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String categoryName = binding.categorySecondOptionButton.getText().toString();
-                Intent intent = GameModeActivity.intentFactory(
-                        CategoryActivity.this,
-                        categoryName);
-                startActivity(intent);
-                //Toast.makeText(CategoryActivity.this, "Sports category not implemented yet", Toast.LENGTH_SHORT).show();
+                if(checkCategoryExists(categoryName)){
+                    Intent intent = GameModeActivity.intentFactory(
+                            CategoryActivity.this,
+                            categoryName);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(CategoryActivity.this,
+                            "No questions related to " + categoryName + " at the moment.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
+    }
+
+    public boolean checkCategoryExists(String category){
+        boolean exists = false;
+        exists = repository.doesContainCategory(category);
+        return exists;
     }
 
     private void checkLoggedInUser() {

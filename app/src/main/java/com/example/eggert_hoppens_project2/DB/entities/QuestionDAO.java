@@ -35,8 +35,6 @@ public interface QuestionDAO {
     @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
     LiveData<Question> getQuestionById(int questionId);
 
-    /*@Query("SELECT 1 FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory == :category")
-    LiveData<Question> getQuestionByCategory(String category);*/
-
-    //TODO: count how many different questions there are and return it.
+    @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category)")
+    boolean doesContainCategory(String category);
 }

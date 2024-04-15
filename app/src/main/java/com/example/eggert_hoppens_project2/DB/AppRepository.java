@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.eggert_hoppens_project2.CategoryActivity;
 import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
@@ -113,6 +114,22 @@ public class AppRepository {
 
     public LiveData<List<Question>> getAllQuestionsByCategory(String category){
         return questionDAO.getAllQuestionsByCategory(category);
+    }
+
+    public boolean doesContainCategory(String category){
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                boolean temp = questionDAO.doesContainCategory(category);
+                return temp;
+            }
+        });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.i(CategoryActivity.TAG, "Problem when getting question by category.");
+        }
+        return false;
     }
 
     public void insertQuestion(Question question){
