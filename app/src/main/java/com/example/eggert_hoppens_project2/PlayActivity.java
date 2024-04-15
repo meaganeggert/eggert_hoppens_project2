@@ -130,7 +130,12 @@ public class PlayActivity extends AppCompatActivity {
                         gameModeSettings.incrementStrikes();
                     }
                     if(gameModeSettings.checkGameEnds(currentQuestionIndex, dbTotalQuestions)){
-                        Intent intent = CategoryActivity.intentFactory(PlayActivity.this);
+                        Intent intent = PlayResultsActivity.intentFactory(
+                                PlayActivity.this,
+                                gameModeSettings.getUserScore(),
+                                gameModeSettings.getUserStrikes(),
+                                gameModeSettings.getTotalTime()
+                        );
                         startActivity(intent);
                     } else{
                         userAnswer = "";

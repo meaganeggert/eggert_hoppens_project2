@@ -7,7 +7,6 @@ public class GameModeSettings {
     //________________________________________________________________________________________Fields
     private String gameModeName = "";
     private String gameModeDescription = "";
-    //private boolean playIsRunning = false;
 
     private boolean hasStrikes = false;
     private boolean isTimed = false;
@@ -20,7 +19,7 @@ public class GameModeSettings {
 
     //___________________________________________________________________________________Constructor
     public GameModeSettings(String gameModeExtra) {
-        this.gameModeName = gameModeName;
+        this.gameModeName = gameModeExtra;
         this.userScore = 0;
         //this.playIsRunning = true;
         setGameMode();
@@ -31,7 +30,7 @@ public class GameModeSettings {
             case "Zen":
                 this.gameModeDescription = "Un-timed quiz, score will not be recorded.";
                 break;
-            case "Timed":
+            case "Speed":
                 this.gameModeDescription = "Timed quiz, score will not be recorded.";
                 this.isTimed = true;
                 setTimeStart();
@@ -79,6 +78,7 @@ public class GameModeSettings {
             } else{
                 totalTime = this.timeEnd - this.timeStart;
             }
+            totalTime = totalTime / 1000;
         }
         return totalTime;
     }
@@ -133,14 +133,6 @@ public class GameModeSettings {
 
     public void setTimed(boolean timed) {
         this.isTimed = timed;
-    }
-
-    public boolean isPlayIsRunning() {
-        return playIsRunning;
-    }
-
-    public void setPlayIsRunning(boolean playIsRunning) {
-        this.playIsRunning = playIsRunning;
     }
 
     public boolean isHasStrikes() {
