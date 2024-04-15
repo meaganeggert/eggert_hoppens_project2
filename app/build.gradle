@@ -44,7 +44,11 @@ android {
 
 dependencies {
 
-    //Adding the room DB
+    // Adding Fragments
+    def fragment_version = "1.6.2"
+    implementation "androidx.fragment:fragment:$fragment_version"
+
+    // Adding the room DB
     def room_version = "2.6.1"
 
     implementation "androidx.room:room-runtime:$room_version"

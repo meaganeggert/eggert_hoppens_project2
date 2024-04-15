@@ -36,4 +36,6 @@
     <string name="example_raven_question">Why is a raven like a writing desk?</string>
     <string name="change_username">Change Username</string>
     <string name="change_password">Change Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
