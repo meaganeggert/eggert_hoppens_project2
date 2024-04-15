@@ -7,4 +7,73 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <include
+        android:id="@+id/headerToolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/adminTitle_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Admin Settings"
+        android:fontFamily="serif-monospace"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
+
+    <Button
+        android:id="@+id/updateUsers_Button"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="serif-monospace"
+        android:text="Update User Accounts"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminTitle_textView" />
+
+    <Button
+        android:id="@+id/updateQuest_Button"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:fontFamily="serif-monospace"
+        android:layout_marginTop="50dp"
+        android:text="Update Question Database"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateUsers_Button" />
+
+    <Button
+        android:id="@+id/clearScore_Button"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:fontFamily="serif-monospace"
+        android:layout_marginTop="50dp"
+        android:text="Clear All Scores"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateQuest_Button" />
+
+    <Button
+        android:id="@+id/admin_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="@string/back"
+        android:textSize="18sp"
+        android:fontFamily="serif-monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

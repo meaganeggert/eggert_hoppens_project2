@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         checkLoggedInUser();
 
+        // Show persistent UserName
+        TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
+        toolbar_UserName.setText(loggedInUser);
+
+
+        // Back Button Functionality
         binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         });
 
-        // Handling switching to ProfileActivity
+        // Handles Switch to ProfileActivity
         binding.profileOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
