@@ -19,6 +19,9 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
+            android:name=".PlayResultsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
