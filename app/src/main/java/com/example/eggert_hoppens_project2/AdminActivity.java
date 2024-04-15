@@ -75,7 +75,13 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
+        binding.updateQuestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = UpdateQuestionActivity.intentFactory(AdminActivity.this);
+                startActivity(intent);
+            }
+        });
 
         //Back Button Functionality
         binding.adminBackButton.setOnClickListener(new View.OnClickListener() {
