@@ -44,7 +44,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.adminBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = SettingsActivity.intentFactory(AdminActivity.this);
+                Intent intent = LandingActivity.intentFactory(AdminActivity.this, loggedInUserId);
                 startActivity(intent);
             }
         });
