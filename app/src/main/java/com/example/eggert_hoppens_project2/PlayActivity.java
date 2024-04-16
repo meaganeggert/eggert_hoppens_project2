@@ -36,6 +36,7 @@ public class PlayActivity extends AppCompatActivity {
     private static String categoryName = "";    //extra category value
 
     private String dbQuestion = "";
+    private int dbQuestionId = -1;
     private String dbCorrectAnswer = "Correct";
     private final ArrayList<String> dbAnswerChoices = new ArrayList<>();
     private int dbTotalQuestions = 0;
@@ -49,6 +50,7 @@ public class PlayActivity extends AppCompatActivity {
     TextView questionNumberTextView;
     Button ans1, ans2, ans3, ans4;
     Button submitButton, quitButton;
+    Button reportButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +67,14 @@ public class PlayActivity extends AppCompatActivity {
 
         //If the previous activity passed an extra for the selected game mode, show the selected
         //game mode on screen using the playPassedGameModeTextView text view.
-        if(getIntent().hasExtra(GAME_MODE_NAME)){
+        if (getIntent().hasExtra(GAME_MODE_NAME)) {
             gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
             binding.playPassedGameModeTextView.setText(String.format(Locale.US, "%s", gameModeName));
             gameModeSettings = new GameModeSettings(gameModeName);
         }
         //If the previous activity passed an extra for the selected category, show the selected
         //game mode on screen using the playPassedCategoryTextView text view.
-        if(getIntent().hasExtra(CATEGORY_NAME)){
+        if (getIntent().hasExtra(CATEGORY_NAME)) {
             categoryName = getIntent().getStringExtra(CATEGORY_NAME);
             binding.playPassedCategoryTextView.setText(String.format(Locale.US, "Category: %s", categoryName));
         }
@@ -87,7 +89,7 @@ public class PlayActivity extends AppCompatActivity {
         ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                if (!userAnswer.isEmpty()) { //This shouldn't happen, but just to be safe.
                     userAnswer = "";
                 }
                 userAnswer = ans1.getText().toString();
@@ -96,7 +98,7 @@ public class PlayActivity extends AppCompatActivity {
         ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                if (!userAnswer.isEmpty()) { //This shouldn't happen, but just to be safe.
                     userAnswer = "";
                 }
                 userAnswer = ans2.getText().toString();
@@ -105,7 +107,7 @@ public class PlayActivity extends AppCompatActivity {
         ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){ //This shouldn't happen, but just to be safe.
+                if (!userAnswer.isEmpty()) { //This shouldn't happen, but just to be safe.
                     userAnswer = "";
                 }
                 userAnswer = ans3.getText().toString();
@@ -114,7 +116,7 @@ public class PlayActivity extends AppCompatActivity {
         ans4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userAnswer.isEmpty()){  //This shouldn't happen, but just to be safe.
+                if (!userAnswer.isEmpty()) {  //This shouldn't happen, but just to be safe.
                     userAnswer = "";
                 }
                 userAnswer = ans4.getText().toString();
@@ -127,15 +129,15 @@ public class PlayActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(userAnswer.isEmpty()){
+                if (userAnswer.isEmpty()) {
                     Toast.makeText(PlayActivity.this, "Must select an answer.", Toast.LENGTH_SHORT).show();
-                } else{
-                    if(userAnswer.equals(dbCorrectAnswer)){
+                } else {
+                    if (userAnswer.equals(dbCorrectAnswer)) {
                         gameModeSettings.incrementScore();
-                    }else{
+                    } else {
                         gameModeSettings.incrementStrikes();
                     }
-                    if(gameModeSettings.checkGameEnds()){
+                    if (gameModeSettings.checkGameEnds()) {
                         gameModeSettings.endGame();
                         Intent intent = PlayResultsActivity.intentFactory(
                                 PlayActivity.this,
@@ -146,7 +148,7 @@ public class PlayActivity extends AppCompatActivity {
                                 gameModeSettings.getGameModeName()
                         );
                         startActivity(intent);
-                    } else{
+                    } else {
                         userAnswer = "";
                         currentQuestionIndex++;
                         gameModeSettings.setCurrentQuestionIndex(currentQuestionIndex);
@@ -171,6 +173,14 @@ public class PlayActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reportQuestion();
+            }
+        });
+
     }
 
     /**
@@ -178,12 +188,13 @@ public class PlayActivity extends AppCompatActivity {
      * question related field values by the current question number. Once the temporary fields
      * are established, call the assignQuestionToView() method to display the info on screen.
      */
-    public void loadNewQuestion(){
+    public void loadNewQuestion() {
         LiveData<List<Question>> categoryObserver = repository.getAllQuestionsByCategory(categoryName);
         categoryObserver.observe(this, questions -> {
-            if(!questions.isEmpty()){
-                if(currentQuestionIndex < questions.size()){
+            if (!questions.isEmpty()) {
+                if (currentQuestionIndex < questions.size()) {
                     dbQuestion = questions.get(currentQuestionIndex).getQuestion();
+                    dbQuestionId = questions.get(currentQuestionIndex).getQuestionId();
                     dbCorrectAnswer = questions.get(currentQuestionIndex).getCorrectAnswer();
 
                     dbAnswerChoices.add(questions.get(currentQuestionIndex).getCorrectAnswer());
@@ -202,10 +213,10 @@ public class PlayActivity extends AppCompatActivity {
      * dbTotalQuestions field to the tables size. Mostly done separately so we don't keep
      * reassigning the dbTotalQuestions to the same thing over and over again.
      */
-    public void setTotalQuestions(){
+    public void setTotalQuestions() {
         LiveData<List<Question>> categoryObserver = repository.getAllQuestionsByCategory(categoryName);
         categoryObserver.observe(this, questionList -> {
-            if(!questionList.isEmpty()){
+            if (!questionList.isEmpty()) {
                 dbTotalQuestions = questionList.size();
                 gameModeSettings.setDbTotalQuestions(dbTotalQuestions);
             }
@@ -217,7 +228,7 @@ public class PlayActivity extends AppCompatActivity {
      * displayed in a random order of buttons, displays the question itself, and the question
      * number.
      */
-    public void assignQuestionToView(){
+    public void assignQuestionToView() {
         Random rand = new Random();
         int tempIndex;
 
@@ -242,7 +253,7 @@ public class PlayActivity extends AppCompatActivity {
         //make sure arrayList is clear to use for next question.
         dbAnswerChoices.clear();
 
-        questionNumberTextView.setText(String.format(Locale.US, "Question %d", currentQuestionIndex+1));
+        questionNumberTextView.setText(String.format(Locale.US, "Question %d", currentQuestionIndex + 1));
         questionTextView.setText(String.format(Locale.US, "%s", dbQuestion));
     }
 
@@ -250,7 +261,7 @@ public class PlayActivity extends AppCompatActivity {
      * setViewBindings() sets the buttons and text views that will be edited... which is probably
      * all of them. TODO: continue adding on to this, then change the description of this.
      */
-    public void setViewBindings(){
+    public void setViewBindings() {
         questionTextView = findViewById(R.id.questionTextView);
         questionNumberTextView = findViewById(R.id.questionNumberTextView);
         ans1 = findViewById(R.id.answerFirstButton);
@@ -259,9 +270,21 @@ public class PlayActivity extends AppCompatActivity {
         ans4 = findViewById(R.id.answerFourthButton);
         submitButton = findViewById(R.id.submitButton);
         quitButton = findViewById(R.id.quitButton);
+        reportButton = findViewById(R.id.report_Button);
 
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
+    }
+
+    /**
+     * Sends the question ID to properly address the reported question
+     */
+    private void reportQuestion() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_REPORTED_QUEST_ID, Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_REPORTED_QUEST_ID, dbQuestionId);
+        sharedPrefEditor.apply();
+        Toast.makeText(this, "Reported Question " + dbQuestionId, Toast.LENGTH_SHORT).show();
     }
 
     private void checkLoggedInUser() {
@@ -288,12 +311,13 @@ public class PlayActivity extends AppCompatActivity {
      * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
      * of the previous activity (GameModeActivity), and passes the extras for the names of the
      * selected game mode and category.
-     * @param context Context of the previous activity (GameModeActivity)
+     *
+     * @param context  Context of the previous activity (GameModeActivity)
      * @param gameMode Name of the selected game mode
      * @param category Name of the selected category of questions
      * @return Returns intent to be used to start the PlayActivity
      */
-    public static Intent intentFactory(Context context, String gameMode, String category){
+    public static Intent intentFactory(Context context, String gameMode, String category) {
         //TODO: also pass extra containing genre.
         Intent intent = new Intent(context, PlayActivity.class);
         intent.putExtra(GAME_MODE_NAME, gameMode);
