@@ -61,6 +61,7 @@ public abstract class AppDataBase extends RoomDatabase {
 
                 dao.resetUserDB();
                 questionDAO.deleteAllQuestions();
+                scoreDAO.deleteAllScores();
 
                 UserInfo admin = new UserInfo("admin1", "admin1", true);
                 dao.insert(admin);
@@ -91,6 +92,29 @@ public abstract class AppDataBase extends RoomDatabase {
                         "Seven"
                 );
                 questionDAO.insertQuestion(testQuestion2);
+
+
+                Question testQuestion3 = new Question(
+                        "multiple",
+                        "medium",
+                        "Sports",
+                        "Who is that one guy from that one sport?",
+                        "That one guy",
+                        "That other guy",
+                        "The guy",
+                        "32"
+                );
+                questionDAO.insertQuestion(testQuestion3);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(1, 1, 1, -9, 500);
+                scoreDAO.insertScore(defaultScore);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore2 = new com.example.eggert_hoppens_project2.DB.entities.Score(2, 1, 1, -99, 400);
+                scoreDAO.insertScore(defaultScore2);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore3 = new com.example.eggert_hoppens_project2.DB.entities.Score(3, 1, 1, -99, 300);
+                scoreDAO.insertScore(defaultScore3);
+
             });
         }
     };

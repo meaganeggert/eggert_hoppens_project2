@@ -30,6 +30,7 @@ public class AppRepository {
 
     private LiveData<List<UserInfo>> allInfo;
     private LiveData<List<Question>> allQuestionInfo;
+    private LiveData<List<Score>> allScores;
 
     private static AppRepository repository;
 
@@ -42,6 +43,8 @@ public class AppRepository {
         this.allQuestionInfo = this.questionDAO.getAllQuestions();
 
         this.scoreDAO = db.scoreDAO();
+        this.allScores = this.scoreDAO.getScoresByHighest();
+
     }
 
     public static AppRepository getRepository(Application application) {
@@ -146,22 +149,8 @@ public class AppRepository {
         });
     }
 
-    //________________________________________________________________________Score Methods_________
-    public void insertScore(Score score){
-        AppDataBase.databaseWriteExecutor.execute(() ->
-        {
-            scoreDAO.insertScore(score);
-        });
-    }
 
-    public LiveData<List<Score>> getScoresByHighest(){
-        return scoreDAO.getScoresByHighest();
-    }
-
-    public LiveData<List<Score>> getAllScores(){
-        return scoreDAO.getAllScores();
-    }
-
+    //--------Score Handling---------//
     public boolean doesScoreExist(){
         Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
             @Override
@@ -194,11 +183,28 @@ public class AppRepository {
         return false;
     }
 
-    public LiveData<Score> getScoreById (int userId){
-        return scoreDAO.getScoreByUserId(userId);
-    }
-
     public void updateUserScoreInfo(Score score){
         scoreDAO.updateScore(score);
     }
+
+    public LiveData<Score> getScoreByScoreId(int scoreId) {
+        return scoreDAO.getScoreByScoreId(scoreId);
+    }
+
+    public LiveData<List<Score>> getScoreByUserId(int userId) {
+        return scoreDAO.getScoreByUserId(userId);
+    }
+
+    public LiveData<List<Score>> getAllScores() {
+        return scoreDAO.getScoresByHighest();
+    }
+
+    public void insertScore(Score score){
+        AppDataBase.databaseWriteExecutor.execute(() ->
+        {
+            scoreDAO.insertScore(score);
+        });
+    }
+
+
 }

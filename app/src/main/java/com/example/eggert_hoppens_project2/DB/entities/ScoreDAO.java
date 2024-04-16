@@ -26,15 +26,6 @@ public interface ScoreDAO {
     @Query("DELETE FROM " + AppDataBase.SCORE_TABLE)
     void deleteAllScores();
 
-    //Retrieve scores by highest score.
-    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mUserScore DESC")
-    LiveData<List<Score>> getScoresByHighest();
-
-    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE)
-    LiveData<List<Score>> getAllScores();
-
-    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
-    LiveData<Score> getScoreByUserId(int userId);
 
     @Query("SELECT EXISTS(SELECT 1 FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId)")
     boolean doesContainScoreById(int userId);
@@ -44,4 +35,16 @@ public interface ScoreDAO {
 
 //    @Query("UPDATE " + AppDataBase.SCORE_TABLE + " Set mScoreId = :scoreId")
 //    LiveData<Score> updateUserScore(int scoreId);
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mScore DESC")
+    LiveData<List<Score>> getScoresByHighest();
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
+    LiveData<List<Score>> getScoreByUserId(int userId);
+
+    @Query("DELETE from " + AppDataBase.SCORE_TABLE)
+    void deleteAllScores();
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mScoreId = :scoreId")
+    LiveData<Score> getScoreByScoreId(int scoreId);
 }
