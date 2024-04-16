@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,16 +14,28 @@ import java.util.List;
 
 @Dao
 public interface ScoreDAO {
-    @Insert
-    void insertScore(Score... scores);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertScore(Score... score);
 
     @Update
-    void updateScore(Score... scores);
+    void updateScore(Score... score);
 
     @Delete
     void deleteScore(Score score);
 
-    //Retrieve scores by highest score.
+    @Query("DELETE FROM " + AppDataBase.SCORE_TABLE)
+    void deleteAllScores();
+
+
+    @Query("SELECT EXISTS(SELECT 1 FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId)")
+    boolean doesContainScoreById(int userId);
+
+    @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.SCORE_TABLE + ")")
+    boolean doesScoreExist();
+
+//    @Query("UPDATE " + AppDataBase.SCORE_TABLE + " Set mScoreId = :scoreId")
+//    LiveData<Score> updateUserScore(int scoreId);
+
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mScore DESC")
     LiveData<List<Score>> getScoresByHighest();
 

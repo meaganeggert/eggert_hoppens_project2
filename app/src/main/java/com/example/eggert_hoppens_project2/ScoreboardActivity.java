@@ -14,8 +14,12 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding;
+
+import java.util.List;
+import java.util.Locale;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
@@ -27,12 +31,15 @@ public class ScoreboardActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
+    StringBuilder scoreInfo = new StringBuilder();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityScoreboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = AppRepository.getRepository(getApplication());
 
         checkLoggedInUser();
 
@@ -42,6 +49,10 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
+        if(repository.doesScoreExist()){
+            displayScoreList();
+        }
+
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +61,16 @@ public class ScoreboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void displayScoreList(){
+        LiveData<List<Score>> scoreObserver = repository.getScoresByHighest();
+        scoreObserver.observe(this, scores -> {
+            for(Score score: scores){
+                scoreInfo.append(score.toString());
+            }
+            binding.scoreboardDisplayTextView.setText(String.format(Locale.US, "%s", scoreInfo));
+        });
     }
 
     private void checkLoggedInUser() {

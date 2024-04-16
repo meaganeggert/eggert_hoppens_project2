@@ -12,6 +12,7 @@ import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.ScoreDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
+import com.example.eggert_hoppens_project2.PlayResultsActivity;
 import com.example.eggert_hoppens_project2.SignUpActivity;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 
@@ -31,7 +32,6 @@ public class AppRepository {
     private LiveData<List<Question>> allQuestionInfo;
     private LiveData<List<Score>> allScores;
 
-
     private static AppRepository repository;
 
     private AppRepository(Application application) {
@@ -44,6 +44,7 @@ public class AppRepository {
 
         this.scoreDAO = db.scoreDAO();
         this.allScores = this.scoreDAO.getScoresByHighest();
+
     }
 
     public static AppRepository getRepository(Application application) {
@@ -148,7 +149,43 @@ public class AppRepository {
         });
     }
 
+
     //--------Score Handling---------//
+    public boolean doesScoreExist(){
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                boolean temp = scoreDAO.doesScoreExist();
+                return temp;
+            }
+        });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.i(CategoryActivity.TAG, "Problem when getting score list.");
+        }
+        return false;
+    }
+
+    public boolean userScoreAlreadyExist(int userId){
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                boolean temp = scoreDAO.doesContainScoreById(userId);
+                return temp;
+            }
+        });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.i(PlayResultsActivity.TAG, "Problem getting score by user ID.");
+        }
+        return false;
+    }
+
+    public void updateUserScoreInfo(Score score){
+        scoreDAO.updateScore(score);
+    }
 
     public LiveData<Score> getScoreByScoreId(int scoreId) {
         return scoreDAO.getScoreByScoreId(scoreId);
@@ -168,5 +205,6 @@ public class AppRepository {
             scoreDAO.insertScore(score);
         });
     }
+
 
 }
