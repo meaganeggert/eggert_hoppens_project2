@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -23,10 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 
+import com.example.eggert_hoppens_project2.DB.AppDataBase;
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -43,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
     private AppRepository repository;
 
+    private AppDataBase instance;
 
     private String mUsername = "testUser";
     private String mPassword = "testPass";
 
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
+
+    public static ArrayList<String> scoreboard_userNames = new ArrayList<>();
 
 
 
@@ -59,13 +67,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         repository = AppRepository.getRepository(getApplication());
 
+
         // Only show "Test" button if needed for debugging
         if (DEBUG) {
             binding.testButton.setVisibility(View.VISIBLE);
         }
 
         if (userLoggedIn()) {
+            getAllScores();
             Intent intent = LandingActivity.intentFactory(this, loggedInUserId);
+            intent.putStringArrayListExtra("SCOREBOARDUSERNAMES", scoreboard_userNames);
+            Log.d("WTFMAIN", String.valueOf(scoreboard_userNames.size()));
             startActivity(intent);
         }
 
@@ -215,6 +227,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return false;
+    }
+
+    /**
+     * TODO: TEST FUNCTION
+     */
+    public void getAllScores() {
+        LiveData<List<Score>> scoreObserver = repository.getAllScores();
+        scoreObserver.observe(this, scoresList -> {
+            if (!scoresList.isEmpty()) {
+                for (Score score : scoresList) {
+                    Log.d("CRAZY", score.getUserName());
+                    scoreboard_userNames.add(score.getUserName());
+                    Log.d("WHAT", scoreboard_userNames.get(scoresList.indexOf(score)));
+                }
+            }
+        });
     }
 
     /**
