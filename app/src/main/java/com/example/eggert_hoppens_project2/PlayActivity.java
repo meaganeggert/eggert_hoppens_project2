@@ -254,6 +254,7 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
+        // Saves the question number to SharedPreferences and sends up a notification that the question has been reported
         reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -433,7 +434,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     /**
-     * PlayActivity intent factory inteded to be used within GameModeActivity. Utilizes the context
+     * PlayActivity intent factory intended to be used within GameModeActivity. Utilizes the context
      * of the previous activity (GameModeActivity), and passes the extras for the names of the
      * selected game mode and category.
      *
