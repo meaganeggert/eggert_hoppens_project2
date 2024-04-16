@@ -1,10 +1,15 @@
 package com.example.eggert_hoppens_project2;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -31,6 +39,8 @@ public class PlayActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
     private AppRepository repository;
+
+    private static final String CHANNEL_ID = "REPORT_NOTIFY";
 
     private static final String GAME_MODE_NAME = "Game Mode Name";  //extra game mode name for intent factory
     private static final String CATEGORY_NAME = "Category_Name_Value_String";   //extra category name for intent factory
@@ -248,6 +258,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 reportQuestion();
+                notifyMe(getApplicationContext());
             }
         });
 
@@ -355,6 +366,50 @@ public class PlayActivity extends AppCompatActivity {
         sharedPrefEditor.putInt(LandingActivity.SHARED_PREFERENCE_REPORTED_QUEST_ID, dbQuestionId);
         sharedPrefEditor.apply();
         Toast.makeText(this, "Reported Question " + dbQuestionId, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Creates a reported question notification that pops up with a banner
+     */
+    private void notifyMe(Context context) {
+        NotificationManager notifyManager = createNotificationChannel(this);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.bubble_icon)
+                .setContentTitle("Question #" + dbQuestionId + " Reported")
+                .setContentText("You should consider deleting this question.")
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        notificationManager.notify(1, builder.build());
+        //notifyManager.notify(1, builder.build());
+
+    }
+
+    /**
+     * This method creates the channel for implementing push notifications
+     */
+    private NotificationManager createNotificationChannel(Context context) {
+            CharSequence name = "Channel Name";
+            String description = "Channel Description";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            return notificationManager;
     }
 
     private void checkLoggedInUser() {
