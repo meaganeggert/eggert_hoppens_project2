@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,10 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +38,9 @@ public class ScoreboardActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
+    public static ArrayList<String> scoreboard_userNames = new ArrayList<>();
+    private static int SCORE_SIZE;
+
     StringBuilder scoreInfo = new StringBuilder();
 
 
@@ -46,18 +53,27 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         checkLoggedInUser();
 
+
+
         // Show persistent UserName
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
+
+        ArrayList<String> test = new ArrayList<>(Arrays.asList("hello", "goodbye"));
+        test.add("ciao");
+
+
+        getAllScores();
+
         // Recycler View Functionality
-
-
-        Adapter customAdapter = new Adapter(new String[]{"Meagan", "Raymond", "Lena", "Leonard", "Dean", "Daniel"}, new String[] {"500", "400", "300", "200", "100", "0"});
-        Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
+        Adapter customAdapter = new Adapter(scoreboard_userNames, new String[] {"500", "400", "300", "200", "100", "0"});
+        //Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
         RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(customAdapter);
+
+
 
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,15 +85,19 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     }
 
-//    public void displayScoreList(){
-//        LiveData<List<Score>> scoreObserver = repository.getAllScores();
-//        scoreObserver.observe(this, scores -> {
-//            for(Score score: scores){
-//                scoreInfo.append(score.toString());
-//            }
-//            binding.scoreboardDisplayTextView.setText(String.format(Locale.US, "%s", scoreInfo));
-//        });
-//    }
+    /**
+     * TODO: TEST FUNCTION
+     */
+    public void getAllScores() {
+        LiveData<List<Score>> categoryObserver = repository.getAllScores();
+        categoryObserver.observe(this, scoresList -> {
+            if (!scoresList.isEmpty()) {
+                for (Score score : scoresList) {
+                    scoreboard_userNames.add(score.getUserName());
+                }
+            }
+        });
+    }
 
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
@@ -100,6 +120,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     public static Intent intentFactory(Context context){
+
         return new Intent(context, ScoreboardActivity.class);
     }
 }

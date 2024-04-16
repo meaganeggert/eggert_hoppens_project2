@@ -4,17 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityLoginBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LandingActivity extends AppCompatActivity {
@@ -28,6 +33,8 @@ public class LandingActivity extends AppCompatActivity {
     private static final String CATEGORY_NAME = "Category_Name_Value_String";
     private static final String USER_NAME = "logged_In_User";
     private static final String LOGIN_ACT_USER_ID = "login_activity_user_id";
+
+    public static ArrayList<String> scoreboard_userNames = new ArrayList<>();
 
 
     private AppRepository repository;
@@ -50,7 +57,6 @@ public class LandingActivity extends AppCompatActivity {
         loggedInUserId = getIntent().getIntExtra(LOGIN_ACT_USER_ID, LOGGED_OUT);
         loginUser();
 //        Toast.makeText(this, String.valueOf(loggedInUserId), Toast.LENGTH_SHORT).show();
-
 
         if (loggedInUserId == LOGGED_OUT) {
             Intent intent = MainActivity.intentFactory(getApplicationContext());
@@ -76,6 +82,7 @@ public class LandingActivity extends AppCompatActivity {
         setSupportActionBar(thisToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
+
         //Pressing the play button takes you to the category selection activity
         binding.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +97,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = ScoreboardActivity.intentFactory(LandingActivity.this);
+                intent.putStringArrayListExtra("SCOREBOARDUSERNAMES", scoreboard_userNames);
                 startActivity(intent);
             }
         });
@@ -153,6 +161,7 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
     }
+
 
     /**
      * This method will logout the user and reset all shared preferences

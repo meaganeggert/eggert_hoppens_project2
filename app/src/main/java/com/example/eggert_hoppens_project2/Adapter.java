@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    private String[] localDataSet = {"hello", "is", "this", "working"};
+    private ArrayList<String> userSet;
     private String[] placeSet = {"1", "2", "3", "4", "5"};
     private String[] scoreSet = {"500", "400", "300", "200", "100"};
 
@@ -42,8 +44,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public Adapter(String[] users, String[] scores) {
-        localDataSet = users;
+    public Adapter(ArrayList<String> users, String[] scores) {
+        userSet = users;
         scoreSet = scores;
     }
 
@@ -62,7 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getUserTextView().setText(localDataSet[position]);
+        viewHolder.getUserTextView().setText(userSet.get(position));
         viewHolder.getPlaceTextView().setText(placeSet[position]);
         viewHolder.getScoreTextView().setText(scoreSet[position]);
     }
@@ -70,6 +72,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return 5;
+        return userSet.size();
     }
 }
