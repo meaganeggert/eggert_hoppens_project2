@@ -11,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
+import com.example.eggert_hoppens_project2.DB.entities.ScoreDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
@@ -18,7 +20,7 @@ import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserInfo.class, Question.class}, version = 2, exportSchema = false)
+@Database(entities = {UserInfo.class, Question.class, Score.class}, version = 3, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "MAINDATABASE";
@@ -55,6 +57,8 @@ public abstract class AppDataBase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 UserInfoDAO dao = INSTANCE.userInfoDAO();
                 QuestionDAO questionDAO = INSTANCE.questionDAO();
+                ScoreDAO scoreDAO = INSTANCE.scoreDAO();
+
                 dao.resetUserDB();
                 questionDAO.deleteAllQuestions();
 
@@ -87,18 +91,6 @@ public abstract class AppDataBase extends RoomDatabase {
                         "Seven"
                 );
                 questionDAO.insertQuestion(testQuestion2);
-
-                Question testQuestion3 = new Question(
-                        "multiple",
-                        "medium",
-                        "Sports",
-                        "Who is that one guy from that one sport?",
-                        "That one guy",
-                        "That other guy",
-                        "The guy",
-                        "32"
-                );
-                questionDAO.insertQuestion(testQuestion3);
             });
         }
     };
@@ -106,4 +98,6 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract UserInfoDAO userInfoDAO();
 
     public abstract QuestionDAO questionDAO();
+
+    public abstract ScoreDAO scoreDAO();
 }

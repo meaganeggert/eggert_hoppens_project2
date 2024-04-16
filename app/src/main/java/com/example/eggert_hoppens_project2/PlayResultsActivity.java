@@ -19,6 +19,7 @@ import java.util.Locale;
 public class PlayResultsActivity extends AppCompatActivity {
     private AppRepository repository;
     ActivityPlayResultsScreenBinding binding;
+    public static final String TAG = "EGGHOP_Play_Results";
 
     private String loggedInUser = "bob";
     private int loggedInUserId = -1;

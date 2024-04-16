@@ -14,8 +14,12 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
@@ -27,12 +31,15 @@ public class ScoreboardActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
+    private static final List<Score> currentScoreList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityScoreboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = AppRepository.getRepository(getApplication());
 
         checkLoggedInUser();
 
@@ -42,6 +49,10 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
+        if(repository.doesScoreExist()){
+            displayScoreList();
+        }
+
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +61,25 @@ public class ScoreboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setCurrentScoreList(){
+        int index = 0;
+        LiveData<List<Score>> scoreObserver = repository.getScoresByHighest();
+        scoreObserver.observe(this, scores -> {
+            while(index < scores.size()){
+                currentScoreList.add(scores.get(index));
+            }
+        });
+    }
+
+    public void displayScoreList(){
+        setCurrentScoreList();
+        StringBuilder scoreInfo = new StringBuilder();
+        for(Score score: currentScoreList){
+            scoreInfo.append(score);
+        }
+        binding.scoreboardDisplayTextView.setText(scoreInfo.toString());
     }
 
     private void checkLoggedInUser() {

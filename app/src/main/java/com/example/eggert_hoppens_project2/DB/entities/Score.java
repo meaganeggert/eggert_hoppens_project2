@@ -2,48 +2,40 @@ package com.example.eggert_hoppens_project2.DB.entities;
 
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
-//ParentColumn is the UserInfo.class, ChildColumn is the Score.class
-@Entity(tableName = AppDataBase.SCORE_TABLE, foreignKeys = {
-        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserId", childColumns = "mUserId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE),
-        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserName", childColumns = "mUserName", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
-        //@ForeignKey(entity = GameMode.class, parentColumns = "mGameModeId", childColumns = "mGameModeId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
-        //Last foreignKey
-})
+@Entity(tableName = AppDataBase.SCORE_TABLE)
 public class Score {
     //--------------------------------------------------------Fields
     @PrimaryKey (autoGenerate = true)
     private int mScoreId;
-
     private int mUserId;
     private int mUserName;
-    private int mGameModeId;
-
-    private int mScore;
+    private int mUserScore;
+    private int mUserStrikes;
+    private int mTotalQuestions;
+    private double mTime;
 
     //---------------------------------------------------------Constructor
-    public Score(int scoreId, int userId, int gameModeId) {
-        mScoreId = scoreId;
+    public Score(int userId, int userName, int userScore, int userStrikes, int totalQuestions, double time) {
         mUserId = userId;
-        mGameModeId = gameModeId;
+        mUserName = userName;
+        mUserScore = userScore;
+        mUserStrikes = userStrikes;
+        mTotalQuestions = totalQuestions;
+        mTime = time;
     }
 
     //-----------------------------------------------------------toString
     @Override
     public String toString() {
-        return "Score{" +
-                "mScoreId=" + mScoreId +
-                ", mUserId=" + mUserId +
-                ", mUserName=" + mUserName +
-                ", mGameModeId=" + mGameModeId +
-                ", mScore=" + mScore +
-                '}';
-
-        //return mUserName + "\t\t" + mScore + "\n";
+        return  mUserName +
+                "\tStrikes=" + mUserStrikes +
+                "\tScore=" + mUserScore + "/" + mTotalQuestions +
+                "\tTime=" + mTime + " seconds\n" +
+                "========================";
     }
 
     //-----------------------------------------------------------Set/Get
@@ -71,19 +63,35 @@ public class Score {
         mUserName = userName;
     }
 
-    public int getGameModeId() {
-        return mGameModeId;
+    public int getUserScore() {
+        return mUserScore;
     }
 
-    public void setGameModeId(int gameModeId) {
-        mGameModeId = gameModeId;
+    public void setUserScore(int userScore) {
+        mUserScore = userScore;
     }
 
-    public int getScore() {
-        return mScore;
+    public int getUserStrikes() {
+        return mUserStrikes;
     }
 
-    public void setScore(int score) {
-        mScore = score;
+    public void setUserStrikes(int userStrikes) {
+        mUserStrikes = userStrikes;
+    }
+
+    public int getTotalQuestions() {
+        return mTotalQuestions;
+    }
+
+    public void setTotalQuestions(int totalQuestions) {
+        mTotalQuestions = totalQuestions;
+    }
+
+    public double getTime() {
+        return mTime;
+    }
+
+    public void setTime(double time) {
+        mTime = time;
     }
 }
