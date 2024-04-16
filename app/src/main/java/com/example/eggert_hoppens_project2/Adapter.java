@@ -10,37 +10,43 @@ import androidx.recyclerview.widget.RecyclerView;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private String[] localDataSet = {"hello", "is", "this", "working"};
+    private String[] placeSet = {"1", "2", "3", "4", "5"};
+    private String[] scoreSet = {"500", "400", "300", "200", "100"};
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private TextView userTextView;
+        private TextView scoreTextView;
+        private TextView placeTextView;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.username_textView);
+            userTextView = (TextView) view.findViewById(R.id.username_textView);
+            placeTextView = (TextView) view.findViewById(R.id.place_textView);
+            scoreTextView = (TextView) view.findViewById(R.id.score_textView);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getUserTextView() {
+            return userTextView;
+        }
+        public TextView getScoreTextView() {
+            return scoreTextView;
+        }
+        public TextView getPlaceTextView() {
+            return placeTextView;
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView
-     */
-    public Adapter(String[] dataSet) {
-        localDataSet = dataSet;
+    public Adapter(String[] users, String[] scores) {
+        localDataSet = users;
+        scoreSet = scores;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public Adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
@@ -56,12 +62,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet[position]);
+        viewHolder.getUserTextView().setText(localDataSet[position]);
+        viewHolder.getPlaceTextView().setText(placeSet[position]);
+        viewHolder.getScoreTextView().setText(scoreSet[position]);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return 5;
     }
 }

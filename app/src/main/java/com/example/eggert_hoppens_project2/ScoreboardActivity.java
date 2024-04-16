@@ -50,7 +50,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
-        Adapter customAdapter = new Adapter(new String[]{"hello", "goodbye", "ciao"});
+        // Recycler View Functionality
+
+
+        Adapter customAdapter = new Adapter(new String[]{"Meagan", "Raymond", "Lena", "Leonard", "Dean", "Daniel"}, new String[] {"500", "400", "300", "200", "100", "0"});
         Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
         RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
