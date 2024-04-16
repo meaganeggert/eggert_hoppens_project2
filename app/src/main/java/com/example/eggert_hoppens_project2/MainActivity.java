@@ -73,14 +73,6 @@ public class MainActivity extends AppCompatActivity {
             binding.testButton.setVisibility(View.VISIBLE);
         }
 
-        if (userLoggedIn()) {
-            getAllScores();
-            Intent intent = LandingActivity.intentFactory(this, loggedInUserId);
-            intent.putStringArrayListExtra("SCOREBOARDUSERNAMES", scoreboard_userNames);
-            Log.d("WTFMAIN", String.valueOf(scoreboard_userNames.size()));
-            startActivity(intent);
-        }
-
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
         setSupportActionBar(thisToolbar);
@@ -229,21 +221,6 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * TODO: TEST FUNCTION
-     */
-    public void getAllScores() {
-        LiveData<List<Score>> scoreObserver = repository.getAllScores();
-        scoreObserver.observe(this, scoresList -> {
-            if (!scoresList.isEmpty()) {
-                for (Score score : scoresList) {
-                    Log.d("CRAZY", score.getUserName());
-                    scoreboard_userNames.add(score.getUserName());
-                    Log.d("WHAT", scoreboard_userNames.get(scoresList.indexOf(score)));
-                }
-            }
-        });
-    }
 
     /**
      * This method just makes it easier to type Toast messages
