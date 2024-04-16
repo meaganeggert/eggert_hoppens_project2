@@ -41,4 +41,7 @@ public interface ScoreDAO {
 
     @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.SCORE_TABLE + ")")
     boolean doesScoreExist();
+
+//    @Query("UPDATE " + AppDataBase.SCORE_TABLE + " Set mScoreId = :scoreId")
+//    LiveData<Score> updateUserScore(int scoreId);
 }

@@ -197,4 +197,8 @@ public class AppRepository {
     public LiveData<Score> getScoreById (int userId){
         return scoreDAO.getScoreByUserId(userId);
     }
+
+    public void updateUserScoreInfo(Score score){
+        scoreDAO.updateScore(score);
+    }
 }

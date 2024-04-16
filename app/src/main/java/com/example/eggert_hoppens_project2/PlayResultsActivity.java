@@ -86,13 +86,13 @@ public class PlayResultsActivity extends AppCompatActivity {
 //                currentUserScore.setScoreId(previousUserScore.getScoreId());
 //
 //                if(currentUserScore.getUserScore() >= previousUserScore.getUserScore()){
-//                    insertUserScore(currentUserScore);
+//                    updatePreviousScore(previousUserScore);
 //                }
 //            }
 //            else{  //If user doesn't already have a score, just insert this one.
 //                insertUserScore(currentUserScore);
 //            }
-            insertUserScore(currentUserScore);
+            insertUserScore(currentUserScore);  //FOR NOW IT WILL JUST KEEP INSERTING SCORES, EVEN IF THERE ALREADY IS ONE WITH THE SAME USERID.
         }
 
         //Not entirely sure if this works the way I want it to. Supposed to clear all the activities leading up to this
@@ -113,6 +113,10 @@ public class PlayResultsActivity extends AppCompatActivity {
 
     private void insertUserScore(Score score){
         repository.insertScore(score);
+    }
+
+    private void updatePreviousScore(Score score){
+        repository.updateUserScoreInfo(score);
     }
 
     private void setPreviousUserScoreInfo(int userId){

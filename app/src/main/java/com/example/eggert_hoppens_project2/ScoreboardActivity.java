@@ -18,7 +18,6 @@ import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
