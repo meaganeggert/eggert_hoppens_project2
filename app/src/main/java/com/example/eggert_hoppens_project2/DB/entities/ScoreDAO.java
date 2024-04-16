@@ -23,9 +23,6 @@ public interface ScoreDAO {
     @Delete
     void deleteScore(Score score);
 
-    @Query("DELETE FROM " + AppDataBase.SCORE_TABLE)
-    void deleteAllScores();
-
 
     @Query("SELECT EXISTS(SELECT 1 FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId)")
     boolean doesContainScoreById(int userId);
@@ -36,7 +33,7 @@ public interface ScoreDAO {
 //    @Query("UPDATE " + AppDataBase.SCORE_TABLE + " Set mScoreId = :scoreId")
 //    LiveData<Score> updateUserScore(int scoreId);
 
-    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mScore DESC")
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mUserScore DESC")
     LiveData<List<Score>> getScoresByHighest();
 
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
