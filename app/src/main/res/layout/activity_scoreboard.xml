@@ -15,6 +15,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scoreboardList_Recycler"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="180dp" />
+
+
     <TextView
         android:id="@+id/scoreboardTitleTextView"
         android:layout_width="wrap_content"
@@ -27,18 +37,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
-    <TextView
-        android:id="@+id/scoreboardDisplayTextView"
-        android:layout_width="370dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="24dp"
-        android:padding="8dp"
-        android:text="Player Score Info"
-        android:fontFamily="serif-monospace"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreboardTitleTextView" />
+<!--    <TextView-->
+<!--        android:id="@+id/scoreboardDisplayTextView"-->
+<!--        android:layout_width="370dp"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:padding="8dp"-->
+<!--        android:text="Player Score Info"-->
+<!--        android:fontFamily="serif-monospace"-->
+<!--        android:textSize="15sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/scoreboardTitleTextView" />-->
 
     <Button
         android:id="@+id/scoreboardBackButton"
