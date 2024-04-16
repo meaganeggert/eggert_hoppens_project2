@@ -3,6 +3,8 @@ package com.example.eggert_hoppens_project2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +54,12 @@ public class PlayActivity extends AppCompatActivity {
     Button submitButton, quitButton;
     Button reportButton;
 
+    private boolean check1 = false;
+    private boolean check2 = false;
+    private boolean check3 = false;
+    private boolean check4 = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -93,6 +101,19 @@ public class PlayActivity extends AppCompatActivity {
                     userAnswer = "";
                 }
                 userAnswer = ans1.getText().toString();
+                if (!check1) {
+                    ans1.setBackgroundColor(Color.parseColor("TEAL")); // PRESSED BUTTON COLOR
+                    ans4.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans2.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans3.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check1 = !check1;
+                    check4 = false;
+                    check2 = false;
+                    check3 = false;
+                } else {
+                    ans1.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check1 = !check1;
+                }
             }
         });
         ans2.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +123,19 @@ public class PlayActivity extends AppCompatActivity {
                     userAnswer = "";
                 }
                 userAnswer = ans2.getText().toString();
+                if (!check2) {
+                    ans2.setBackgroundColor(Color.parseColor("TEAL")); // PRESSED BUTTON COLOR
+                    ans1.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans4.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans3.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check2 = !check2;
+                    check1 = false;
+                    check4 = false;
+                    check3 = false;
+                } else {
+                    ans2.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check2 = !check2;
+                }
             }
         });
         ans3.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +145,23 @@ public class PlayActivity extends AppCompatActivity {
                     userAnswer = "";
                 }
                 userAnswer = ans3.getText().toString();
+                if (!check3) {
+                    ans3.setBackgroundColor(Color.parseColor("TEAL")); // PRESSED BUTTON COLOR
+                    ans1.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans2.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans4.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check3 = !check3;
+                    check1 = false;
+                    check2 = false;
+                    check4 = false;
+                } else {
+                    ans3.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check3 = !check3;
+                }
             }
         });
+
+
         ans4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +169,19 @@ public class PlayActivity extends AppCompatActivity {
                     userAnswer = "";
                 }
                 userAnswer = ans4.getText().toString();
+                if (!check4) {
+                    ans4.setBackgroundColor(Color.parseColor("TEAL")); // PRESSED BUTTON COLOR
+                    ans1.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans2.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans3.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check4 = !check4;
+                    check1 = false;
+                    check2 = false;
+                    check3 = false;
+                } else {
+                    ans4.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    check4 = !check4;
+                }
             }
         });
 
@@ -132,6 +194,14 @@ public class PlayActivity extends AppCompatActivity {
                 if (userAnswer.isEmpty()) {
                     Toast.makeText(PlayActivity.this, "Must select an answer.", Toast.LENGTH_SHORT).show();
                 } else {
+                    ans1.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans2.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans3.setBackgroundColor(Color.parseColor("#6750A4")); // DEFAULT BUTTON COLOR
+                    ans4.setBackgroundColor(Color.parseColor("#6750A4")); // PRESSED BUTTON COLOR
+                    check1 = false;
+                    check2 = false;
+                    check3 = false;
+                    check4 = false;
                     if (userAnswer.equals(dbCorrectAnswer)) {
                         gameModeSettings.incrementScore();
                     } else {
