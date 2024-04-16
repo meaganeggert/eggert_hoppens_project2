@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 import com.example.eggert_hoppens_project2.CategoryActivity;
 import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
+import com.example.eggert_hoppens_project2.DB.entities.ScoreDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.SignUpActivity;
@@ -22,8 +24,12 @@ public class AppRepository {
     private UserInfoDAO userinfoDAO;
 
     private QuestionDAO questionDAO;
+
+    private ScoreDAO scoreDAO;
+
     private LiveData<List<UserInfo>> allInfo;
     private LiveData<List<Question>> allQuestionInfo;
+    private LiveData<List<Score>> allScores;
 
 
     private static AppRepository repository;
@@ -35,6 +41,9 @@ public class AppRepository {
 
         this.questionDAO = db.questionDAO();
         this.allQuestionInfo = this.questionDAO.getAllQuestions();
+
+        this.scoreDAO = db.scoreDAO();
+        this.allScores = this.scoreDAO.getScoresByHighest();
     }
 
     public static AppRepository getRepository(Application application) {
@@ -136,6 +145,27 @@ public class AppRepository {
         AppDataBase.databaseWriteExecutor.execute(() ->
         {
             questionDAO.insertQuestion(question);
+        });
+    }
+
+    //--------Score Handling---------//
+
+    public LiveData<Score> getScoreByScoreId(int scoreId) {
+        return scoreDAO.getScoreByScoreId(scoreId);
+    }
+
+    public LiveData<List<Score>> getScoreByUserId(int userId) {
+        return scoreDAO.getScoreByUserId(userId);
+    }
+
+    public LiveData<List<Score>> getAllScores() {
+        return scoreDAO.getScoresByHighest();
+    }
+
+    public void insertScore(Score score){
+        AppDataBase.databaseWriteExecutor.execute(() ->
+        {
+            scoreDAO.insertScore(score);
         });
     }
 

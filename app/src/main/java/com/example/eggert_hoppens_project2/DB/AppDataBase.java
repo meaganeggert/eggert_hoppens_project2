@@ -11,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.eggert_hoppens_project2.DB.entities.Question;
 import com.example.eggert_hoppens_project2.DB.entities.QuestionDAO;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
+import com.example.eggert_hoppens_project2.DB.entities.ScoreDAO;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfoDAO;
 import com.example.eggert_hoppens_project2.MainActivity;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
@@ -18,7 +20,7 @@ import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserInfo.class, Question.class}, version = 2, exportSchema = false)
+@Database(entities = {UserInfo.class, Question.class, Score.class}, version = 3, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "MAINDATABASE";
@@ -55,8 +57,10 @@ public abstract class AppDataBase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 UserInfoDAO dao = INSTANCE.userInfoDAO();
                 QuestionDAO questionDAO = INSTANCE.questionDAO();
+                ScoreDAO scoreDAO = INSTANCE.scoreDAO();
                 dao.resetUserDB();
                 questionDAO.deleteAllQuestions();
+                scoreDAO.deleteAllScores();
 
                 UserInfo admin = new UserInfo("admin1", "admin1", true);
                 dao.insert(admin);
@@ -99,6 +103,15 @@ public abstract class AppDataBase extends RoomDatabase {
                         "32"
                 );
                 questionDAO.insertQuestion(testQuestion3);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(1, 1, 1, -9, 500);
+                scoreDAO.insertScore(defaultScore);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore2 = new com.example.eggert_hoppens_project2.DB.entities.Score(2, 1, 1, -99, 400);
+                scoreDAO.insertScore(defaultScore2);
+
+                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore3 = new com.example.eggert_hoppens_project2.DB.entities.Score(3, 1, 1, -99, 300);
+                scoreDAO.insertScore(defaultScore3);
             });
         }
     };
@@ -106,4 +119,6 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract UserInfoDAO userInfoDAO();
 
     public abstract QuestionDAO questionDAO();
+
+    public abstract ScoreDAO scoreDAO();
 }

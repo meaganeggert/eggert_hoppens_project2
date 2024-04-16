@@ -3,17 +3,20 @@ package com.example.eggert_hoppens_project2.DB.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
 //ParentColumn is the UserInfo.class, ChildColumn is the Score.class
-@Entity(tableName = AppDataBase.SCORE_TABLE, foreignKeys = {
-        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserId", childColumns = "mUserId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE),
-        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserName", childColumns = "mUserName", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
-        //@ForeignKey(entity = GameMode.class, parentColumns = "mGameModeId", childColumns = "mGameModeId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
-        //Last foreignKey
-})
+
+//, foreignKeys = {
+//        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserId", childColumns = "mUserId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE),
+//        @ForeignKey(entity = UserInfo.class, parentColumns = "mUserName", childColumns = "mUserName", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
+//        //@ForeignKey(entity = GameMode.class, parentColumns = "mGameModeId", childColumns = "mGameModeId", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)
+//        //Last foreignKey
+//})
+@Entity(tableName = AppDataBase.SCORE_TABLE)
 public class Score {
     //--------------------------------------------------------Fields
     @PrimaryKey (autoGenerate = true)
@@ -26,10 +29,19 @@ public class Score {
     private int mScore;
 
     //---------------------------------------------------------Constructor
+    @Ignore
     public Score(int scoreId, int userId, int gameModeId) {
         mScoreId = scoreId;
         mUserId = userId;
         mGameModeId = gameModeId;
+    }
+
+    public Score(int mScoreId, int mUserId, int mUserName, int mGameModeId, int mScore) {
+        this.mScoreId = mScoreId;
+        this.mUserId = mUserId;
+        this.mUserName = mUserName;
+        this.mGameModeId = mGameModeId;
+        this.mScore = mScore;
     }
 
     //-----------------------------------------------------------toString
@@ -38,7 +50,6 @@ public class Score {
         return "Score{" +
                 "mScoreId=" + mScoreId +
                 ", mUserId=" + mUserId +
-                ", mUserName=" + mUserName +
                 ", mGameModeId=" + mGameModeId +
                 ", mScore=" + mScore +
                 '}';
