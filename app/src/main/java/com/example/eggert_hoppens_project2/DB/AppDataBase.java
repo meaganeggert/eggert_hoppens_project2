@@ -109,11 +109,17 @@ public abstract class AppDataBase extends RoomDatabase {
                 com.example.eggert_hoppens_project2.DB.entities.Score defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(1, "Hermione", 500, 0, 8, 3.0);
                 scoreDAO.insertScore(defaultScore);
 
-                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore2 = new com.example.eggert_hoppens_project2.DB.entities.Score(2, "Ron", 400, 1, 6, 5.5);
-                scoreDAO.insertScore(defaultScore2);
+                defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(2, "Ron", 400, 1, 6, 5.5);
+                scoreDAO.insertScore(defaultScore);
 
-                com.example.eggert_hoppens_project2.DB.entities.Score defaultScore3 = new com.example.eggert_hoppens_project2.DB.entities.Score(3, "Harry", 300, 0, 5, 9.0);
-                scoreDAO.insertScore(defaultScore3);
+                defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(3, "Harry", 300, 0, 5, 9.0);
+                scoreDAO.insertScore(defaultScore);
+
+                defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(4, "Leia", 650, 0, 7, 7.5);
+                scoreDAO.insertScore(defaultScore);
+
+                defaultScore = new com.example.eggert_hoppens_project2.DB.entities.Score(5, "Luke", 450, 3, 6, 4.0);
+                scoreDAO.insertScore(defaultScore);
 
             });
         }
