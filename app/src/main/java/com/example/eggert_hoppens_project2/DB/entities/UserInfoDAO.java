@@ -15,10 +15,10 @@ import java.util.List;
 @Dao
 public interface UserInfoDAO {
 
-    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName == :username")
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName = :username")
     LiveData<UserInfo> getUserByUserName(String username);
 
-    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserId == :userId")
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserId = :userId")
     LiveData<UserInfo> getUserByUserId(int userId);
 
     //Room library should implement these for us.

@@ -1,5 +1,6 @@
 package com.example.eggert_hoppens_project2.DB.entities;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -23,8 +24,14 @@ public interface ScoreDAO {
 
     //Retrieve scores by highest score.
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mScore DESC")
-    List<Score> getScoresByHighest();
+    LiveData<List<Score>> getScoresByHighest();
 
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
-    List<Score> getScoreByUserId(int userId);
+    LiveData<List<Score>> getScoreByUserId(int userId);
+
+    @Query("DELETE from " + AppDataBase.SCORE_TABLE)
+    void deleteAllScores();
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mScoreId = :scoreId")
+    LiveData<Score> getScoreByScoreId(int scoreId);
 }

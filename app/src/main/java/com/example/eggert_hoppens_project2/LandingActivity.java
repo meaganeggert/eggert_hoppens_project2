@@ -23,6 +23,7 @@ public class LandingActivity extends AppCompatActivity {
     static final String SHARED_PREFERENCE_USERNAME_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERNAME_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_USERID_VALUE";
     static final String SHARED_PREFERENCE_ISADMIN_KEY = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_ISADMIN_KEY";
+    static final String SHARED_PREFERENCE_REPORTED_QUEST_ID = "eggert_hoppens_project2.LOGIN_ACTIVITY_SHARED_PREFERENCE_REPORTED_QUESTION_ID";
 
     private static final String CATEGORY_NAME = "Category_Name_Value_String";
     private static final String USER_NAME = "logged_In_User";
@@ -35,6 +36,7 @@ public class LandingActivity extends AppCompatActivity {
     private String loggedInUser = "egghop";
     private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
+    private static final int NO_REPORTS = -1;
 
     private boolean loggedIn_isAdmin = false;
 
@@ -167,6 +169,8 @@ public class LandingActivity extends AppCompatActivity {
 
         startActivity(MainActivity.intentFactory(getApplicationContext()));
     }
+
+
 
     /**
      * Intent Factory for the LoginActivity
