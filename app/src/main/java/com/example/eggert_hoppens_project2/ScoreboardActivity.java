@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -47,11 +50,11 @@ public class ScoreboardActivity extends AppCompatActivity {
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
-        binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
-
-//        if(repository.doesScoreExist()){
-//            displayScoreList();
-//        }
+        Adapter customAdapter = new Adapter(new String[]{"hello", "goodbye", "ciao"});
+        Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
+        RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(customAdapter);
 
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
