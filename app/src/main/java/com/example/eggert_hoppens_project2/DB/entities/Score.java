@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
+import java.util.Objects;
+
 @Entity(tableName = AppDataBase.SCORE_TABLE)
 public class Score {
     //--------------------------------------------------------Fields
@@ -36,6 +38,19 @@ public class Score {
                 "\tScore=" + mUserScore + "/" + mTotalQuestions +
                 "\tTime=" + mTime + " seconds\n" +
                 "========================\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return mScoreId == score.mScoreId && mUserId == score.mUserId && mUserScore == score.mUserScore && mUserStrikes == score.mUserStrikes && mTotalQuestions == score.mTotalQuestions && Double.compare(mTime, score.mTime) == 0 && Objects.equals(mUserName, score.mUserName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mScoreId, mUserId, mUserName, mUserScore, mUserStrikes, mTotalQuestions, mTime);
     }
 
     //-----------------------------------------------------------Set/Get

@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface ScoreDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertScore(Score... score);
+    void insertScore(Score score);
 
     @Update
     void updateScore(Score... score);
