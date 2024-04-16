@@ -49,9 +49,9 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         binding.scoreboardDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
-        if(repository.doesScoreExist()){
-            displayScoreList();
-        }
+//        if(repository.doesScoreExist()){
+//            displayScoreList();
+//        }
 
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,15 +63,15 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     }
 
-    public void displayScoreList(){
-        LiveData<List<Score>> scoreObserver = repository.getScoresByHighest();
-        scoreObserver.observe(this, scores -> {
-            for(Score score: scores){
-                scoreInfo.append(score.toString());
-            }
-            binding.scoreboardDisplayTextView.setText(String.format(Locale.US, "%s", scoreInfo));
-        });
-    }
+//    public void displayScoreList(){
+//        LiveData<List<Score>> scoreObserver = repository.getAllScores();
+//        scoreObserver.observe(this, scores -> {
+//            for(Score score: scores){
+//                scoreInfo.append(score.toString());
+//            }
+//            binding.scoreboardDisplayTextView.setText(String.format(Locale.US, "%s", scoreInfo));
+//        });
+//    }
 
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;

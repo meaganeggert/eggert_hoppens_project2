@@ -42,14 +42,6 @@ public class Score {
         mTime = time;
     }
 
-    public Score(int mScoreId, int mUserId, int mUserName, int mGameModeId, int mScore) {
-        this.mScoreId = mScoreId;
-        this.mUserId = mUserId;
-        this.mUserName = mUserName;
-        this.mGameModeId = mGameModeId;
-        this.mScore = mScore;
-    }
-
     //-----------------------------------------------------------toString
     @Override
     public String toString() {

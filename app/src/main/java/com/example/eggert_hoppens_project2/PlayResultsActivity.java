@@ -119,12 +119,12 @@ public class PlayResultsActivity extends AppCompatActivity {
         repository.updateUserScoreInfo(score);
     }
 
-    private void setPreviousUserScoreInfo(int userId){
-        LiveData<Score> scoreObserver = repository.getScoreById(userId);
-        scoreObserver.observe(this, score -> {
-            previousUserScore = score;
-        });
-    }
+//    private void setPreviousUserScoreInfo(int userId){
+//        LiveData<Score> scoreObserver = repository.getScoreByUserId(userId);
+//        scoreObserver.observe(this, score -> {
+//            previousUserScore = score;
+//        });
+//    }
 
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
