@@ -12,14 +12,14 @@ public class Score {
     @PrimaryKey (autoGenerate = true)
     private int mScoreId;
     private int mUserId;
-    private int mUserName;
+    private String mUserName;
     private int mUserScore;
     private int mUserStrikes;
     private int mTotalQuestions;
     private double mTime;
 
     //---------------------------------------------------------Constructor
-    public Score(int userId, int userName, int userScore, int userStrikes, int totalQuestions, double time) {
+    public Score(int userId, String userName, int userScore, int userStrikes, int totalQuestions, double time) {
         mUserId = userId;
         mUserName = userName;
         mUserScore = userScore;
@@ -55,11 +55,11 @@ public class Score {
         mUserId = userId;
     }
 
-    public int getUserName() {
+    public String getUserName() {
         return mUserName;
     }
 
-    public void setUserName(int userName) {
+    public void setUserName(String userName) {
         mUserName = userName;
     }
 

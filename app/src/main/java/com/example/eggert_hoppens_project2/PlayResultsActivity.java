@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
+import com.example.eggert_hoppens_project2.DB.entities.Score;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
 import com.example.eggert_hoppens_project2.databinding.ActivityPlayResultsScreenBinding;
 
@@ -38,12 +39,16 @@ public class PlayResultsActivity extends AppCompatActivity {
     private static double userTime = 0.0;
     private static String gameModeName = "";
 
+    private static Score previousUserScore;
+    private static Score currentUserScore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPlayResultsScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        repository = AppRepository.getRepository(getApplication());
 
         checkLoggedInUser();
 
@@ -70,6 +75,25 @@ public class PlayResultsActivity extends AppCompatActivity {
         if(getIntent().hasExtra(GAME_MODE_NAME)){
             gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
         }
+        
+        //Only record score info if the gameMode played was Compete mode;
+        if(gameModeName.equals("Compete")){
+            currentUserScore = new Score(loggedInUserId, loggedInUser, userScore, userStrikes, totalAnsweredQuestions, userTime);
+            //Here is where the score data will be compared.
+            //If the user has a previous score, set the currentUserScore's id to the previous one.
+//            if(checkUserScoreExists(loggedInUserId)){
+//                setPreviousUserScoreInfo(loggedInUserId);
+//                currentUserScore.setScoreId(previousUserScore.getScoreId());
+//
+//                if(currentUserScore.getUserScore() >= previousUserScore.getUserScore()){
+//                    insertUserScore(currentUserScore);
+//                }
+//            }
+//            else{  //If user doesn't already have a score, just insert this one.
+//                insertUserScore(currentUserScore);
+//            }
+            insertUserScore(currentUserScore);
+        }
 
         //Not entirely sure if this works the way I want it to. Supposed to clear all the activities leading up to this
         //and go back to the landing page.
@@ -80,6 +104,21 @@ public class PlayResultsActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
+        });
+    }
+
+    private boolean checkUserScoreExists(int loggedInUserId){
+        return repository.userScoreAlreadyExist(loggedInUserId);
+    }
+
+    private void insertUserScore(Score score){
+        repository.insertScore(score);
+    }
+
+    private void setPreviousUserScoreInfo(int userId){
+        LiveData<Score> scoreObserver = repository.getScoreById(userId);
+        scoreObserver.observe(this, score -> {
+            previousUserScore = score;
         });
     }
 
