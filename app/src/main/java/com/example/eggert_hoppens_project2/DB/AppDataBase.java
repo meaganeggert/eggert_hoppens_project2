@@ -87,6 +87,18 @@ public abstract class AppDataBase extends RoomDatabase {
                         "Seven"
                 );
                 questionDAO.insertQuestion(testQuestion2);
+
+                Question testQuestion3 = new Question(
+                        "multiple",
+                        "medium",
+                        "Sports",
+                        "Who is that one guy from that one sport?",
+                        "That one guy",
+                        "That other guy",
+                        "The guy",
+                        "32"
+                );
+                questionDAO.insertQuestion(testQuestion3);
             });
         }
     };
