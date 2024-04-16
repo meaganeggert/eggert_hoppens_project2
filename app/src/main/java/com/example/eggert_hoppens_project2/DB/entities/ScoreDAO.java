@@ -30,6 +30,9 @@ public interface ScoreDAO {
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " ORDER BY mUserScore DESC")
     LiveData<List<Score>> getScoresByHighest();
 
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE)
+    LiveData<List<Score>> getAllScores();
+
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
     LiveData<Score> getScoreByUserId(int userId);
 

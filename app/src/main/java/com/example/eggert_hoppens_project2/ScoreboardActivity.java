@@ -20,6 +20,7 @@ import com.example.eggert_hoppens_project2.databinding.ActivityScoreboardBinding
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
-    private static final List<Score> currentScoreList = new ArrayList<>();
+    StringBuilder scoreInfo = new StringBuilder();
 
 
     @Override
@@ -63,23 +64,14 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     }
 
-    public void setCurrentScoreList(){
-        int index = 0;
+    public void displayScoreList(){
         LiveData<List<Score>> scoreObserver = repository.getScoresByHighest();
         scoreObserver.observe(this, scores -> {
-            while(index < scores.size()){
-                currentScoreList.add(scores.get(index));
+            for(Score score: scores){
+                scoreInfo.append(score.toString());
             }
+            binding.scoreboardDisplayTextView.setText(String.format(Locale.US, "%s", scoreInfo));
         });
-    }
-
-    public void displayScoreList(){
-        setCurrentScoreList();
-        StringBuilder scoreInfo = new StringBuilder();
-        for(Score score: currentScoreList){
-            scoreInfo.append(score);
-        }
-        binding.scoreboardDisplayTextView.setText(scoreInfo.toString());
     }
 
     private void checkLoggedInUser() {

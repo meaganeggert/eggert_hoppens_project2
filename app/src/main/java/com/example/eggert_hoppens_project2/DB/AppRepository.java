@@ -158,6 +158,10 @@ public class AppRepository {
         return scoreDAO.getScoresByHighest();
     }
 
+    public LiveData<List<Score>> getAllScores(){
+        return scoreDAO.getAllScores();
+    }
+
     public boolean doesScoreExist(){
         Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
             @Override

@@ -35,7 +35,7 @@ public class Score {
                 "\tStrikes=" + mUserStrikes +
                 "\tScore=" + mUserScore + "/" + mTotalQuestions +
                 "\tTime=" + mTime + " seconds\n" +
-                "========================";
+                "========================\n";
     }
 
     //-----------------------------------------------------------Set/Get
