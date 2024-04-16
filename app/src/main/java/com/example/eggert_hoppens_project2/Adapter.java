@@ -13,7 +13,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private ArrayList<String> userSet;
     private String[] placeSet = {"1", "2", "3", "4", "5"};
-    private String[] scoreSet = {"500", "400", "300", "200", "100"};
+    private ArrayList<String> scoreSet;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -44,7 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public Adapter(ArrayList<String> users, String[] scores) {
+    public Adapter(ArrayList<String> users, ArrayList<String> scores) {
         userSet = users;
         scoreSet = scores;
     }
@@ -66,7 +66,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         // contents of the view with that element
         viewHolder.getUserTextView().setText(userSet.get(position));
         viewHolder.getPlaceTextView().setText(placeSet[position]);
-        viewHolder.getScoreTextView().setText(scoreSet[position]);
+        viewHolder.getScoreTextView().setText(scoreSet.get(position));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

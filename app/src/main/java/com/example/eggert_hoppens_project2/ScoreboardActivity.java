@@ -39,6 +39,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
     public static ArrayList<String> scoreboard_userNames = new ArrayList<>();
+    public static ArrayList<String> scoreboard_Scores = new ArrayList<>();
     private static int SCORE_SIZE;
 
     StringBuilder scoreInfo = new StringBuilder();
@@ -53,28 +54,22 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         checkLoggedInUser();
 
-
-
         // Show persistent UserName
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
-
-        ArrayList<String> test = new ArrayList<>(Arrays.asList("hello", "goodbye"));
-        test.add("ciao");
-
-
-        getAllScores();
-
         // Recycler View Functionality
-        Adapter customAdapter = new Adapter(scoreboard_userNames, new String[] {"500", "400", "300", "200", "100", "0"});
+//        ArrayList<String> test = new ArrayList<>(Arrays.asList("hello", "goodbye"));
+//        test.add("ciao");
+        getAllScores();
+        Adapter customAdapter = new Adapter(scoreboard_userNames, scoreboard_Scores);
         //Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
         RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(customAdapter);
 
 
-
+        // Return to Landing Activity
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +81,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO: TEST FUNCTION
+     * This method will populate a local ArrayList from the database to be sent to the RecyclerView for display
      */
     public void getAllScores() {
         LiveData<List<Score>> categoryObserver = repository.getAllScores();
@@ -94,11 +89,15 @@ public class ScoreboardActivity extends AppCompatActivity {
             if (!scoresList.isEmpty()) {
                 for (Score score : scoresList) {
                     scoreboard_userNames.add(score.getUserName());
+                    scoreboard_Scores.add(String.valueOf(score.getUserScore()));
                 }
             }
         });
     }
 
+    /**
+     * Checks to see which user is logged in for persistence use
+     */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
 
@@ -119,7 +118,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         });
     }
 
-    public static Intent intentFactory(Context context){
+    public static Intent intentFactory(Context context) {
 
         return new Intent(context, ScoreboardActivity.class);
     }
