@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
             binding.testButton.setVisibility(View.VISIBLE);
         }
 
+        if (userLoggedIn()) {
+            Intent intent = LandingActivity.intentFactory(this, loggedInUserId);
+            startActivity(intent);
+        }
+
         // Set up for Header Toolbar
         Toolbar thisToolbar = (Toolbar) findViewById(R.id.headerToolbar);
         setSupportActionBar(thisToolbar);
