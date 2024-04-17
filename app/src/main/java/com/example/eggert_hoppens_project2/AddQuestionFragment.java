@@ -42,13 +42,22 @@ public class AddQuestionFragment extends Fragment {
     EditText wrong2EditText;
     EditText wrong3EditText;
     EditText correctAnswerEditText;
+    EditText categoryEditText;
 
     RadioGroup difficultyRadioGroup;
     RadioButton selectedDifficultyRadio;
+    boolean goodQuestion = false;
+    int radioButtonId = -1;
 
 
-    private String mNewQuestionText;
-    private String mNewCorrectAns, mWrongAns1, mWrongAns2, mWrongAns3;
+    private final String BLANK = "BLANK";
+    private String mNewQuestionText = BLANK;
+    private String mNewCorrectAns = BLANK;
+    private String mWrongAns1 = BLANK;
+    private String mWrongAns2 = BLANK;
+    private String mWrongAns3 = BLANK;
+    private String mCategory = BLANK;
+    private String mDifficulty = BLANK;
 
     public AddQuestionFragment() {
         // Required empty public constructor
@@ -96,32 +105,54 @@ public class AddQuestionFragment extends Fragment {
         wrong2EditText = view.findViewById(R.id.wrong2_editText);
         wrong3EditText = view.findViewById(R.id.wrong3_editText);
         correctAnswerEditText = view.findViewById(R.id.correctAnswer_editText);
+        categoryEditText = view.findViewById(R.id.addCategory_editText);
         difficultyRadioGroup = view.findViewById(R.id.difficulty_RadioGroup);
+
 
         submitQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get Information From Display
-                mNewQuestionText = questionEditText.getText().toString();
-                mWrongAns1 = wrong1EditText.getText().toString();
-                mWrongAns2 = wrong2EditText.getText().toString();
-                mWrongAns3 = wrong3EditText.getText().toString();
-                mNewCorrectAns = correctAnswerEditText.getText().toString();
-                int radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
-                selectedDifficultyRadio = difficultyRadioGroup.findViewById(radioButtonId);
-                String difficultyText = selectedDifficultyRadio.getText().toString();
-
-                // TODO: Verify that none of the information was blank
-
-                // Add Question to the database and clear the fragment
-                Question newQuestion = new Question("multiple", "easy", "Video Games", mNewQuestionText, mNewCorrectAns, mWrongAns1, mWrongAns2, mWrongAns3);
-                repository.insertQuestion(newQuestion);
-                Toast.makeText(getActivity(), "Question Added To The Database", Toast.LENGTH_LONG).show();
-                getParentFragmentManager().beginTransaction().replace(getActivity().findViewById(R.id.updateQuest_FragmentContainer).getId(), new BlankFragment()).commit();
+                getInformationFromDisplay();
+                assessQuestionValidity();
             }
         });
         return view;
     }
 
+    /**
+     * This will pull all information entered by the user into the fragment display
+     */
+    private void getInformationFromDisplay() {
+        mCategory = categoryEditText.getText().toString();
+        mNewQuestionText = questionEditText.getText().toString();
+        mWrongAns1 = wrong1EditText.getText().toString();
+        mWrongAns2 = wrong2EditText.getText().toString();
+        mWrongAns3 = wrong3EditText.getText().toString();
+        mNewCorrectAns = correctAnswerEditText.getText().toString();
+        radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
+        selectedDifficultyRadio = difficultyRadioGroup.findViewById(radioButtonId);
+        mDifficulty = selectedDifficultyRadio.getText().toString();
+    }
 
+    /**
+     * Checks to make sure that the user has entered something in every EditText
+     * Note: This defaults questions to easy difficulty
+     */
+    private void assessQuestionValidity() {
+        if (mCategory.equals(BLANK) || mNewQuestionText.equals(BLANK) || mNewCorrectAns.equals(BLANK) || mWrongAns1.equals(BLANK) || mWrongAns2.equals(BLANK) || mWrongAns3.equals(BLANK)) {
+            Toast.makeText(getActivity(), "Something didn't work", Toast.LENGTH_SHORT).show();
+        }
+        else if (!(radioButtonId == -1 || mCategory.isEmpty() || mNewQuestionText.isEmpty() || mNewCorrectAns.isEmpty() || mWrongAns1.isEmpty() || mWrongAns2.isEmpty() || mWrongAns3.isEmpty())) {
+
+            // Add Question to the database and clear the fragment
+            Question newQuestion = new Question("multiple", mDifficulty, mCategory, mNewQuestionText, mNewCorrectAns, mWrongAns1, mWrongAns2, mWrongAns3);
+            repository.insertQuestion(newQuestion);
+            Toast.makeText(getActivity(), "Question Added To The Database", Toast.LENGTH_LONG).show();
+            getParentFragmentManager().beginTransaction().replace(getActivity().findViewById(R.id.updateQuest_FragmentContainer).getId(), new BlankFragment()).commit();
+        }
+        else {
+            Toast.makeText(getActivity(), "You have to complete all the fields.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
