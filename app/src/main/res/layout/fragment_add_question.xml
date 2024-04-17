@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddQuestionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/addQuestion_FragTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginBottom="2dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:text="Please enter the question details:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/categoryTitle_textView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/addQuestion_EditText"
+            android:text="Category:"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/addCategory_editText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="Video Games, Sports, etc."
+            android:inputType="text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/questionTitle_textView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/addQuestion_EditText"
+            android:text="Question:"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/addQuestion_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="What color is the sky?"
+            android:inputType="textMultiLine"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/correctAnswerTitle_textView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/addQuestion_EditText"
+            android:text="Correct Answer:"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/correctAnswer_editText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="Blue"
+            android:inputType="text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/answersTitle_textView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/addQuestion_EditText"
+            android:text="Other Answers:"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/wrong1_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:hint="Yellow"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/wrong2_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:hint="Lime Green"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/wrong3_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:hint="Fuschia"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/addQuestion_EditText"
+            android:text="Difficulty:"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/difficulty_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                >
+                <RadioButton
+                android:id="@+id/easy_Radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="easy"
+                android:fontFamily="serif-monospace"
+                android:layout_gravity="center"
+                android:textSize="14sp"/>
+            <RadioButton
+                android:id="@+id/medium_Radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="medium"
+                android:fontFamily="serif-monospace"
+                android:layout_gravity="center"
+                android:textSize="14sp"/>
+            <RadioButton
+                android:id="@+id/hard_Radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hard"
+                android:fontFamily="serif-monospace"
+                android:layout_gravity="center"
+                android:textSize="14sp"/>
+            </RadioGroup>
+
+        <Button
+            android:id="@+id/addQuestionSubmit_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="serif-monospace"
+            android:text="Submit"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>
