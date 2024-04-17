@@ -120,6 +120,9 @@ public class AddQuestionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * This will pull all information entered by the user into the fragment display
+     */
     private void getInformationFromDisplay() {
         mCategory = categoryEditText.getText().toString();
         mNewQuestionText = questionEditText.getText().toString();
@@ -132,6 +135,10 @@ public class AddQuestionFragment extends Fragment {
         mDifficulty = selectedDifficultyRadio.getText().toString();
     }
 
+    /**
+     * Checks to make sure that the user has entered something in every EditText
+     * Note: This defaults questions to easy difficulty
+     */
     private void assessQuestionValidity() {
         if (mCategory.equals(BLANK) || mNewQuestionText.equals(BLANK) || mNewCorrectAns.equals(BLANK) || mWrongAns1.equals(BLANK) || mWrongAns2.equals(BLANK) || mWrongAns3.equals(BLANK)) {
             Toast.makeText(getActivity(), "Something didn't work", Toast.LENGTH_SHORT).show();
