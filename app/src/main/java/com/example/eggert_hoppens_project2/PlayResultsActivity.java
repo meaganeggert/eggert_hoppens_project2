@@ -78,7 +78,6 @@ public class PlayResultsActivity extends AppCompatActivity {
 
 
 
-
         //Only record score info if the gameMode played was Compete mode;
         if(gameModeName.equals("Compete")){
             currentUserScore = new Score(loggedInUserId, loggedInUser, userScore, userStrikes, totalAnsweredQuestions, userTime);
@@ -116,7 +115,7 @@ public class PlayResultsActivity extends AppCompatActivity {
     }
 
     public void updateScore(int loggedInUserId){
-       LiveData<Score> scoreObserver = repository.getScoreById(loggedInUserId);
+       LiveData<Score> scoreObserver = repository.getScoreByUserId(loggedInUserId);
        scoreObserver.observe(this, score -> {
            if(score != null){
                if(currentUserScore.getUserScore() > score.getUserScore()){

@@ -37,7 +37,10 @@ public interface ScoreDAO {
     LiveData<List<Score>> getScoresByHighest();
 
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
-    LiveData<List<Score>> getScoreByUserId(int userId);
+    LiveData<List<Score>> getScoreListByUserId(int userId);
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
+    LiveData<Score> getScoreByUserId(int userId);
 
     @Query("DELETE from " + AppDataBase.SCORE_TABLE)
     void deleteAllScores();

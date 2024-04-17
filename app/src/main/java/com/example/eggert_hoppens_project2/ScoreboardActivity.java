@@ -62,17 +62,21 @@ public class ScoreboardActivity extends AppCompatActivity {
 //        ArrayList<String> test = new ArrayList<>(Arrays.asList("hello", "goodbye"));
 //        test.add("ciao");
         getAllScores();
-        Adapter customAdapter = new Adapter(scoreboard_userNames, scoreboard_Scores);
+        Adapter customAdapter = new Adapter(scoreboard_userNames, scoreboard_Scores);//_____________________________________________________________________________
         //Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
-        RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
+        RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);//____________________________________________________________________________________
+        recyclerView = findViewById((R.id.scoreboardList_Recycler));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(customAdapter);
+
 
 
         // Return to Landing Activity
         binding.scoreboardBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                scoreboard_userNames.clear();
+                scoreboard_Scores.clear();
                 Intent intent = LandingActivity.intentFactory(ScoreboardActivity.this, loggedInUserId);
                 startActivity(intent);
             }
@@ -91,6 +95,12 @@ public class ScoreboardActivity extends AppCompatActivity {
                     scoreboard_userNames.add(score.getUserName());
                     scoreboard_Scores.add(String.valueOf(score.getUserScore()));
                 }
+                Adapter customAdapter = new Adapter(scoreboard_userNames, scoreboard_Scores);
+                //Toast.makeText(this, String.valueOf(customAdapter.getItemCount()), Toast.LENGTH_LONG).show();
+                RecyclerView recyclerView = findViewById(R.id.scoreboardList_Recycler);
+                recyclerView = findViewById((R.id.scoreboardList_Recycler));
+                recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                recyclerView.setAdapter(customAdapter);
             }
         });
     }
