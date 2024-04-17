@@ -49,34 +49,46 @@ public class IntentTesting {
     public ActivityScenario<UpdateQuestionActivity> updateQuestionActivityActivityScenario;
     public ActivityScenario<MainActivity> mainActivityActivityScenario;
 
-    @Rule
-    public ActivityScenarioRule<MainActivity> mainActivityActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
     @Before
-    public void setUp() {
-
-        mainActivityActivityScenario = ActivityScenario.launch(MainActivity.class);
-        settingsActivityActivityScenario = ActivityScenario.launch(SettingsActivity.class);
-
+    public void setUp() {;
         Intents.init();
     }
 
     @After
     public void tearDown() {
-        mainActivityActivityScenario.close();
-        settingsActivityActivityScenario.close();
-
         Intents.release();
     }
 
-//    @Test
-//    public void test_toSignUpActivity() {
-//        onView(withId(R.id.toSignUp_Button)).perform(click());
-//        intended(hasComponent(SignUpActivity.class.getName()));
-//    }
+    @Test
+    public void test_toSignUpActivity() {
+        mainActivityActivityScenario = ActivityScenario.launch(MainActivity.class);
+        onView(withId(R.id.toSignUp_Button)).perform(click());
+        intended(hasComponent(SignUpActivity.class.getName()));
+        mainActivityActivityScenario.close();
+    }
 
     @Test
-    public void test_toMain() {
+    public void test_toPlayActivity() {
+        landingActivityActivityScenario = ActivityScenario.launch(LandingActivity.class);
+        onView(withId(R.id.play_Button)).perform(click());
+        intended(hasComponent(PlayActivity.class.getName()));
+        landingActivityActivityScenario.close();
+    }
+
+
+    @Test
+    public void test_toLanding() {
+        settingsActivityActivityScenario = ActivityScenario.launch(SettingsActivity.class);
         onView(withId(R.id.settingsBackButton)).perform(click());
         intended(hasComponent(LandingActivity.class.getName()));
+        settingsActivityActivityScenario.close();
+    }
+
+    @Test
+    public void test_toSettings() {
+        landingActivityActivityScenario = ActivityScenario.launch(LandingActivity.class);
+        onView(withId(R.id.settings_Button)).perform(click());
+        intended(hasComponent(SettingsActivity.class.getName()));
+        landingActivityActivityScenario.close();
     }
 }
