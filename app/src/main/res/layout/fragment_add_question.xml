@@ -152,11 +152,16 @@
             android:text="Difficulty:"
             android:textColor="@color/white"
             android:textSize="18sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center">
-            <RadioButton
+
+            <RadioGroup
+                android:id="@+id/difficulty_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                >
+                <RadioButton
                 android:id="@+id/easy_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,7 +185,7 @@
                 android:fontFamily="serif-monospace"
                 android:layout_gravity="center"
                 android:textSize="14sp"/>
-        </LinearLayout>
+            </RadioGroup>
 
         <Button
             android:id="@+id/addQuestionSubmit_Button"

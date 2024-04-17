@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -41,9 +42,9 @@ public class AddQuestionFragment extends Fragment {
     EditText wrong2EditText;
     EditText wrong3EditText;
     EditText correctAnswerEditText;
-    RadioButton easyRadioButton;
-    RadioButton mediumRadioButton;
-    RadioButton hardRadioButton;
+
+    RadioGroup difficultyRadioGroup;
+    RadioButton selectedDifficultyRadio;
 
 
     private String mNewQuestionText;
@@ -95,18 +96,24 @@ public class AddQuestionFragment extends Fragment {
         wrong2EditText = view.findViewById(R.id.wrong2_editText);
         wrong3EditText = view.findViewById(R.id.wrong3_editText);
         correctAnswerEditText = view.findViewById(R.id.correctAnswer_editText);
-        easyRadioButton = view.findViewById(R.id.easy_Radio);
-        mediumRadioButton = view.findViewById(R.id.medium_Radio);
-        hardRadioButton = view.findViewById(R.id.hard_Radio);
+        difficultyRadioGroup = view.findViewById(R.id.difficulty_RadioGroup);
 
         submitQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get Information From Display
                 mNewQuestionText = questionEditText.getText().toString();
                 mWrongAns1 = wrong1EditText.getText().toString();
                 mWrongAns2 = wrong2EditText.getText().toString();
                 mWrongAns3 = wrong3EditText.getText().toString();
                 mNewCorrectAns = correctAnswerEditText.getText().toString();
+                int radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
+                selectedDifficultyRadio = difficultyRadioGroup.findViewById(radioButtonId);
+                String difficultyText = selectedDifficultyRadio.getText().toString();
+
+                // TODO: Verify that none of the information was blank
+
+                // Add Question to the database and clear the fragment
                 Question newQuestion = new Question("multiple", "easy", "Video Games", mNewQuestionText, mNewCorrectAns, mWrongAns1, mWrongAns2, mWrongAns3);
                 repository.insertQuestion(newQuestion);
                 Toast.makeText(getActivity(), "Question Added To The Database", Toast.LENGTH_LONG).show();
