@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -108,16 +109,22 @@ public class AdminActivity extends AppCompatActivity {
             return;
         }
 
-        userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, userInfo -> {
-            if (userInfo != null) {
-                return;
-            }
-        });
+        try {
+            userObserver = repository.getUserByUserId(loggedInUserId);
+            userObserver.observe(this, userInfo -> {
+                if (userInfo != null) {
+                    return;
+                }
+            });
+        }
+        catch (NullPointerException e) {
+            Log.d("CHECKFOREXCEPTION", e.toString());
+            return;
+        }
     }
 
     /**
-     * ToDo: Fill this in later
+     * This will load the fragment
      */
     private void loadFragment(Fragment fragment) {
         FragmentManager fragMan = getSupportFragmentManager();

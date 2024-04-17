@@ -149,6 +149,12 @@ public class AppRepository {
         });
     }
 
+    public void deleteQuestionById(int questionId) {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            questionDAO.deleteById(questionId);
+        });
+    }
+
 
     //--------Score Handling---------//
     public boolean doesScoreExist(){
