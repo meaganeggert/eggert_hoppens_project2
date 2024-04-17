@@ -37,4 +37,7 @@ public interface QuestionDAO {
 
     @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mCategory = :category)")
     boolean doesContainCategory(String category);
+
+    @Query("DELETE FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
+    void deleteById(int questionId);
 }
