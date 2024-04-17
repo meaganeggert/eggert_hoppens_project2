@@ -73,8 +73,9 @@ public class ClearScoreConfirmationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_clear_score_confirmation, container, false);
         // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_clear_score_confirmation, container, false);
+        // Bindings
         yesButton = (Button) view.findViewById(R.id.yes_Button);
         noButton = (Button) view.findViewById(R.id.no_Button);
 

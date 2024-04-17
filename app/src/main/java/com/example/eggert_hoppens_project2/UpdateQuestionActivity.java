@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -41,7 +44,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonSelected = binding.addQuestionButton.getText().toString();
-                //intent goes here or whatever goes here.
+                loadFragment(new AddQuestionFragment());
             }
         });
         binding.deleteQuestionButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,16 @@ public class UpdateQuestionActivity extends AppCompatActivity {
             Log.d("CHECKFOREXCEPTION", e.toString());
             return;
         }
+    }
+
+    /**
+     * This will load the fragment
+     */
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragMan = getSupportFragmentManager();
+        FragmentTransaction fragTran = fragMan.beginTransaction();
+        fragTran.replace(R.id.updateQuest_FragmentContainer, fragment);
+        fragTran.commit();
     }
 
     public static Intent intentFactory (Context context){

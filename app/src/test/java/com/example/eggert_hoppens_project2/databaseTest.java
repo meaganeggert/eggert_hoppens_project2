@@ -25,10 +25,10 @@ public class databaseTest {
 
     @Before
     public void createDatabase() {
-        db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), AppDataBase.class)
-                .allowMainThreadQueries()
-                .build();
-        userDao = db.userInfoDAO();
+//        db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), AppDataBase.class)
+//                .allowMainThreadQueries()
+//                .build();
+//        userDao = db.userInfoDAO();
     }
 
     @After

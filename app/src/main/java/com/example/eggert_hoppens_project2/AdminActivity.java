@@ -124,7 +124,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     /**
-     * ToDo: Fill this in later
+     * This will load the fragment
      */
     private void loadFragment(Fragment fragment) {
         FragmentManager fragMan = getSupportFragmentManager();
