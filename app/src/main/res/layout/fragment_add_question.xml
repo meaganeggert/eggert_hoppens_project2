@@ -35,6 +35,7 @@
             android:text="Category:"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
         <EditText
             android:id="@+id/addCategory_editText"
             android:layout_width="match_parent"
@@ -80,6 +81,7 @@
             android:text="Correct Answer:"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
         <EditText
             android:id="@+id/correctAnswer_editText"
             android:layout_width="match_parent"
@@ -104,42 +106,41 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/wrong1_editText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:hint="Yellow"
-                android:inputType="text"
-                android:textSize="14sp" />
+        <EditText
+            android:id="@+id/wrong1_editText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="Yellow"
+            android:inputType="text"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/wrong2_editText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:hint="Lime Green"
-                android:inputType="text"
-                android:textSize="14sp" />
+        <EditText
+            android:id="@+id/wrong2_editText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="Lime Green"
+            android:inputType="text"
+            android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/wrong3_editText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:hint="Fuschia"
-                android:inputType="text"
-                android:textSize="14sp" />
-
+        <EditText
+            android:id="@+id/wrong3_editText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="Fuschia"
+            android:inputType="text"
+            android:textSize="14sp" />
 
 
         <TextView
@@ -153,39 +154,42 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-            <RadioGroup
-                android:id="@+id/difficulty_RadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                >
-                <RadioButton
+        <RadioGroup
+            android:id="@+id/difficulty_RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
                 android:id="@+id/easy_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="easy"
-                android:fontFamily="serif-monospace"
                 android:layout_gravity="center"
-                android:textSize="14sp"/>
+                android:checked="true"
+                android:fontFamily="serif-monospace"
+                android:text="easy"
+                android:textSize="14sp" />
+
             <RadioButton
                 android:id="@+id/medium_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="medium"
-                android:fontFamily="serif-monospace"
                 android:layout_gravity="center"
-                android:textSize="14sp"/>
+                android:fontFamily="serif-monospace"
+                android:text="medium"
+                android:textSize="14sp" />
+
             <RadioButton
                 android:id="@+id/hard_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hard"
-                android:fontFamily="serif-monospace"
                 android:layout_gravity="center"
-                android:textSize="14sp"/>
-            </RadioGroup>
+                android:fontFamily="serif-monospace"
+                android:text="hard"
+                android:textSize="14sp" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/addQuestionSubmit_Button"
