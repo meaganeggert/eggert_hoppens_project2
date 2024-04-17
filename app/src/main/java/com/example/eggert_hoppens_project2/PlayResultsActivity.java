@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -39,7 +40,6 @@ public class PlayResultsActivity extends AppCompatActivity {
     private static double userTime = 0.0;
     private static String gameModeName = "";
 
-    private static Score previousUserScore;
     private static Score currentUserScore;
 
 
@@ -75,24 +75,23 @@ public class PlayResultsActivity extends AppCompatActivity {
         if(getIntent().hasExtra(GAME_MODE_NAME)){
             gameModeName = getIntent().getStringExtra(GAME_MODE_NAME);
         }
-        
+
+
+
         //Only record score info if the gameMode played was Compete mode;
         if(gameModeName.equals("Compete")){
             currentUserScore = new Score(loggedInUserId, loggedInUser, userScore, userStrikes, totalAnsweredQuestions, userTime);
+
+
             //Here is where the score data will be compared.
             //If the user has a previous score, set the currentUserScore's id to the previous one.
-//            if(checkUserScoreExists(loggedInUserId)){
-//                setPreviousUserScoreInfo(loggedInUserId);
-//                currentUserScore.setScoreId(previousUserScore.getScoreId());
-//
-//                if(currentUserScore.getUserScore() >= previousUserScore.getUserScore()){
-//                    updatePreviousScore(previousUserScore);
-//                }
-//            }
-//            else{  //If user doesn't already have a score, just insert this one.
-//                insertUserScore(currentUserScore);
-//            }
-            insertUserScore(currentUserScore);  //FOR NOW IT WILL JUST KEEP INSERTING SCORES, EVEN IF THERE ALREADY IS ONE WITH THE SAME USERID.
+            if(checkUserScoreExists(loggedInUserId)){
+                updateScore(loggedInUserId);
+            }
+            else{  //If user doesn't already have a score, just insert this one.
+                insertUserScore(currentUserScore);
+            }
+            //insertUserScore(currentUserScore);  //FOR NOW IT WILL JUST KEEP INSERTING SCORES, EVEN IF THERE ALREADY IS ONE WITH THE SAME USERID.
         }
 
         //Not entirely sure if this works the way I want it to. Supposed to clear all the activities leading up to this
@@ -115,16 +114,17 @@ public class PlayResultsActivity extends AppCompatActivity {
         repository.insertScore(score);
     }
 
-    private void updatePreviousScore(Score score){
-        repository.updateUserScoreInfo(score);
+    public void updateScore(int loggedInUserId){
+       LiveData<Score> scoreObserver = repository.getScoreByUserId(loggedInUserId);
+       scoreObserver.observe(this, score -> {
+           if(score != null){
+               if(currentUserScore.getUserScore() > score.getUserScore()){
+                   currentUserScore.setScoreId(score.getScoreId());
+                   insertUserScore(currentUserScore);
+               }
+           }
+       });
     }
-
-//    private void setPreviousUserScoreInfo(int userId){
-//        LiveData<Score> scoreObserver = repository.getScoreByUserId(userId);
-//        scoreObserver.observe(this, score -> {
-//            previousUserScore = score;
-//        });
-//    }
 
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;

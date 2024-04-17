@@ -191,7 +191,11 @@ public class AppRepository {
         return scoreDAO.getScoreByScoreId(scoreId);
     }
 
-    public LiveData<List<Score>> getScoreByUserId(int userId) {
+    public LiveData<List<Score>> getScoreListByUserId(int userId) {
+        return scoreDAO.getScoreListByUserId(userId);
+    }
+
+    public LiveData<Score> getScoreByUserId(int userId){
         return scoreDAO.getScoreByUserId(userId);
     }
 

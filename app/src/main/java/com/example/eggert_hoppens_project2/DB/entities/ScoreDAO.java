@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface ScoreDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertScore(Score... score);
+    void insertScore(Score score);
 
     @Update
     void updateScore(Score... score);
@@ -37,7 +37,10 @@ public interface ScoreDAO {
     LiveData<List<Score>> getScoresByHighest();
 
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
-    LiveData<List<Score>> getScoreByUserId(int userId);
+    LiveData<List<Score>> getScoreListByUserId(int userId);
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mUserId = :userId")
+    LiveData<Score> getScoreByUserId(int userId);
 
     @Query("DELETE from " + AppDataBase.SCORE_TABLE)
     void deleteAllScores();
