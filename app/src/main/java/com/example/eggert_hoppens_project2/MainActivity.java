@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         //-- END Login Button Functionality --
 
         //-- BEGIN Sign-Up Button Functionality --
-        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+        binding.toSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = SignUpActivity.intentFactory(MainActivity.this);
@@ -217,12 +217,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, userInfo -> {
-            if (userInfo != null) {
-                return;
-            }
-        });
+        try {
+            userObserver = repository.getUserByUserId(loggedInUserId);
+            userObserver.observe(this, userInfo -> {
+                if (userInfo != null) {
+                    return;
+                }
+            });
+        }
+        catch (NullPointerException e) {
+            Log.d("CHECKFOREXCEPTION", e.toString());
+            return false;
+        }
         return false;
     }
 

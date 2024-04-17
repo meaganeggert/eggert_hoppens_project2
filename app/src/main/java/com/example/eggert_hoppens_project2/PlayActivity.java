@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -425,12 +426,18 @@ public class PlayActivity extends AppCompatActivity {
             return;
         }
 
-        userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, userInfo -> {
-            if (userInfo != null) {
-                return;
-            }
-        });
+        try {
+            userObserver = repository.getUserByUserId(loggedInUserId);
+            userObserver.observe(this, userInfo -> {
+                if (userInfo != null) {
+                    return;
+                }
+            });
+        }
+        catch (NullPointerException e) {
+            Log.d("CHECKFOREXCEPTION", e.toString());
+            return;
+        }
     }
 
     /**

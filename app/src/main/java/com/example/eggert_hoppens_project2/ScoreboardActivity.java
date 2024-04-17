@@ -120,12 +120,18 @@ public class ScoreboardActivity extends AppCompatActivity {
             return;
         }
 
-        userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, userInfo -> {
-            if (userInfo != null) {
-                return;
-            }
-        });
+        try {
+            userObserver = repository.getUserByUserId(loggedInUserId);
+            userObserver.observe(this, userInfo -> {
+                if (userInfo != null) {
+                    return;
+                }
+            });
+        }
+        catch (NullPointerException e) {
+            Log.d("CHECKFOREXCEPTION", e.toString());
+            return;
+        }
     }
 
     public static Intent intentFactory(Context context) {

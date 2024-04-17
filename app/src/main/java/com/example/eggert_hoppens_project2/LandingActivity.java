@@ -154,12 +154,19 @@ public class LandingActivity extends AppCompatActivity {
         if (loggedInUserId != LOGGED_OUT) {
             return;
         }
-        userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, userInfo -> {
-            if (userInfo != null) {
-                return;
-            }
-        });
+
+        try {
+            userObserver = repository.getUserByUserId(loggedInUserId);
+            userObserver.observe(this, userInfo -> {
+                if (userInfo != null) {
+                    return;
+                }
+            });
+        }
+        catch (NullPointerException e) {
+            Log.d("CHECKFOREXCEPTION", e.toString());
+            return;
+        }
     }
 
 
