@@ -2,10 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ScoreboardActivity">
+      <entry key="app">
         <State />
       </entry>
-      <entry key="app">
+      <entry key="test_toLandingActivity()">
+        <State />
+      </entry>
+      <entry key="test_toMain()">
+        <State />
+      </entry>
+      <entry key="test_toMainActivity()">
+        <State />
+      </entry>
+      <entry key="test_toSignUpActivity()">
+        <State />
+      </entry>
+      <entry key="validateSignUpToMain()">
         <State />
       </entry>
     </value>

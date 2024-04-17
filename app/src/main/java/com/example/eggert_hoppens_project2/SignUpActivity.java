@@ -89,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (password_Validate() && !mUsername.isEmpty()) {
                     insertUser();
                     Toast.makeText(SignUpActivity.this, "Success!.", Toast.LENGTH_LONG).show();
+                    returnToMain();
                 }
                 else if (mUsername.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Must enter a username!", Toast.LENGTH_SHORT).show();
@@ -97,8 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(getApplicationContext(), "Passwords must match and not be empty!", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = MainActivity.intentFactory(getApplicationContext());
-                startActivity(intent);
+
             }
         });
         //-- END Section for Sign Up Button Functionality --
@@ -143,6 +143,11 @@ public class SignUpActivity extends AppCompatActivity {
     private void insertUser() {
         UserInfo user = new UserInfo(mUsername, mPassword, false);
         repository.insertUserInfo(user);
+    }
+
+    private void returnToMain() {
+        Intent intent = MainActivity.intentFactory(getApplicationContext());
+        startActivity(intent);
     }
 
     private void clearUserTable() {
