@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <!-- Include Header Toolbar Layout -->
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
@@ -15,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <!-- Settings Title -->
     <TextView
         android:id="@+id/settingsTitleTextView"
         android:layout_width="wrap_content"
@@ -27,6 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
+    <!-- Profile Button -->
     <Button
         android:id="@+id/profileOptionButton"
         android:layout_width="250dp"
@@ -39,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsTitleTextView" />
 
+    <!-- 'How to Play' Button -->
     <Button
         android:id="@+id/howToPlayOptionButton"
         android:layout_width="250dp"
@@ -51,6 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileOptionButton" />
 
+    <!-- Back Button -->
     <Button
         android:id="@+id/settingsBackButton"
         android:layout_width="wrap_content"

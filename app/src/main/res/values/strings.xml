@@ -40,4 +40,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="how_to_play_title">How To Play</string>
     <string name="how_to_play_instructions">How To Play Instructions</string>
+    <string name="medium">medium</string>
+    <string name="easy">easy</string>
+    <string name="hard">hard</string>
+    <string name="difficultyLabel">Difficulty:</string>
+    <string name="fuschia">Fuschia</string>
+    <string name="lime_green">Lime Green</string>
+    <string name="yellow">Yellow</string>
+    <string name="other_answers_label">Other Answers:</string>
+    <string name="blue">Blue</string>
+    <string name="correct_answer_label">Correct Answer:</string>
+    <string name="what_color_is_the_sky">What color is the sky?</string>
+    <string name="question_label">Question:</string>
+    <string name="video_games_sports_etc">Video Games, Sports, etc.</string>
+    <string name="category_label">Category:</string>
+    <string name="please_enter_the_question_details">Please enter the question details:</string>
+    <string name="score">SCORE</string>
+    <string name="testing">TESTING</string>
+    <string name="_1">#1</string>
 </resources>

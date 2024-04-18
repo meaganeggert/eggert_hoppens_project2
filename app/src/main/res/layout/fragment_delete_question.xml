@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Instructive Title -->
         <TextView
             android:id="@+id/deleteQuest_fragTitle"
             android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
+        <!-- Question ID Title -->
         <TextView
             android:id="@+id/questionIdTitle_textView"
             android:layout_width="match_parent"
@@ -36,6 +38,7 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Question ID EditText -->
         <EditText
             android:id="@+id/questionId_editText"
             android:layout_width="match_parent"
@@ -48,6 +51,7 @@
             android:inputType="number"
             android:textSize="14sp" />
 
+        <!-- View Question Button -->
         <Button
             android:id="@+id/viewQuestion_button"
             android:layout_width="match_parent"
@@ -56,6 +60,7 @@
             android:text="View Question"
             android:textSize="18sp" />
 
+        <!-- Hidden Layout That Displays Once Question ID is Entered -->
         <LinearLayout
             android:id="@+id/viewQuestion_Layout"
             android:layout_width="match_parent"
@@ -64,6 +69,7 @@
             android:visibility="invisible"
             tools:visibility="visible">
 
+            <!-- Confirm Question Title -->
             <TextView
                 android:id="@+id/displayTitle_textView"
                 android:layout_width="match_parent"
@@ -75,6 +81,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
+            <!-- Category Title -->
             <TextView
                 android:id="@+id/displaySection_categoryTitleTV"
                 android:layout_width="match_parent"
@@ -86,6 +93,7 @@
                 android:backgroundTint="@color/white"
                 android:textStyle="bold" />
 
+            <!-- Category Text -->
             <TextView
                 android:id="@+id/displaySection_categoryTV"
                 android:layout_width="match_parent"
@@ -96,6 +104,7 @@
                 android:textSize="14sp"
                 tools:text="Alice in Wonderland" />
 
+            <!-- Question Title -->
             <TextView
                 android:id="@+id/displaySection_questTitleTV"
                 android:layout_width="match_parent"
@@ -107,6 +116,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Question Text -->
             <TextView
                 android:id="@+id/displaySection_questTV"
                 android:layout_width="match_parent"
@@ -117,6 +127,7 @@
                 android:textSize="14sp"
                 tools:text="Why is a raven like a writing desk?" />
 
+            <!-- Correct Answer Title -->
             <TextView
                 android:id="@+id/displaySection_correctAnsTitleTV"
                 android:layout_width="match_parent"
@@ -128,6 +139,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Correct Answer Text -->
             <TextView
                 android:id="@+id/displaySection_correctAnsTV"
                 android:layout_width="match_parent"
@@ -138,6 +150,7 @@
                 android:textSize="14sp"
                 tools:text="Because you're mad" />
 
+            <!-- Wrong Answers Title -->
             <TextView
                 android:id="@+id/displaySection_wrongAnswerTitleTV"
                 android:layout_width="match_parent"
@@ -149,6 +162,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Wrong Answer #1 Text -->
             <TextView
                 android:id="@+id/displaySection_wrong1TV"
                 android:layout_width="match_parent"
@@ -159,6 +173,7 @@
                 android:textSize="14sp"
                 tools:text="Whoooo are you?" />
 
+            <!-- Wrong Answer #2 Text -->
             <TextView
                 android:id="@+id/displaySection_wrong2TV"
                 android:layout_width="match_parent"
@@ -169,6 +184,7 @@
                 android:backgroundTint="@color/white"
                 tools:text="Curiouser and Curiouser" />
 
+            <!-- Wrong Answer #3 Text -->
             <TextView
                 android:id="@+id/displaySection_wrong3TV"
                 android:layout_width="match_parent"
@@ -179,6 +195,7 @@
                 android:textSize="14sp"
                 tools:text="I'm late, I'm late!" />
 
+            <!-- Confirm Delete Button -->
             <Button
                 android:id="@+id/confirmDelete_Button"
                 android:layout_width="match_parent"
@@ -187,6 +204,7 @@
                 android:text="Confirm Delete"
                 android:textSize="18sp" />
 
+            <!-- Cancel Delete Button -->
             <Button
                 android:id="@+id/cancelDelete_Button"
                 android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Header Toolbar -->
+    <!-- Include Header Toolbar Layout -->
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
