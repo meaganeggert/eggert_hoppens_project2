@@ -215,8 +215,10 @@ public class PlayActivity extends AppCompatActivity {
                     check4 = false;
                     if (userAnswer.equals(dbCorrectAnswer)) {
                         gameModeSettings.incrementScore();
+                        Toast.makeText(PlayActivity.this, "Correct!", Toast.LENGTH_SHORT).show();
                     } else {
                         gameModeSettings.incrementStrikes();
+                        Toast.makeText(PlayActivity.this, "Incorrect :(", Toast.LENGTH_SHORT).show();
                     }
                     if (gameModeSettings.checkGameEnds()) {
                         gameModeSettings.endGame();

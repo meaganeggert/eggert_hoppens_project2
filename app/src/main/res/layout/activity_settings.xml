@@ -40,12 +40,12 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsTitleTextView" />
 
     <Button
-        android:id="@+id/tutorialOptionButton"
+        android:id="@+id/howToPlayOptionButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:fontFamily="serif-monospace"
         android:layout_marginTop="50dp"
-        android:text="@string/tutorial"
+        android:text="@string/how_to_play"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
