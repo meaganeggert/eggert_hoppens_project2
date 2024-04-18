@@ -40,4 +40,10 @@ public interface QuestionDAO {
 
     @Query("DELETE FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
     void deleteById(int questionId);
+
+    @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId)")
+    boolean doesContainQuestionId(int questionId);
+
+    @Query("SELECT * FROM " + AppDataBase.QUESTION_TABLE + " WHERE mQuestionId = :questionId")
+    Question getQuestObjectById(int questionId);
 }
