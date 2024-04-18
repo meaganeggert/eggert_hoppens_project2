@@ -37,6 +37,13 @@ public class SettingsActivity extends AppCompatActivity {
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
+        binding.howToPlayOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = HowToPlayActivity.intentFactory(SettingsActivity.this);
+                startActivity(intent);
+            }
+        });
 
         // Back Button Functionality
         binding.settingsBackButton.setOnClickListener(new View.OnClickListener() {

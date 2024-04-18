@@ -38,4 +38,6 @@
     <string name="change_password">Change Password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_to_play_title">How To Play</string>
+    <string name="how_to_play_instructions">How To Play Instructions</string>
 </resources>

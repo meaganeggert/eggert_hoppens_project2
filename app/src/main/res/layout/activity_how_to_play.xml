@@ -7,4 +7,49 @@
     android:layout_height="match_parent"
     tools:context=".HowToPlayActivity">
 
+    <include
+        android:id="@+id/headerToolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/howToPlayTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/how_to_play_title"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
+
+    <TextView
+        android:id="@+id/howToPlayInfoTextView"
+        android:layout_width="381dp"
+        android:layout_height="422dp"
+        android:layout_marginTop="30dp"
+        android:padding="8dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/how_to_play_instructions"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/howToPlayTitleTextView" />
+
+    <Button
+        android:id="@+id/howToPlayBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="@string/back"
+        android:textSize="18sp"
+        android:fontFamily="serif-monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
