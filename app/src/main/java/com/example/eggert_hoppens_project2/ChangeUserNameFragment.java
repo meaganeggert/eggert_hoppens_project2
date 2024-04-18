@@ -1,5 +1,7 @@
 package com.example.eggert_hoppens_project2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
-import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
-
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,12 +24,10 @@ public class ChangeUserNameFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
+    private static final String ID_PARAM = "ID parameter";
 
     // TODO: Rename and change types of parameters
     private int mUserId;
-    //private String mParam2;
 
     View view;
     AppRepository repository;
@@ -48,23 +45,14 @@ public class ChangeUserNameFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
+     * @param userId Active user's ID.
      * @return A new instance of fragment ChangeUserNameFragment.
      */
     // TODO: Rename and change types and number of parameters
-//    public static ChangeUserNameFragment newInstance(String param1, String param2) {
-//        ChangeUserNameFragment fragment = new ChangeUserNameFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
     public static ChangeUserNameFragment newInstance(int userId) {
         ChangeUserNameFragment fragment = new ChangeUserNameFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, userId);
+        args.putInt(ID_PARAM, userId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,8 +61,7 @@ public class ChangeUserNameFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mUserId = getArguments().getInt(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
+            mUserId = getArguments().getInt(ID_PARAM);
         }
     }
 
@@ -91,7 +78,7 @@ public class ChangeUserNameFragment extends Fragment {
         submitUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getNewUserFromDisplay();
+                getNewUserNameFromDisplay();
                 checkNewUserName();
             }
         });
@@ -99,19 +86,28 @@ public class ChangeUserNameFragment extends Fragment {
         return view;
     }
 
-    private void getNewUserFromDisplay(){
+    /** Grabs string where the user can type their new username. */
+    private void getNewUserNameFromDisplay(){
         mNewUserName = changeUserNameEditText.getText().toString();
     }
+
+    /** Checks if the new username is valid. Cannot be empty, cannot already exits. If it is neither, update the user's username. */
     private void checkNewUserName(){
-        if(mNewUserName.equals("")){
+        if(mNewUserName.isEmpty()){
             Toast.makeText(getActivity(), "New username cannot be empty.", Toast.LENGTH_SHORT).show();
         }
         else if(repository.containsUserName(mNewUserName)){
-            Toast.makeText(getActivity(), "Username already taken.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Username already exists.", Toast.LENGTH_SHORT).show();
         }
         else{
             repository.updateUserName(mNewUserName, mUserId);
-            Toast.makeText(getActivity(), "Username successfully changed.", Toast.LENGTH_SHORT).show();
+
+            SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(LandingActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+            SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+            sharedPrefEditor.putString(LandingActivity.SHARED_PREFERENCE_USERNAME_KEY, mNewUserName);
+            sharedPrefEditor.apply();
+
+            Toast.makeText(getActivity(), "Username successfully changed. Please exit this page to see changes.", Toast.LENGTH_SHORT).show();
         }
     }
 }

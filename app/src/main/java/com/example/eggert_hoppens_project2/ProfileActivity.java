@@ -59,8 +59,6 @@ public class ProfileActivity extends AppCompatActivity {
         binding.changeUserNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(ProfileActivity.this, String.format(Locale.US, "%d", loggedInUserId), Toast.LENGTH_SHORT).show();
-                //buttonSelected = binding.changeUserNameButton.getText().toString();
                 loadFragment(ChangeUserNameFragment.newInstance(loggedInUserId));
             }
         });
