@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.eggert_hoppens_project2.DB.AppRepository;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ClearScoreConfirmationFragment#newInstance} factory method to
@@ -27,6 +29,8 @@ public class ClearScoreConfirmationFragment extends Fragment {
     private String mParam2;
 
     View view;
+
+    AppRepository repository;
     Button yesButton;
     Button noButton;
 
@@ -73,6 +77,8 @@ public class ClearScoreConfirmationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        repository = AppRepository.getRepository(getActivity().getApplication());
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_clear_score_confirmation, container, false);
         // Bindings
@@ -82,7 +88,8 @@ public class ClearScoreConfirmationFragment extends Fragment {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You said yes!", Toast.LENGTH_SHORT).show();
+                repository.clearScoreboard();
+                Toast.makeText(getActivity(), "Scoreboard has been cleared.", Toast.LENGTH_SHORT).show();
                 getParentFragmentManager().beginTransaction().replace(getActivity().findViewById(R.id.frag_ContainerView).getId(), new BlankFragment()).commit();
 
             }
@@ -91,7 +98,7 @@ public class ClearScoreConfirmationFragment extends Fragment {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "You said no!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Scoreboard is unchanged.", Toast.LENGTH_SHORT).show();
                 getParentFragmentManager().beginTransaction().replace(getActivity().findViewById(R.id.frag_ContainerView).getId(), new BlankFragment()).commit();
             }
         });
