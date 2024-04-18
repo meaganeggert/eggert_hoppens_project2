@@ -4,30 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- Scoreboard Place-->
     <TextView
         android:id="@+id/place_textView"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:textSize="20sp"
-        android:text="#1"
+        android:text="@string/_1"
         android:layout_marginStart="20dp"
         android:gravity="center"
         android:fontFamily="serif-monospace"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Scoreboard Username -->
     <TextView
         android:id="@+id/username_textView"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="TESTING"
+        android:text="@string/testing"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Scoreboard Score -->
     <TextView
         android:id="@+id/score_textView"
         android:layout_width="100dp"
@@ -35,7 +38,7 @@
         android:fontFamily="serif-monospace"
         android:layout_marginEnd="20dp"
         android:gravity="center"
-        android:text="SCORE"
+        android:text="@string/score"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

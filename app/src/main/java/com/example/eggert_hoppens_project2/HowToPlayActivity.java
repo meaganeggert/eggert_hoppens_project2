@@ -85,6 +85,10 @@ public class HowToPlayActivity extends AppCompatActivity {
         binding.howToPlayInfoTextView.setText(sb);
     }
 
+    /**
+     * This will pull information from our Shared Preferences in order to
+     * display the current username in the toolbar
+     */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
 

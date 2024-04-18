@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MeaganFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Display 'Hello Meagan' -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

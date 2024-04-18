@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+
+    <!-- Include Header Toolbar Layout -->
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
@@ -15,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <!-- Title Text -->
     <TextView
         android:id="@+id/profileTitleTextView"
         android:layout_width="wrap_content"
@@ -27,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
+    <!-- Username Label -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,6 +45,7 @@
         android:id="@+id/username_Label"
         />
 
+    <!-- Displays Current Username -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,6 +58,7 @@
         android:fontFamily="serif-monospace"
         android:id="@+id/currentUser_TextView"/>
 
+    <!-- Change Username Button -->
     <Button
         android:id="@+id/changeUserName_Button"
         android:layout_width="250dp"
@@ -66,6 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentUser_TextView" />
 
+    <!-- Change Password Button -->
     <Button
         android:id="@+id/changePassword_Button"
         android:layout_width="250dp"
@@ -79,6 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/changeUserName_Button" />
 
+    <!-- Back Button -->
     <Button
         android:id="@+id/profile_backButton"
         android:layout_width="wrap_content"
@@ -91,11 +99,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Fragment FrameLayout -->
     <FrameLayout
         android:id="@+id/profile_Activity_FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="200dp"

@@ -85,12 +85,19 @@ public class CategoryActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Ensure that this category exists within the database
+     */
     public boolean checkCategoryExists(String category){
         boolean exists = false;
         exists = repository.doesContainCategory(category);
         return exists;
     }
 
+    /**
+     * This will pull information from our Shared Preferences in order to
+     * display the current username in the toolbar
+     */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
 

@@ -95,6 +95,10 @@ public class GameModeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This will pull information from our Shared Preferences in order to
+     * display the current username in the toolbar
+     */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;
 

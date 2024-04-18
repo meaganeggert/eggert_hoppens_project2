@@ -8,9 +8,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Overall Instruction Title -->
         <TextView
             android:id="@+id/addQuestion_FragTitle"
             android:layout_width="match_parent"
@@ -20,10 +21,11 @@
             android:backgroundTint="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:text="Please enter the question details:"
+            android:text="@string/please_enter_the_question_details"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
+        <!-- Category Title -->
         <TextView
             android:id="@+id/categoryTitle_textView"
             android:layout_width="match_parent"
@@ -32,10 +34,11 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:labelFor="@id/addQuestion_EditText"
-            android:text="Category:"
+            android:text="@string/category_label"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Category EditText -->
         <EditText
             android:id="@+id/addCategory_editText"
             android:layout_width="match_parent"
@@ -43,10 +46,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="Video Games, Sports, etc."
+            android:hint="@string/video_games_sports_etc"
             android:inputType="text"
             android:textSize="14sp" />
 
+        <!-- Question Title -->
         <TextView
             android:id="@+id/questionTitle_textView"
             android:layout_width="match_parent"
@@ -55,10 +59,11 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:labelFor="@id/addQuestion_EditText"
-            android:text="Question:"
+            android:text="@string/question_label"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Question EditText -->
         <EditText
             android:id="@+id/addQuestion_EditText"
             android:layout_width="match_parent"
@@ -66,10 +71,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="What color is the sky?"
+            android:hint="@string/what_color_is_the_sky"
             android:inputType="textMultiLine"
             android:textSize="14sp" />
 
+        <!-- Correct Answer Title -->
         <TextView
             android:id="@+id/correctAnswerTitle_textView"
             android:layout_width="match_parent"
@@ -78,10 +84,11 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:labelFor="@id/addQuestion_EditText"
-            android:text="Correct Answer:"
+            android:text="@string/correct_answer_label"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Correct Answer EditText -->
         <EditText
             android:id="@+id/correctAnswer_editText"
             android:layout_width="match_parent"
@@ -90,10 +97,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="Blue"
+            android:hint="@string/blue"
             android:inputType="text"
             android:textSize="14sp" />
 
+        <!-- Other Answers Title -->
         <TextView
             android:id="@+id/answersTitle_textView"
             android:layout_width="match_parent"
@@ -102,10 +110,11 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:labelFor="@id/addQuestion_EditText"
-            android:text="Other Answers:"
+            android:text="@string/other_answers_label"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Wrong #1 EditText -->
         <EditText
             android:id="@+id/wrong1_editText"
             android:layout_width="match_parent"
@@ -114,10 +123,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="Yellow"
+            android:hint="@string/yellow"
             android:inputType="text"
             android:textSize="14sp" />
 
+        <!-- Wrong #2 EditText -->
         <EditText
             android:id="@+id/wrong2_editText"
             android:layout_width="match_parent"
@@ -126,10 +136,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="Lime Green"
+            android:hint="@string/lime_green"
             android:inputType="text"
             android:textSize="14sp" />
 
+        <!-- Wrong #3 EditText -->
         <EditText
             android:id="@+id/wrong3_editText"
             android:layout_width="match_parent"
@@ -138,11 +149,11 @@
             android:background="@color/white"
             android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:hint="Fuschia"
+            android:hint="@string/fuschia"
             android:inputType="text"
             android:textSize="14sp" />
 
-
+        <!-- Difficulty Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -150,10 +161,11 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:labelFor="@id/addQuestion_EditText"
-            android:text="Difficulty:"
+            android:text="@string/difficultyLabel"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <!-- Difficulty Radio Group -->
         <RadioGroup
             android:id="@+id/difficulty_RadioGroup"
             android:layout_width="match_parent"
@@ -162,6 +174,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <!-- Easy RadioButton -->
             <RadioButton
                 android:id="@+id/easy_Radio"
                 android:layout_width="wrap_content"
@@ -169,28 +182,31 @@
                 android:layout_gravity="center"
                 android:checked="true"
                 android:fontFamily="serif-monospace"
-                android:text="easy"
+                android:text="@string/easy"
                 android:textSize="14sp" />
 
+            <!-- Medium RadioButton -->
             <RadioButton
                 android:id="@+id/medium_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="serif-monospace"
-                android:text="medium"
+                android:text="@string/medium"
                 android:textSize="14sp" />
 
+            <!-- Hard RadioButton -->
             <RadioButton
                 android:id="@+id/hard_Radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="serif-monospace"
-                android:text="hard"
+                android:text="@string/hard"
                 android:textSize="14sp" />
         </RadioGroup>
 
+        <!-- Submit Button -->
         <Button
             android:id="@+id/addQuestionSubmit_Button"
             android:layout_width="wrap_content"

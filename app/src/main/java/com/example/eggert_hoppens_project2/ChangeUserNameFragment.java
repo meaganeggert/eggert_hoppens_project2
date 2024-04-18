@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
@@ -36,6 +37,8 @@ public class ChangeUserNameFragment extends Fragment {
     EditText changeUserNameEditText;
     String mNewUserName = "";
     boolean goodName = false;
+
+    TextView toolbar_displayNewName;
 
     public ChangeUserNameFragment() {
         // Required empty public constructor
@@ -72,14 +75,18 @@ public class ChangeUserNameFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_change_user_name, container, false);
+
+        // Bindings
         submitUserName = (Button) view.findViewById(R.id.changeUserNameSubmit_Button);
         changeUserNameEditText = view.findViewById(R.id.changeUserName_editText);
+        toolbar_displayNewName = getActivity().findViewById(R.id.toolbarUsername);
 
         submitUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getNewUserNameFromDisplay();
                 checkNewUserName();
+
             }
         });
 
@@ -91,7 +98,10 @@ public class ChangeUserNameFragment extends Fragment {
         mNewUserName = changeUserNameEditText.getText().toString();
     }
 
-    /** Checks if the new username is valid. Cannot be empty, cannot already exits. If it is neither, update the user's username. */
+    /** Checks if the new username is valid.
+     * Cannot be empty, cannot already exits.
+     * If it is neither, update the user's username.
+     * */
     private void checkNewUserName(){
         if(mNewUserName.isEmpty()){
             Toast.makeText(getActivity(), "New username cannot be empty.", Toast.LENGTH_SHORT).show();
@@ -107,7 +117,9 @@ public class ChangeUserNameFragment extends Fragment {
             sharedPrefEditor.putString(LandingActivity.SHARED_PREFERENCE_USERNAME_KEY, mNewUserName);
             sharedPrefEditor.apply();
 
-            Toast.makeText(getActivity(), "Username successfully changed. Please exit this page to see changes.", Toast.LENGTH_SHORT).show();
+            toolbar_displayNewName.setText(mNewUserName);
+
+            Toast.makeText(getActivity(), "Username successfully changed.", Toast.LENGTH_SHORT).show();
         }
     }
 }

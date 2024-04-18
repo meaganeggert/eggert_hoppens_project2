@@ -69,7 +69,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * This method will check to see which user is logged in and display persistent information appropriately
+     * This will pull information from our Shared Preferences in order to
+     * display the current username in the toolbar
      */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;

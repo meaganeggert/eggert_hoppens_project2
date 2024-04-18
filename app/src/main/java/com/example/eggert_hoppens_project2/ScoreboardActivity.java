@@ -106,7 +106,8 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks to see which user is logged in for persistence use
+     * This will pull information from our Shared Preferences in order to
+     * display the current username in the toolbar
      */
     private void checkLoggedInUser() {
         LiveData<UserInfo> userObserver;

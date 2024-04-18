@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ScoreboardActivity">
 
+    <!-- Include Header Toolbar Layout -->
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
@@ -15,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="180dp" />
 
-
+    <!-- Scoreboard Title -->
     <TextView
         android:id="@+id/scoreboardTitleTextView"
         android:layout_width="wrap_content"
@@ -37,19 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/scoreboardDisplayTextView"-->
-<!--        android:layout_width="370dp"-->
-<!--        android:layout_height="400dp"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:padding="8dp"-->
-<!--        android:text="Player Score Info"-->
-<!--        android:fontFamily="serif-monospace"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/scoreboardTitleTextView" />-->
-
+    <!-- Back Button -->
     <Button
         android:id="@+id/scoreboardBackButton"
         android:layout_width="wrap_content"
