@@ -98,7 +98,10 @@ public class ChangeUserNameFragment extends Fragment {
         mNewUserName = changeUserNameEditText.getText().toString();
     }
 
-    /** Checks if the new username is valid. Cannot be empty, cannot already exits. If it is neither, update the user's username. */
+    /** Checks if the new username is valid.
+     * Cannot be empty, cannot already exits.
+     * If it is neither, update the user's username.
+     * */
     private void checkNewUserName(){
         if(mNewUserName.isEmpty()){
             Toast.makeText(getActivity(), "New username cannot be empty.", Toast.LENGTH_SHORT).show();
