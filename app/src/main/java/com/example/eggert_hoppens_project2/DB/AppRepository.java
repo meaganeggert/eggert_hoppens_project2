@@ -92,6 +92,12 @@ public class AppRepository {
         });
     }
 
+    public void updateUserName(String newUserName, int userId) {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            userinfoDAO.updateUserName(newUserName, userId);
+        });
+    }
+
     public boolean containsUserName(String newUser) {
         Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(
                 new Callable<Boolean>() {
