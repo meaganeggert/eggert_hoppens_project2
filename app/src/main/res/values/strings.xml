@@ -31,11 +31,13 @@
     <string name="log_out">Log Out</string>
     <string name="back">Back</string>
     <string name="profile">Profile</string>
-    <string name="tutorial">Tutorial</string>
+    <string name="how_to_play">How To Play</string>
     <string name="quit">Quit</string>
     <string name="example_raven_question">Why is a raven like a writing desk?</string>
     <string name="change_username">Change Username</string>
     <string name="change_password">Change Password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_to_play_title">How To Play</string>
+    <string name="how_to_play_instructions">How To Play Instructions</string>
 </resources>

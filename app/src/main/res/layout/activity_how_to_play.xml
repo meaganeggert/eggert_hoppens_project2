@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".HowToPlayActivity">
 
     <include
         android:id="@+id/headerToolbar"
@@ -16,43 +16,32 @@
         />
 
     <TextView
-        android:id="@+id/settingsTitleTextView"
+        android:id="@+id/howToPlayTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Settings"
         android:fontFamily="serif-monospace"
+        android:text="@string/how_to_play_title"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
-    <Button
-        android:id="@+id/profileOptionButton"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="100dp"
+    <TextView
+        android:id="@+id/howToPlayInfoTextView"
+        android:layout_width="381dp"
+        android:layout_height="422dp"
+        android:layout_marginTop="30dp"
+        android:padding="8dp"
         android:fontFamily="serif-monospace"
-        android:text="@string/profile"
+        android:text="@string/how_to_play_instructions"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/howToPlayTitleTextView" />
 
     <Button
-        android:id="@+id/howToPlayOptionButton"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:fontFamily="serif-monospace"
-        android:layout_marginTop="50dp"
-        android:text="@string/how_to_play"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileOptionButton" />
-
-    <Button
-        android:id="@+id/settingsBackButton"
+        android:id="@+id/howToPlayBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -62,6 +51,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
