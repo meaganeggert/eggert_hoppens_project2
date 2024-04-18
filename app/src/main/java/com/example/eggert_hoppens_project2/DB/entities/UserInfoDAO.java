@@ -51,4 +51,7 @@ public interface UserInfoDAO {
 
     @Query("UPDATE " + AppDataBase.USER_INFO_TABLE + " SET mUserPassword = :newPassword WHERE mUserId = :userId")
     void updatePassword(String newPassword, int userId);
+
+    @Query("DELETE from " + AppDataBase.SCORE_TABLE)
+    void resetScoreboard();
 }

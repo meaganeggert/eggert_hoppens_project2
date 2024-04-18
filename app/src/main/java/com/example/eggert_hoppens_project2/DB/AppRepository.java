@@ -246,4 +246,9 @@ public class AppRepository {
     }
 
 
+    public void clearScoreboard() {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            userinfoDAO.resetScoreboard();
+        });
+    }
 }
