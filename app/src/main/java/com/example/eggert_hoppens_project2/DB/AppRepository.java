@@ -118,6 +118,10 @@ public class AppRepository {
         return questionDAO.getQuestionById(questionId);
     }
 
+    public Question getQuestionObjById(int questionId) {
+        return questionDAO.getQuestObjectById(questionId);
+    }
+
     public LiveData<List<Question>> getAllQuestions(){
         return questionDAO.getAllQuestions();
     }
@@ -138,6 +142,22 @@ public class AppRepository {
             return future.get();
         }catch (InterruptedException | ExecutionException e){
             Log.i(CategoryActivity.TAG, "Problem when getting question by category.");
+        }
+        return false;
+    }
+
+    public boolean doesContainQuestionId(int questionId) {
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                boolean temp = questionDAO.doesContainQuestionId(questionId);
+                return temp;
+            }
+        });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.i(CategoryActivity.TAG, "Problem when getting question by ID.");
         }
         return false;
     }

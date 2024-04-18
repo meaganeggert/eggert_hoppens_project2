@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeleteQuestionFragment">
+    tools:context=".DeleteQuestionFragment"
+    android:id="@+id/deleteQuest_scroller">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -43,116 +44,157 @@
             android:fontFamily="serif-monospace"
             android:gravity="center"
             android:hint="Enter Question ID Number"
+            android:backgroundTint="@color/white"
             android:inputType="number"
             android:textSize="14sp" />
 
         <Button
+            android:id="@+id/viewQuestion_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:fontFamily="serif-monospace"
             android:text="View Question"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/displayTitle_textView"
+        <LinearLayout
+            android:id="@+id/viewQuestion_Layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/design_default_color_secondary_variant"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:text="Confirm Question to Delete:"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/displaySection_questTitleTV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:text="Question:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/displayTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/design_default_color_secondary_variant"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="Confirm Question to Delete:"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/displaySection_questTV"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="Why is a raven like a writing desk?" />
+            <TextView
+                android:id="@+id/displaySection_categoryTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="Category:"
+                android:textSize="18sp"
+                android:backgroundTint="@color/white"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/displaySection_correctAnsTitleTV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:text="Correct Answer:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/displaySection_categoryTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="Alice in Wonderland" />
 
-        <TextView
-            android:id="@+id/displaySection_correctAnsTV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="Because you're mad" />
+            <TextView
+                android:id="@+id/displaySection_questTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:text="Question:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/displaySection_wrongAnswerTitleTV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:text="Wrong Answers:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/displaySection_questTV"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="Why is a raven like a writing desk?" />
 
-        <TextView
-            android:id="@+id/displaySection_wrong1TV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="Whoooo are you?" />
+            <TextView
+                android:id="@+id/displaySection_correctAnsTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:text="Correct Answer:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/displaySection_wrong2TV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="Curiouser and Curiouser" />
+            <TextView
+                android:id="@+id/displaySection_correctAnsTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="Because you're mad" />
 
-        <TextView
-            android:id="@+id/displaySection_wrong3TV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="serif-monospace"
-            android:gravity="center"
-            android:textSize="14sp"
-            tools:text="I'm late, I'm late!" />
+            <TextView
+                android:id="@+id/displaySection_wrongAnswerTitleTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:text="Wrong Answers:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="serif-monospace"
-            android:text="Confirm Delete"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/displaySection_wrong1TV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="Whoooo are you?" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="serif-monospace"
-            android:text="Cancel"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/displaySection_wrong2TV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:backgroundTint="@color/white"
+                tools:text="Curiouser and Curiouser" />
 
+            <TextView
+                android:id="@+id/displaySection_wrong3TV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="I'm late, I'm late!" />
+
+            <Button
+                android:id="@+id/confirmDelete_Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="serif-monospace"
+                android:text="Confirm Delete"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/cancelDelete_Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="serif-monospace"
+                android:text="Cancel"
+                android:textSize="18sp" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -51,7 +51,7 @@ public class UpdateQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonSelected = binding.deleteQuestionButton.getText().toString();
-                //intent goes here or whatever goes here.
+                loadFragment(new DeleteQuestionFragment());
             }
         });
         binding.updateQuestBackButton.setOnClickListener(new View.OnClickListener() {
