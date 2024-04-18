@@ -45,4 +45,7 @@ public interface UserInfoDAO {
 
     @Query("DELETE FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName NOT IN ('admin1', 'testUser1')")
     void resetUserDB();
+
+    @Query("UPDATE " + AppDataBase.USER_INFO_TABLE + " SET mUserName = :newUserName WHERE mUserId = :userId")
+    void updateUserName(String newUserName, int userId);
 }
