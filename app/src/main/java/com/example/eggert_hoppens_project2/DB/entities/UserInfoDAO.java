@@ -28,6 +28,9 @@ public interface UserInfoDAO {
     @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " ORDER BY mUserName")
     LiveData<List<UserInfo>> getAllRecords();
 
+    @Query("SELECT * FROM " + AppDataBase.USER_INFO_TABLE)
+    List<UserInfo> getAllRecordsList();
+
     @Query("SELECT EXISTS (SELECT 1 FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserName = :newUserName)")
     int doesContain(String newUserName);
 

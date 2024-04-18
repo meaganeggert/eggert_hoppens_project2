@@ -5,19 +5,10 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="test_toLandingActivity()">
+      <entry key="databaseTestInAndroid">
         <State />
       </entry>
-      <entry key="test_toMain()">
-        <State />
-      </entry>
-      <entry key="test_toMainActivity()">
-        <State />
-      </entry>
-      <entry key="test_toSignUpActivity()">
-        <State />
-      </entry>
-      <entry key="validateSignUpToMain()">
+      <entry key="insertAndReadData()">
         <State />
       </entry>
     </value>

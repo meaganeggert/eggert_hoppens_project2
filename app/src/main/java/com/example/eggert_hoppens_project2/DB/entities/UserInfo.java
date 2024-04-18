@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.eggert_hoppens_project2.DB.AppDataBase;
 
+import java.util.Objects;
+
 @Entity (tableName = AppDataBase.USER_INFO_TABLE)
 public class UserInfo {
     //-------------------------------------------------------------------------------Fields
@@ -33,6 +35,19 @@ public class UserInfo {
                 ", UserId=" + mUserId +
                 ", IsAdmin=" + mIsAdmin +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInfo userInfo = (UserInfo) o;
+        return mUserId == userInfo.mUserId && mIsAdmin == userInfo.mIsAdmin && Objects.equals(mUserName, userInfo.mUserName) && Objects.equals(mUserPassword, userInfo.mUserPassword);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUserId, mUserName, mUserPassword, mIsAdmin);
     }
 
     //---------------------------------------------------------------------------------Set/Get
