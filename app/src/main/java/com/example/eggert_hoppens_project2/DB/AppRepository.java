@@ -115,10 +115,13 @@ public class AppRepository {
         return true;
     }
 
-    //_____________________________________________________________________Question Methods_________
-    /*public LiveData<Question> getQuestionByCategory(String category){
-        return questionDAO.getQuestionByCategory(category);
-    }*/
+    public void updatePassword(String newPassword, int userId) {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            userinfoDAO.updatePassword(newPassword, userId);
+        });
+    }
+
+
 
     public LiveData<Question> getQuestionById(int questionId){
         return questionDAO.getQuestionById(questionId);

@@ -48,4 +48,7 @@ public interface UserInfoDAO {
 
     @Query("UPDATE " + AppDataBase.USER_INFO_TABLE + " SET mUserName = :newUserName WHERE mUserId = :userId")
     void updateUserName(String newUserName, int userId);
+
+    @Query("UPDATE " + AppDataBase.USER_INFO_TABLE + " SET mUserPassword = :newPassword WHERE mUserId = :userId")
+    void updatePassword(String newPassword, int userId);
 }

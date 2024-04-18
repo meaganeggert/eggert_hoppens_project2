@@ -23,9 +23,9 @@ import com.example.eggert_hoppens_project2.DB.AppRepository;
  */
 public class ChangeUserNameFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ID_PARAM = "ID parameter";
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: Rename parameter arguments, choose names that match
 
     // TODO: Rename and change types of parameters
     private int mUserId;

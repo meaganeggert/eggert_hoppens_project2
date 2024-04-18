@@ -62,6 +62,12 @@ public class ProfileActivity extends AppCompatActivity {
                 loadFragment(ChangeUserNameFragment.newInstance(loggedInUserId));
             }
         });
+        binding.changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(ChangePasswordFragment.newInstance(loggedInUserId));
+            }
+        });
 
         //Handles back button to return to the settings menu from the profile menu
         binding.profileBackButton.setOnClickListener(new View.OnClickListener() {
