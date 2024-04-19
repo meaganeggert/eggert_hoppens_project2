@@ -6,10 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,10 +20,12 @@ import androidx.lifecycle.LiveData;
 
 import com.example.eggert_hoppens_project2.DB.AppRepository;
 import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
-import com.example.eggert_hoppens_project2.databinding.ActivityAdminBinding;
+import com.example.eggert_hoppens_project2.databinding.ActivityUpdateQuestionBinding;
+import com.example.eggert_hoppens_project2.databinding.ActivityUpdateUserAccountsBinding;
 
-public class AdminActivity extends AppCompatActivity {
-    ActivityAdminBinding binding;
+public class UpdateUserAccountsActivity extends AppCompatActivity {
+
+    ActivityUpdateUserAccountsBinding binding;
     private AppRepository repository;
 
     private String loggedInUser = "bob";
@@ -28,17 +33,11 @@ public class AdminActivity extends AppCompatActivity {
     private static final int LOGGED_OUT = -1;
     private static final String LOGGED_OUT_USERNAME = "EGGHOP";
 
-    private boolean MEAGAN = false;
-    public static boolean clearScore_Clicked = false;
-
-    // Attempting Fragments
-    Button fragmentButton;
-
-
+    String buttonSelected = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAdminBinding.inflate(getLayoutInflater());
+        binding = ActivityUpdateUserAccountsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         checkLoggedInUser();
@@ -47,58 +46,20 @@ public class AdminActivity extends AppCompatActivity {
         TextView toolbar_UserName = (TextView) findViewById(R.id.toolbarUsername);
         toolbar_UserName.setText(loggedInUser);
 
-        Button clearScoreButton = (Button) findViewById(R.id.clearScore_Button);
-        clearScoreButton.setOnClickListener(new View.OnClickListener() {
+        // Delete User Functionality
+        binding.deleteUsersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!clearScore_Clicked) {
-                    loadFragment(new ClearScoreConfirmationFragment());
-
-                }
+                buttonSelected = binding.deleteUsersButton.getText().toString();
+                loadFragment(new DeleteUserFragment());
             }
         });
 
-        // Test Fragment Set Up
-        fragmentButton = (Button) findViewById(R.id.fragment_Button);
-        fragmentButton.setOnClickListener(new View.OnClickListener() {
+        // Back Button Functionality
+        binding.updateUsersBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!MEAGAN) {
-                    loadFragment(new MeaganFragment());
-                    MEAGAN = true;
-                }
-                else {
-                    loadFragment(new BrandonFragment());
-                    MEAGAN = false;
-                }
-
-
-            }
-        });
-
-        // Load Update Users Activity
-        binding.updateUsersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = UpdateUserAccountsActivity.intentFactory(AdminActivity.this);
-                startActivity(intent);
-            }
-        });
-
-        // Load Update Questions Activity
-        binding.updateQuestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = UpdateQuestionActivity.intentFactory(AdminActivity.this);
-                startActivity(intent);
-            }
-        });
-
-        //Back Button Functionality
-        binding.adminBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = LandingActivity.intentFactory(AdminActivity.this, loggedInUserId);
+                Intent intent = AdminActivity.intentFactory(UpdateUserAccountsActivity.this);
                 startActivity(intent);
             }
         });
@@ -140,12 +101,12 @@ public class AdminActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager fragMan = getSupportFragmentManager();
         FragmentTransaction fragTran = fragMan.beginTransaction();
-        fragTran.replace(R.id.frag_ContainerView, fragment);
+        fragTran.replace(R.id.updateUsers_FragmentContainer, fragment);
         fragTran.commit();
     }
 
-
-    public static Intent intentFactory(Context context){
-        return new Intent(context, AdminActivity.class);
+    public static Intent intentFactory (Context context){
+        return new Intent(context, UpdateUserAccountsActivity.class);
     }
+
 }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeleteUserFragment"
+    android:id="@+id/deleteUser_scroller">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Instructive Title -->
+        <TextView
+            android:id="@+id/deleteUser_fragmentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginBottom="2dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:text="@string/confirm_details_for_user_deletion"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- User ID Title -->
+        <TextView
+            android:id="@+id/userIdTitle_textView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:labelFor="@id/questionId_editText"
+            android:text="@string/user_id_number"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <!-- User ID EditText -->
+        <EditText
+            android:id="@+id/userId_editText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:hint="@string/enter_user_id_number"
+            android:backgroundTint="@color/white"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <!-- View User Button -->
+        <Button
+            android:id="@+id/viewUser_Button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="serif-monospace"
+            android:text="@string/view_user"
+            android:textSize="18sp" />
+
+        <!-- Hidden Layout That Displays Once User ID is Entered -->
+        <LinearLayout
+            android:id="@+id/viewUser_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            tools:visibility="visible">
+
+            <!-- Confirm User Title -->
+            <TextView
+                android:id="@+id/userDisplayTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/design_default_color_secondary_variant"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="@string/confirm_user_to_delete"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Username Title -->
+            <TextView
+                android:id="@+id/userDisplaySectionUsernameTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="@string/username"
+                android:textSize="18sp"
+                android:backgroundTint="@color/white"
+                android:textStyle="bold" />
+
+            <!-- Username Text -->
+            <TextView
+                android:id="@+id/userDisplaySectionUsername_textView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="QueenOfHearts" />
+
+            <!-- High Score Title -->
+            <TextView
+                android:id="@+id/userDisplaySectionHSTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:text="@string/high_score"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- High Score Text -->
+            <TextView
+                android:id="@+id/userDisplaySectionHS_textView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:textSize="14sp"
+                tools:text="912" />
+
+            <!-- Confirm Delete Button -->
+            <Button
+                android:id="@+id/usersConfirmDelete_Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="serif-monospace"
+                android:text="@string/confirm_delete"
+                android:textSize="18sp" />
+
+            <!-- Cancel Delete Button -->
+            <Button
+                android:id="@+id/usersCancelDelete_Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="serif-monospace"
+                android:text="@string/cancel"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
