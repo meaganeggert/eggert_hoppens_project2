@@ -51,7 +51,7 @@ public class UpdateUserAccountsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonSelected = binding.deleteUsersButton.getText().toString();
-                loadFragment(new DeleteUserFragment());
+                loadFragment(DeleteUserFragment.newInstance(loggedInUserId));
             }
         });
 

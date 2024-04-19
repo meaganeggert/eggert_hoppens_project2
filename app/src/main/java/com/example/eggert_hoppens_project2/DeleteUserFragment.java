@@ -25,6 +25,7 @@ import com.example.eggert_hoppens_project2.DB.entities.UserInfo;
  */
 public class DeleteUserFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
+    private static final String ID_PARAM = "ID parameter";
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -52,25 +53,17 @@ public class DeleteUserFragment extends Fragment {
     private int userIdToDelete = -1;
     private String mUsername = BLANK;
     private int mHighScore = 0;
+    private int currentUserId = -1;
 
     public DeleteUserFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteQuestionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DeleteUserFragment newInstance(String param1, String param2) {
+
+    public static DeleteUserFragment newInstance(int userId) {
         DeleteUserFragment fragment = new DeleteUserFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ID_PARAM, userId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +72,7 @@ public class DeleteUserFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            currentUserId = getArguments().getInt(ID_PARAM);
         }
     }
 
@@ -122,10 +114,15 @@ public class DeleteUserFragment extends Fragment {
         confirmDelete_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                repository.deleteUserById(userIdToDelete);
-                userView_L.setVisibility(View.INVISIBLE);
-                scroller.smoothScrollTo(0,0);
-                Toast.makeText(getActivity(), "User #" + userIdToDelete + " has been deleted.", Toast.LENGTH_SHORT).show();
+                if (currentUserId != userIdToDelete) {
+                    repository.deleteUserById(userIdToDelete);
+                    userView_L.setVisibility(View.INVISIBLE);
+                    scroller.smoothScrollTo(0, 0);
+                    Toast.makeText(getActivity(), "User #" + userIdToDelete + " has been deleted.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getActivity(), "You can't delete yourself!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
