@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (!userIDAvailable()) {
                     Toast.makeText(SignUpActivity.this, "That username is already taken.", Toast.LENGTH_SHORT).show();
                 }
-                if (password_Validate() && !mUsername.isEmpty()) {
+                else if (password_Validate() && !mUsername.isEmpty()) {
                     insertUser();
                     Toast.makeText(SignUpActivity.this, "Success!.", Toast.LENGTH_LONG).show();
                     returnToMain();
@@ -124,6 +124,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
         //-- END Section For ShowPassword Checkbox Functionality --
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnToMain();
+            }
+        });
 
         //-- BEGIN Section for Test Button Functionality --
         //-- For this activity, the test button will clear all the users in the DB, except the initial admin1 and testUser1
