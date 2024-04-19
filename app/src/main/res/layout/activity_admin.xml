@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <!-- Include Header Toolbar -->
     <include
         android:id="@+id/headerToolbar"
         layout="@layout/toolbar"
@@ -15,54 +16,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <!-- Admin Settings Title -->
     <TextView
         android:id="@+id/adminTitle_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Admin Settings"
+        android:text="@string/admin_settings"
         android:fontFamily="serif-monospace"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerToolbar" />
 
+    <!-- Update User Accounts Button -->
     <Button
         android:id="@+id/updateUsers_Button"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="10dp"
         android:fontFamily="serif-monospace"
-        android:text="Update User Accounts"
+        android:text="@string/update_user_accounts"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminTitle_textView" />
 
+    <!-- Update Question DB Button -->
     <Button
         android:id="@+id/updateQuest_Button"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:fontFamily="serif-monospace"
         android:layout_marginTop="10dp"
-        android:text="Update Question Database"
+        android:text="@string/update_question_database"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateUsers_Button" />
 
+    <!-- Clear All Scores Button -->
     <Button
         android:id="@+id/clearScore_Button"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:fontFamily="serif-monospace"
         android:layout_marginTop="10dp"
-        android:text="Clear All Scores"
+        android:text="@string/clear_all_scores"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateQuest_Button" />
 
+    <!-- Back Button -->
     <Button
         android:id="@+id/admin_backButton"
         android:layout_width="wrap_content"
@@ -75,19 +81,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Fragment Test Button -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/admin_backButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Fragment Test"
+        android:text="@string/fragment_test"
+        android:visibility="invisible"
         android:fontFamily="serif-monospace"
         android:id="@+id/fragment_Button"
         android:textSize="18sp"
+        tools:visibility="visible"
         android:backgroundTint="@color/black"
         android:layout_marginBottom="1dp"/>
 
+    <!-- Fragment FrameLayout -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -95,6 +105,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="114dp" />
 
+    <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:name="com.example.eggert_hoppens_project2.BlankFragment"
