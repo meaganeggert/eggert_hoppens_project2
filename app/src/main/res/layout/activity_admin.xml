@@ -98,14 +98,15 @@
         android:layout_marginBottom="1dp"/>
 
     <!-- Fragment FrameLayout -->
+
+    <!-- Fragment Container -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="114dp" />
+        tools:layout_editor_absoluteY="48dp" />
 
-    <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:name="com.example.eggert_hoppens_project2.BlankFragment"

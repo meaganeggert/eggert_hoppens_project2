@@ -251,4 +251,27 @@ public class AppRepository {
             userinfoDAO.resetScoreboard();
         });
     }
+
+
+    public void deleteUserById(int mUserId) {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            userinfoDAO.deleteUserById(mUserId);
+        });
+    }
+
+    public boolean doesContainUserId(int mUserId) {
+        Future<Boolean> future = AppDataBase.databaseWriteExecutor.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                boolean temp = userinfoDAO.doesContainUserId(mUserId);
+                return temp;
+            }
+        });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.i(CategoryActivity.TAG, "Problem when getting user by ID.");
+        }
+        return false;
+    }
 }

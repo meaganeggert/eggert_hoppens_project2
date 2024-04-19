@@ -75,4 +75,12 @@
     <string name="update_question_database">Update Question Database</string>
     <string name="update_user_accounts">Update User Accounts</string>
     <string name="admin_settings">Admin Settings</string>
+    <string name="delete_user">Delete User</string>
+    <string name="update_users">Update Users</string>
+    <string name="confirm_details_for_user_deletion">Confirm details for user deletion:</string>
+    <string name="user_id_number">User ID Number:</string>
+    <string name="enter_user_id_number">Enter User ID Number</string>
+    <string name="view_user">View User</string>
+    <string name="confirm_user_to_delete">Confirm User to Delete:</string>
+    <string name="high_score">High Score:</string>
 </resources>

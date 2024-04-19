@@ -54,4 +54,10 @@ public interface UserInfoDAO {
 
     @Query("DELETE from " + AppDataBase.SCORE_TABLE)
     void resetScoreboard();
+
+    @Query("DELETE FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserId = :userID")
+    void deleteUserById(int userID);
+
+    @Query("SELECT EXISTS(SELECT * FROM " + AppDataBase.USER_INFO_TABLE + " WHERE mUserId = :userId)")
+    boolean doesContainUserId(int userId);
 }
