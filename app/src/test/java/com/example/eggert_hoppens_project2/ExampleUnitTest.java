@@ -58,6 +58,56 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void gameEndWorks() {
+        boolean tester = false;
+        // Set to compete
+        gameModeController = new GameModeSettings(gameModeNames[2]);
+
+        // If there are still more questions..
+        gameModeController.setDbTotalQuestions(5);
+        gameModeController.setCurrentQuestionIndex(0);
+        tester = gameModeController.checkGameEnds();
+        assertFalse(tester); // Game shouldn't be over
+
+        // If we have reached the last question
+        gameModeController.setDbTotalQuestions(5);
+        gameModeController.setCurrentQuestionIndex(5);
+        tester = gameModeController.checkGameEnds();
+        assertTrue(tester); // Game should be over
+
+        // If game mode is 'Compete'
+        String gameModeName = gameModeController.getGameModeName();
+        assertEquals(gameModeName, "Compete");
+        gameModeController.setDbTotalQuestions(5);
+        gameModeController.setCurrentQuestionIndex(0);
+        gameModeController.setUserStrikes(0);
+        tester = gameModeController.checkGameEnds();
+        assertFalse(tester); // There are more questions, and the user has more strikes
+
+        gameModeController.setUserStrikes(3); // 3 Strikes
+        tester = gameModeController.checkGameEnds();
+        assertTrue(tester); // User struck out
+    }
+
+    @Test
+    public void testAddStrike() {
+        // If game mode isn't 'Compete'
+        gameModeController = new GameModeSettings(gameModeNames[0]);
+        int userStrikes = gameModeController.getUserStrikes(); // 0
+        gameModeController.incrementStrikes(); // Shouldn't add anything
+        assertEquals(userStrikes, 0); // Still 0
+
+        // If game mode IS 'Compete'
+        gameModeController = new GameModeSettings(gameModeNames[2]);
+        userStrikes = gameModeController.getUserStrikes(); // 0
+        assertEquals(userStrikes, 0);
+        gameModeController.incrementStrikes(); // Should add 1 strike
+        userStrikes = gameModeController.getUserStrikes();
+        assertEquals(userStrikes, 1);
+    }
+
+
+    @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
