@@ -39,6 +39,7 @@ public class ChangeUserNameFragment extends Fragment {
     boolean goodName = false;
 
     TextView toolbar_displayNewName;
+    TextView displayNewName;
 
     public ChangeUserNameFragment() {
         // Required empty public constructor
@@ -80,6 +81,7 @@ public class ChangeUserNameFragment extends Fragment {
         submitUserName = (Button) view.findViewById(R.id.changeUserNameSubmit_Button);
         changeUserNameEditText = view.findViewById(R.id.changeUserName_editText);
         toolbar_displayNewName = getActivity().findViewById(R.id.toolbarUsername);
+        displayNewName = getActivity().findViewById(R.id.currentUser_TextView);
 
         submitUserName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +120,7 @@ public class ChangeUserNameFragment extends Fragment {
             sharedPrefEditor.apply();
 
             toolbar_displayNewName.setText(mNewUserName);
+            displayNewName.setText(mNewUserName);
 
             Toast.makeText(getActivity(), "Username successfully changed.", Toast.LENGTH_SHORT).show();
         }
