@@ -47,4 +47,7 @@ public interface ScoreDAO {
 
     @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mScoreId = :scoreId")
     LiveData<Score> getScoreByScoreId(int scoreId);
+
+    @Query("SELECT * FROM " + AppDataBase.SCORE_TABLE + " WHERE mScoreId = :scoreId")
+    Score getScoreByScoreIdNormalList(int scoreId);
 }

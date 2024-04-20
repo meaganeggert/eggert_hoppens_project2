@@ -5,10 +5,19 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="databaseTestInAndroid">
+      <entry key="deleteQuestionById()">
         <State />
       </entry>
-      <entry key="insertAndReadData()">
+      <entry key="deleteUserById()">
+        <State />
+      </entry>
+      <entry key="insertQuestionAndReadData()">
+        <State />
+      </entry>
+      <entry key="questionIdExist()">
+        <State />
+      </entry>
+      <entry key="updateUserNameAndReadData()">
         <State />
       </entry>
     </value>
